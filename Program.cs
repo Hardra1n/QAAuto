@@ -3,7 +3,13 @@
 namespace Console_handler
 {
     class Program
-    {
+    { 
+        static void Main(string[] args)
+        {
+            Console.WriteLine($"You entered: {args[0]}");
+            Console.WriteLine($"Output of func: {GetUniqueStringMaxLength(args[0])}");
+        }
+
         /// <summary>
         /// Returns max length of symbols sequences, in which symbols dosn't place next to the same symbol.
         /// </summary>
@@ -11,7 +17,7 @@ namespace Console_handler
         /// <returns></returns>
         static int GetUniqueStringMaxLength(string str)
         {
-            if (str == String.Empty || str == null)
+            if (String.IsNullOrEmpty(str))
             {
                 return 0;
             }
@@ -29,12 +35,6 @@ namespace Console_handler
                 }
             }
             return maxLength;
-        }
-
-        static void Main(string[] args)
-        {
-            Console.WriteLine($"You wrote: {args[0]}");
-            Console.WriteLine($"Output of func: {GetUniqueStringMaxLength(args[0])}");
         }
     }
 }
