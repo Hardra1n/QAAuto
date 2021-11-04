@@ -4,24 +4,27 @@ using System.Text;
 
 namespace Flying_objects.Model
 {
+    /// <summary>
+    /// Every 'flyingTime' hours birds stops for 'restTime' hours to found food and get to sleep.
+    /// Each bird speed is random double number between 0.1 and 20 km/h
+    /// </summary>
     class Bird : IFlyable
     {
-        // Every 'flyingTime' hours birds stops for 'restTime' hours to found food and get to sleep.
-        // Each bird speed is random double number between 0.1 and 20 km/h
+        private const int RestTime = 10;
+        private const int FlyingTime = 15;
+        private const int BirdMaxSpeed = 20;
 
-        private const int restTime = 10;
-        private const int flyingTime = 15;
+        static readonly Random Rand = new Random();
 
-        static readonly Random rand = new Random();
-        readonly double speed;
-        public Coordinate Coordinate { get; set; }
+        readonly double _speed;
 
 
         public Bird(Coordinate coordinate)
         {
-            speed = 19.9 * rand.NextDouble() + 0.1;
+            _speed = 0.1 + (BirdMaxSpeed - 0.1) * Rand.NextDouble();
             Coordinate = coordinate;
         }
+        public Coordinate Coordinate { get; set; }
 
         public string FlyTo(Coordinate coordinate)
         {
@@ -32,8 +35,8 @@ namespace Flying_objects.Model
         public string GetFlyTime(Coordinate coordinate)
         {
             double distanceToFly = Coordinate.FindDistance(coordinate);
-            double timeToFly = distanceToFly / speed;
-            int flyingRest = (int)Math.Round(timeToFly / flyingTime) * restTime;
+            double timeToFly = distanceToFly / _speed;
+            int flyingRest = (int)Math.Round(timeToFly / FlyingTime) * RestTime;
             timeToFly += flyingRest;
 
             return String.Format("Flytime: {0:f3} h, distance = {1:f3} km, time of rest = {2} h", 
@@ -47,10 +50,10 @@ namespace Flying_objects.Model
             return String.Format("Bird info: " + "\n\t" +
                 "speed = {0:f3} km/h, coordinates = {1}, time of rest = {2} h, " + "\n\t" +
                 "time of fly = {3} h", 
-                speed, 
+                _speed, 
                 Coordinate,
-                restTime,
-                flyingTime);
+                RestTime,
+                FlyingTime);
         }
     }
 }

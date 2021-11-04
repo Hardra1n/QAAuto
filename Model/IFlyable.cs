@@ -16,13 +16,13 @@ namespace Flying_objects.Model
         /// </summary>
         /// <param name="coordinate">Coordinate to fly</param>
         /// <returns>Information message: have object flied or not.</returns>
-        public string FlyTo(Coordinate coordinate);
+        string FlyTo(Coordinate coordinate);
 
         /// <summary>
         /// Gets information about flytime.
         /// </summary>
         /// <param name="coordinate">Coordinate to fly</param>
         /// <returns> String formated information message about flytime.</returns>
-        public string GetFlyTime(Coordinate coordinate);
+        string GetFlyTime(Coordinate coordinate);
     }
 }

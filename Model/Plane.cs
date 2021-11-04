@@ -4,25 +4,25 @@ using System.Text;
 
 namespace Flying_objects.Model
 {
+    /// <summary>
+    /// Plane has primary speed 'speed' in km/h, per 'gainFrequency' km of distance to fly
+    /// it increases his speed on 'speedGain' km/h. Another limitation is that plane can't fly 
+    /// on small distances ('minFlyingDistance')
+    /// </summary>
     class Plane : IFlyable
     {
-        // Plane has primary speed 'speed' in km/h, per 'gainFrequency' km of distance to fly
-        // it increases his speed on 'speedGain' km/h. Another limitation is that plane can't fly 
-        // on small distances ('minFlyingDistance')
 
-        const double minFlyingDistance = 100;
-        const double speed = 200;
-        const double speedGain = 10;
-        const double gainFrequency = 10;
-        public Coordinate Coordinate { get; set; }
-        
+        const double MinFlyingDistance = 100;
+        const double Speed = 200;
+        const double SpeedGain = 10;
+        const double GainFrequency = 10;
 
         public Plane (Coordinate coordinate)
         {
             Coordinate = coordinate;
         }
+        public Coordinate Coordinate { get; set; }
 
-       
         public string FlyTo(Coordinate coordinate)
         {
             if (IsShortDistance(coordinate) != null)
@@ -56,10 +56,11 @@ namespace Flying_objects.Model
         /// </returns>
         private string IsShortDistance(Coordinate coordinate)
         {
-            if (Coordinate.FindDistance(coordinate) < minFlyingDistance)
+            if (Coordinate.FindDistance(coordinate) < MinFlyingDistance)
             {
-                return String.Format("It's too short distance for plane flight, minimal distance = {0:f0} km (yours = {1:f3} km)",
-                    minFlyingDistance,
+                return String.Format("It's too short distance for plane flight, " +
+                    "minimal distance = {0:f0} km (yours = {1:f3} km)",
+                    MinFlyingDistance,
                     Coordinate.FindDistance(coordinate));
             }
             else
@@ -72,13 +73,13 @@ namespace Flying_objects.Model
         {
             double result = 0;
             double distance = Coordinate.FindDistance(coordinate);
-            double timesOfGain = distance / gainFrequency;
+            double timesOfGain = distance / GainFrequency;
 
             for (int i = 0; i <= timesOfGain - 1; i++)
             {
-                result += gainFrequency / (speed + speedGain * i);
+                result += GainFrequency / (Speed + SpeedGain * i);
             }
-            result += (distance % gainFrequency) / (speed + speedGain * (timesOfGain));
+            result += (distance % GainFrequency) / (Speed + SpeedGain * (timesOfGain));
 
             return result;
         }
@@ -89,10 +90,10 @@ namespace Flying_objects.Model
                 "coordinates = {0}, primary speed = {1} km/h, " + "\n\t" +
                 "speed increases every {2} km, speed gain = {3} km/h, minimal flying distance = {4} km",
                 Coordinate,
-                speed,
-                gainFrequency,
-                speedGain,
-                minFlyingDistance);
+                Speed,
+                GainFrequency,
+                SpeedGain,
+                MinFlyingDistance);
         }
     }
 }

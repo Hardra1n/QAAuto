@@ -5,51 +5,51 @@ namespace Flying_objects.Model
 {
     public struct Coordinate
     {
-        private double x;
+        private double _x;
+        private double _y;
+        private double _z;
+
+        public Coordinate(double x, double y, double z)
+        {
+            _y = double.IsNegative(y) ? -y : y;
+            _z = double.IsNegative(z) ? -z : z;
+            _x = double.IsNegative(x) ? -x : x;
+        }
+
         public double X
         {
             get
             {
-                return x;
+                return _x;
             }
             set
             {
-                x = double.IsNegative(value) ? -value : value;
+                _x = double.IsNegative(value) ? -value : value;
             }
         }
 
-        private double y;
         public double Y
         {
             get
             {
-                return y;
+                return _y;
             }
             set
             {
-                y = double.IsNegative(value) ? -value : value;
+                _y = double.IsNegative(value) ? -value : value;
             }
         }
-        
-        private double z;
+
         public double Z
         {
             get
             {
-                return z;
+                return _z;
             }
             set
             {
-                z = double.IsNegative(value) ? -value : value;
+                _z = double.IsNegative(value) ? -value : value;
             }
-        }
-
-
-        public Coordinate(double x, double y, double z)
-        {
-            this.y = double.IsNegative(y) ? -y : y;
-            this.z = double.IsNegative(z) ? -z : z;
-            this.x = double.IsNegative(x) ? -x : x;
         }
 
         /// <summary>
