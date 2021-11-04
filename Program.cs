@@ -5,6 +5,25 @@ namespace Console_digit_converter
 {
     class Program
     {
+        const byte notationBaseMin = 2;
+        const byte notationBaseMax = 20;
+        const string wrongInputMessage = "Wrong input";
+
+        static void Main(string[] args)
+        {
+            int num;
+            byte notationBase;
+
+            Console.WriteLine("Enter number to convert");
+            num = Int32.Parse(Console.ReadLine());
+            Console.WriteLine("Enter notation base");
+            notationBase = Byte.Parse(Console.ReadLine());
+
+            Console.WriteLine($"{num} in decimal notation into {notationBase}-notation is " +
+                $"{ConvertToAnotherNotation(num, notationBase)}");
+
+        }
+
         /// <summary>
         /// Converts a deciamal-notation value into another notation [2;20]
         /// </summary>
@@ -13,9 +32,9 @@ namespace Console_digit_converter
         /// <returns> Represents number in new notation as a string </returns>
         static string ConvertToAnotherNotation(int num, byte notationBase)
         {
-            if (num < 0 || notationBase < 2  || notationBase > 20)
+            if (num < 0 || notationBase < notationBaseMin  || notationBase > notationBaseMax)
             {
-                return "WRONG INPUT";
+                return wrongInputMessage;
             }
 
             StringBuilder newNumber = new StringBuilder("");
@@ -42,21 +61,6 @@ namespace Console_digit_converter
                 return (char)('A' + number - 10);
 
             return (char)(number + '0');
-        }
-
-        static void Main(string[] args)
-        {
-            int num;
-            byte notationBase;
-
-            Console.WriteLine("Enter number to convert");
-            num = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Enter notation base");
-            notationBase = Byte.Parse(Console.ReadLine());
-
-            Console.WriteLine($"{num} in decimal notation into {notationBase}-notation is " +
-                $"{ConvertToAnotherNotation(num, notationBase)}");
-
         }
     }
 }
