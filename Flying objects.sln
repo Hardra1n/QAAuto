@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flying objects", "Flying objects.csproj", "{98F698A0-BC86-45CE-A7F3-90318089E9CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98F698A0-BC86-45CE-A7F3-90318089E9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F698A0-BC86-45CE-A7F3-90318089E9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F698A0-BC86-45CE-A7F3-90318089E9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F698A0-BC86-45CE-A7F3-90318089E9CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4C213C8-54D7-455D-B1EB-B95F57C780B7}
+	EndGlobalSection
+EndGlobal
