@@ -15,13 +15,15 @@ namespace Console_digit_converter
             byte notationBase;
 
             Console.WriteLine("Enter number to convert");
-            num = Int32.Parse(Console.ReadLine());
+            bool isNumParsed = Int32.TryParse(Console.ReadLine(), out num);
             Console.WriteLine("Enter notation base");
-            notationBase = Byte.Parse(Console.ReadLine());
+            bool isNotationParsed = Byte.TryParse(Console.ReadLine(), out notationBase);
 
-            Console.WriteLine($"{num} in decimal notation into {notationBase}-notation is " +
-                $"{ConvertToAnotherNotation(num, notationBase)}");
-
+            if (isNotationParsed && isNumParsed)
+            {
+                Console.WriteLine($"{num} in decimal notation into {notationBase}-notation is " +
+                                  $"{ConvertToAnotherNotation(num, notationBase)}");
+            }
         }
 
         /// <summary>
