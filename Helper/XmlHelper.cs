@@ -14,12 +14,12 @@ namespace VehicleXML.Helper
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="objects"></param>
-        /// <param name="filepath"></param>
-        public static void XmlSerialize<T>(List<T> objects, string filepath)
+        /// <param name="filePath"></param>
+        public static void XmlSerialize<T>(List<T> objects, string filePath)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(List<T>));
 
-            using (FileStream fs = new FileStream(filepath, FileMode.Create))
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
             {
                 formatter.Serialize(fs, objects);
             }
