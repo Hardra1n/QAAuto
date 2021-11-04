@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VehicleXML.Model.Vehicle_components
+namespace VehicleXML.Model.VehicleComponents
 {
     [Serializable]
     public class Chassis
     {
-        public byte WheelNumber { get; set; }
-        public string SerialNumber { get; set; }
-        public int MaxWeight { get; set; }
-
         public Chassis() { }
 
         public Chassis(byte wheelNumber, string serialNumber, int maxWeight)
@@ -19,6 +15,12 @@ namespace VehicleXML.Model.Vehicle_components
             SerialNumber = serialNumber;
             MaxWeight = maxWeight;
         }
+        public byte WheelNumber { get; set; }
+
+        public string SerialNumber { get; set; }
+
+        public int MaxWeight { get; set; }
+
 
         /// <summary>
         /// Represents full information about chassis

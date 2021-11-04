@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using VehicleXML.Helper;
-using VehicleXML.Model.Vehicle_components;
+using VehicleXML.Model.VehicleComponents;
 using VehicleXML.Model.Vehicles;
 
 namespace VehicleXML.Model
 {
     public class AutoPark
     {
-        public List<AVehicle> Vehicles { get; set; }
 
-        public AutoPark(IEnumerable<AVehicle> vehicles)
+        public AutoPark(IEnumerable<Vehicle> vehicles)
         {
             Vehicles = vehicles.ToList();
         }
+        public List<Vehicle> Vehicles { get; set; }
 
         /// <summary>
         /// Serilializes vehicles with engine volume more then 1.5 liters into XML file.
         /// </summary>
         /// <param name="filepath"></param>
-        public void LinqScenqrio1(string filepath)
+        public List<Vehicle> LinqScenqrio1()
         {
             var data = Vehicles.Where(x => x.Engine.Volume > 1.5)
                                .ToList();
 
-            XmlHelper.XmlSerialize(data, filepath);
+            return data;
         }
 
         /// <summary>
         /// Serilializes bus's and truck's engine type, power and volume into XML file
         /// </summary>
         /// <param name="filepath"></param>
-        public void LinqScenario2(string filepath)
+        public List<Engine> LinqScenario2()
         {
             var data = Vehicles.Where(x => x is Bus || x is Truck)
-                               .Select(delegate (AVehicle vehicle)
+                               .Select(delegate (Vehicle vehicle)
                                {
                                    return new Engine()
                                    {
@@ -45,26 +45,25 @@ namespace VehicleXML.Model
                                    };
                                })
                                .ToList();
-            XmlHelper.XmlSerialize(data, filepath);
+            return data;
         }
 
         /// <summary>
         /// Serilializes vehicles, grouped by transmission type
         /// </summary>
         /// <param name="filepath"></param>
-        public void LinqScenario3(string filepath)
+        public List<Vehicle> LinqScenario3()
         {
             var data = Vehicles.GroupBy(x => x.Transmission?.Type).ToList();
-            List<AVehicle> list = new List<AVehicle>();
+            List<Vehicle> list = new List<Vehicle>();
             foreach (var item in data)
             {
-                foreach (AVehicle vehicle in item)
+                foreach (Vehicle vehicle in item)
                 {
                     list.Add(vehicle);
                 }
             }
-            XmlHelper.XmlSerialize(list, filepath);
-
+            return list;
         }
     }
 }

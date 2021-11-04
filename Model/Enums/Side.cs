@@ -6,7 +6,7 @@ namespace VehicleXML.Model.Enums
 {
     public enum Side
     {
-        right,
-        left
+        Right,
+        Left
     }
 }

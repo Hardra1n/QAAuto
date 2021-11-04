@@ -6,10 +6,8 @@ using VehicleXML.Model.Enums;
 namespace VehicleXML.Model.Vehicles
 {
     [Serializable]
-    public class Scooter : AVehicle 
+    public class Scooter : Vehicle 
     {
-        public bool IsBacketOn { get; set; }
-        public Side LockerSide { get; set; }
 
         public Scooter() { }
 
@@ -18,6 +16,9 @@ namespace VehicleXML.Model.Vehicles
             IsBacketOn = isBacketOn;
             LockerSide = (Side)Enum.Parse(LockerSide.GetType(), lockerSide);
         }
+        public bool IsBacketOn { get; set; }
+
+        public Side LockerSide { get; set; }
 
         /// <summary>
         /// Represents full info about scooter, as a vihecle, and unique attributes:

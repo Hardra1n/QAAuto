@@ -5,10 +5,8 @@ using System.Text;
 namespace VehicleXML.Model.Vehicles
 {
     [Serializable]
-    public class Bus : AVehicle 
+    public class Bus : Vehicle 
     {
-        public byte SeatAmount { get; set; }
-        public bool IsLong { get; set; }
 
         public Bus() { }
 
@@ -17,6 +15,9 @@ namespace VehicleXML.Model.Vehicles
             SeatAmount = seatAmount;
             IsLong = isLong;
         }
+        public byte SeatAmount { get; set; }
+
+        public bool IsLong { get; set; }
 
         /// <summary>
         /// Represents full info about bus, as a vihecle, and unique attributes:

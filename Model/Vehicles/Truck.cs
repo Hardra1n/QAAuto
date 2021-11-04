@@ -5,9 +5,8 @@ using System.Text;
 namespace VehicleXML.Model.Vehicles
 {
     [Serializable]
-    public class Truck : AVehicle
+    public class Truck : Vehicle
     {
-        public bool IsBuiltInTrunk { get; set; }
 
         public Truck() { }
 
@@ -15,6 +14,7 @@ namespace VehicleXML.Model.Vehicles
         {
             IsBuiltInTrunk = isBuiltInTrunk;
         }
+        public bool IsBuiltInTrunk { get; set; }
 
         /// <summary>
         /// Represents full info about truck, as a vihecle, and unique attribute:

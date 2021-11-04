@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
-using VehicleXML.Model.Vehicle_components;
+using VehicleXML.Model.VehicleComponents;
 
 namespace VehicleXML.Model.Vehicles
 {
@@ -11,21 +11,25 @@ namespace VehicleXML.Model.Vehicles
     [XmlInclude(typeof(Scooter))]
     [XmlInclude(typeof(Truck))]
     [Serializable]
-    public abstract class AVehicle
+    public abstract class Vehicle
     {
-        public Engine Engine { get; set; }
-        public Chassis Chassis { get; set; }
-        public Transmission Transmission { get; set; }
-        public string Mark { get; set; }
-        public string Model { get; set; }
+        public Vehicle() { }
 
-        public AVehicle() { }
-
-        public AVehicle(string mark, string model)
+        public Vehicle(string mark, string model)
         {
             Mark = mark;
             Model = model;
         }
+
+        public Engine Engine { get; set; }
+
+        public Chassis Chassis { get; set; }
+
+        public Transmission Transmission { get; set; }
+
+        public string Mark { get; set; }
+
+        public string Model { get; set; }
 
         /// <summary>
         /// Sets new engine to object
