@@ -17,9 +17,9 @@ namespace VehicleXML
             foreach (Vehicle vehicle in autopark.Vehicles)
                 Console.WriteLine(vehicle.GetInfo() + "\n");
 
-            XmlHelper.XmlSerialize(autopark.LinqScenqrio1(), "../../../VehiclesWithEngineCondition.xml");
-            XmlHelper.XmlSerialize(autopark.LinqScenario2(), "../../../Engines.xml");
-            XmlHelper.XmlSerialize(autopark.LinqScenario3(), "../../../TransmissionGroup");
+            XmlHelper.XmlSerialize(autopark.GetVehiclesWithEngineVolumeGreaterThen1p5(), "../../../VehiclesWithEngineCondition.xml");
+            XmlHelper.XmlSerialize(autopark.GetBusNTruckEngines(), "../../../Engines.xml");
+            XmlHelper.XmlSerialize(autopark.GetVehiclesGroupedByTransmissionType(), "../../../TransmissionGroup");
         }
 
         /// <summary>

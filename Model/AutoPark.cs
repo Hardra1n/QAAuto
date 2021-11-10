@@ -17,10 +17,9 @@ namespace VehicleXML.Model
         public List<Vehicle> Vehicles { get; set; }
 
         /// <summary>
-        /// Serilializes vehicles with engine volume more then 1.5 liters into XML file.
+        /// Gets list of vehicles from autopark with Engine greater then 1.5
         /// </summary>
-        /// <param name="filepath"></param>
-        public List<Vehicle> LinqScenqrio1()
+        public List<Vehicle> GetVehiclesWithEngineVolumeGreaterThen1p5()
         {
             var data = Vehicles.Where(x => x.Engine.Volume > 1.5)
                                .ToList();
@@ -29,10 +28,9 @@ namespace VehicleXML.Model
         }
 
         /// <summary>
-        /// Serilializes bus's and truck's engine type, power and volume into XML file
+        /// Gets list of bus's and truck's engines(type, power, volume) from autopark
         /// </summary>
-        /// <param name="filepath"></param>
-        public List<Engine> LinqScenario2()
+        public List<Engine> GetBusNTruckEngines()
         {
             var data = Vehicles.Where(x => x is Bus || x is Truck)
                                .Select(delegate (Vehicle vehicle)
@@ -49,10 +47,9 @@ namespace VehicleXML.Model
         }
 
         /// <summary>
-        /// Serilializes vehicles, grouped by transmission type
+        /// Gets list of vehicles from autopark grouped by transmission type
         /// </summary>
-        /// <param name="filepath"></param>
-        public List<Vehicle> LinqScenario3()
+        public List<Vehicle> GetVehiclesGroupedByTransmissionType()
         {
             var data = Vehicles.GroupBy(x => x.Transmission?.Type).ToList();
             List<Vehicle> list = new List<Vehicle>();
