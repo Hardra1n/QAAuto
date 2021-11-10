@@ -27,23 +27,37 @@ namespace Flying_objects.Model
         {
             if (IsShortDistance(coordinate))
             {
-                return "FlyTo: " + FormatShortDistanceMessage(coordinate);
+                return FormatShortDistanceMessage(coordinate);
             }
 
             Coordinate = Coordinate.SetCoordinates(coordinate);
-            return $"FlyTo: Plane has flied to new coordinates: {Coordinate}";
+            return $"Plane has flied to new coordinates: {Coordinate}";
         }
 
-        public string GetFlyTime(Coordinate coordinate)
+        /// <summary>
+        /// Represents flying message: flytime, distance
+        /// </summary>
+        /// <param name="coordinate"></param>
+        /// <returns></returns>
+        public string GetFlyMessage(Coordinate coordinate)
         {
             if (IsShortDistance(coordinate))
             {
-                return "Flytime: " + FormatShortDistanceMessage(coordinate);
+                return FormatShortDistanceMessage(coordinate);
             }
 
-            return String.Format("Flytime: {0:f3} h, distance = {1:f3} km", 
+            return String.Format("{0:f3} h, distance = {1:f3} km", 
                 CalculateFlyTime(coordinate),
                 Coordinate.FindDistance(coordinate));
+        }
+
+        public double GetFlyTime(Coordinate coordinate)
+        {
+            if (IsShortDistance(coordinate))
+            {
+                return 0;
+            }
+            return Math.Round(CalculateFlyTime(coordinate), 3);
         }
 
         /// <summary>
@@ -107,5 +121,6 @@ namespace Flying_objects.Model
                 SpeedGain,
                 MinFlyingDistance);
         }
+
     }
 }

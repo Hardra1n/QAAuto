@@ -29,9 +29,10 @@ namespace Flying_objects
 
         static public string ConsoleOutput(IFlyable flyable, Coordinate pointToFly)
         {
-            return  flyable.ToString() + '\n' + 
-                    flyable.GetFlyTime(pointToFly) + '\n' +
-                    flyable.FlyTo(pointToFly) + '\n';
+            return flyable.ToString() + '\n' +
+                   "GetFlyMessage: " + flyable.GetFlyMessage(pointToFly) + '\n' +
+                   "GetFlyTime: " + flyable.GetFlyTime(pointToFly) + " h" + '\n' +
+                   "FlyTo: " + flyable.FlyTo(pointToFly) + '\n';
         }
     }
 }

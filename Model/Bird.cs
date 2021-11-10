@@ -29,20 +29,28 @@ namespace Flying_objects.Model
         public string FlyTo(Coordinate coordinate)
         {
             Coordinate = Coordinate.SetCoordinates(coordinate);
-            return $"FlyTo: Bird has flied to new coordinates: {Coordinate}";
+            return $"Bird has flied to new coordinates: {Coordinate}";
         }
 
-        public string GetFlyTime(Coordinate coordinate)
+        public string GetFlyMessage(Coordinate coordinate)
         {
-            double distanceToFly = Coordinate.FindDistance(coordinate);
-            double timeToFly = distanceToFly / _speed;
-            int flyingRest = (int)Math.Round(timeToFly / FlyingTime) * RestTime;
-            timeToFly += flyingRest;
+            return String.Format("{0:f3} h, distance = {1:f3} km, time of rest = {2} h", 
+                GetFlyTime(coordinate), 
+                Coordinate.FindDistance(coordinate),
+                CalculateFlyingRest(coordinate));
+        }
 
-            return String.Format("Flytime: {0:f3} h, distance = {1:f3} km, time of rest = {2} h", 
-                timeToFly, 
-                distanceToFly,
-                flyingRest);
+        public double GetFlyTime(Coordinate coordinate)
+        {
+            double notRoundedFlyTime = Coordinate.FindDistance(coordinate) / _speed +
+                                       CalculateFlyingRest(coordinate);
+            return Math.Round(notRoundedFlyTime, 3);
+        }
+
+        private int CalculateFlyingRest(Coordinate coordinate)
+        {
+            double timeToFlyWithoutRest = Coordinate.FindDistance(coordinate) / _speed;
+            return (int)Math.Round(timeToFlyWithoutRest/ FlyingTime) * RestTime;
         }
 
         public override string ToString()

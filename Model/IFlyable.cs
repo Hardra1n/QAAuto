@@ -23,6 +23,13 @@ namespace Flying_objects.Model
         /// </summary>
         /// <param name="coordinate">Coordinate to fly</param>
         /// <returns> String formated information message about flytime.</returns>
-        string GetFlyTime(Coordinate coordinate);
+        string GetFlyMessage(Coordinate coordinate);
+
+        /// <summary>
+        /// Gets flytime
+        /// </summary>
+        /// <param name="coordinate">Coordinate to fly</param>
+        /// <returns> FlyTime with 3 digits after point</returns>
+        double GetFlyTime(Coordinate coordinate);
     }
 }
