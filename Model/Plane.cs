@@ -25,9 +25,9 @@ namespace Flying_objects.Model
 
         public string FlyTo(Coordinate coordinate)
         {
-            if (IsShortDistance(coordinate) != null)
+            if (IsShortDistance(coordinate))
             {
-                return "FlyTo: " + IsShortDistance(coordinate);
+                return "FlyTo: " + FormatShortDistanceMessage(coordinate);
             }
 
             Coordinate = Coordinate.SetCoordinates(coordinate);
@@ -36,9 +36,9 @@ namespace Flying_objects.Model
 
         public string GetFlyTime(Coordinate coordinate)
         {
-            if (IsShortDistance(coordinate) != null)
+            if (IsShortDistance(coordinate))
             {
-                return "Flytime: " + IsShortDistance(coordinate);
+                return "Flytime: " + FormatShortDistanceMessage(coordinate);
             }
 
             return String.Format("Flytime: {0:f3} h, distance = {1:f3} km", 
@@ -47,14 +47,14 @@ namespace Flying_objects.Model
         }
 
         /// <summary>
-        /// Checks for distance limitations.
+        /// Formates short distance message
         /// </summary>
         /// <param name="coordinate"></param>
         /// <returns>
         /// Information message, if distance to fly &lt; minimal flying distance,
         /// or null if it isn't out of limitations
         /// </returns>
-        private string IsShortDistance(Coordinate coordinate)
+        private string FormatShortDistanceMessage(Coordinate coordinate)
         {
             if (Coordinate.FindDistance(coordinate) < MinFlyingDistance)
             {
@@ -66,6 +66,18 @@ namespace Flying_objects.Model
             else
             {
                 return null;
+            }
+        }
+
+        private bool IsShortDistance(Coordinate coordinate)
+        {
+            if (Coordinate.FindDistance(coordinate) < MinFlyingDistance)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
