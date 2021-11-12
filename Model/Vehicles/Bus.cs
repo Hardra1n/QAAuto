@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VehicleXML.Model.Exceptions;
 
 namespace VehicleXML.Model.Vehicles
 {
     [Serializable]
     public class Bus : Vehicle 
     {
+        byte _seatAmount;
 
         public Bus() { }
 
@@ -15,7 +17,21 @@ namespace VehicleXML.Model.Vehicles
             SeatAmount = seatAmount;
             IsLong = isLong;
         }
-        public byte SeatAmount { get; set; }
+        public byte SeatAmount
+        {
+            get
+            {
+                return _seatAmount;
+            }
+            set
+            {
+                if (value <= 6)
+                {
+                    throw new InitializationException("Bus amount of seats myst be greater then 6");
+                }
+                _seatAmount = value;
+            }
+        }
 
         public bool IsLong { get; set; }
 

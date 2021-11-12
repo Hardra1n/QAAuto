@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using VehicleXML.Model.Enums;
+using VehicleXML.Model.Exceptions;
 
 namespace VehicleXML.Model.Vehicles
 {
@@ -14,7 +15,15 @@ namespace VehicleXML.Model.Vehicles
         public Scooter(string mark, string model, bool isBacketOn, string lockerSide) : base(mark, model)
         {
             IsBacketOn = isBacketOn;
-            LockerSide = (Side)Enum.Parse(LockerSide.GetType(), lockerSide);
+
+            try
+            {
+                LockerSide = (Side)Enum.Parse(LockerSide.GetType(), lockerSide);
+            }
+            catch (Exception ex)
+            {
+                throw new InitializationException("Incorrect scooter locker side", ex);
+            }
         }
         public bool IsBacketOn { get; set; }
 
