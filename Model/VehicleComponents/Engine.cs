@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VehicleXML.Model.Enums;
 using VehicleXML.Model.Exceptions;
 
 namespace VehicleXML.Model.VehicleComponents
@@ -20,8 +21,15 @@ namespace VehicleXML.Model.VehicleComponents
         {
             Power = power;
             Volume = volume;
-            Type = type;
             SerialNumber = serialNumber;
+            try
+            {
+                Type = (EngineType)Enum.Parse(Type.GetType(), type);
+            }
+            catch (Exception ex)
+            {
+                throw new InitializationException("Incorrect engine type", ex);
+            }
         }
 
         public int Power
@@ -56,7 +64,7 @@ namespace VehicleXML.Model.VehicleComponents
             }
         }
 
-        public string Type { get; set; }
+        public EngineType Type { get; set; }
 
         public string SerialNumber
         {
