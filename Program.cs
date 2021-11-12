@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using VehicleXML.Helper;
 using VehicleXML.Model;
+using VehicleXML.Model.Exceptions;
 using VehicleXML.Model.Vehicles;
 
 namespace VehicleXML
@@ -14,12 +14,11 @@ namespace VehicleXML
             InitVehicles(vehicles);
             AutoPark autopark = new AutoPark(vehicles);
 
-            foreach (Vehicle vehicle in autopark.Vehicles)
-                Console.WriteLine(vehicle.GetInfo() + "\n");
+            //GetFullInfoAboutAutoPark(autopark);
 
-            XmlHelper.XmlSerialize(autopark.GetVehiclesWithEngineVolumeGreaterThen1p5(), "../../../VehiclesWithEngineCondition.xml");
-            XmlHelper.XmlSerialize(autopark.GetBusNTruckEngines(), "../../../Engines.xml");
-            XmlHelper.XmlSerialize(autopark.GetVehiclesGroupedByTransmissionType(), "../../../TransmissionGroup");
+            //AutoparkToXML(autopark);
+
+            ExceptionScenario(autopark);
         }
 
         /// <summary>
@@ -71,5 +70,30 @@ namespace VehicleXML
 
         }
 
+        static void GetFullInfoAboutAutoPark(AutoPark autopark)
+        {
+            foreach (Vehicle vehicle in autopark.Vehicles)
+                Console.WriteLine(vehicle.GetInfo() + "\n");
+        }
+
+        static void AutoparkToXML(AutoPark autopark)
+        {
+            XmlHelper.XmlSerialize(autopark.GetVehiclesWithEngineVolumeGreaterThen1p5(), "../../../VehiclesWithEngineCondition.xml");
+            XmlHelper.XmlSerialize(autopark.GetBusNTruckEngines(), "../../../Engines.xml");
+            XmlHelper.XmlSerialize(autopark.GetVehiclesGroupedByTransmissionType(), "../../../TransmissionGroup");
+        }
+
+        static void ExceptionScenario(AutoPark autopark)
+        {
+            try
+            {
+                throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

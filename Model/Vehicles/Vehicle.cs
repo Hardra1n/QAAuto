@@ -66,7 +66,7 @@ namespace VehicleXML.Model.Vehicles
         public virtual string GetInfo()
         {
             StringBuilder formatedInfo = new StringBuilder();
-            formatedInfo.Append($"{this.GetType().Name}\n");
+            formatedInfo.Append($"{GetType().Name}\n");
             formatedInfo.Append($"{Mark} {Model}\n");
             formatedInfo.Append(Engine == null ? String.Empty : Engine.GetInfo() + '\n');
             formatedInfo.Append(Chassis == null ? String.Empty : Chassis.GetInfo() + '\n');

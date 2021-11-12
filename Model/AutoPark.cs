@@ -14,7 +14,8 @@ namespace VehicleXML.Model
         {
             Vehicles = vehicles.ToList();
         }
-        public List<Vehicle> Vehicles { get; set; }
+
+        public List<Vehicle> Vehicles { get; private set; }
 
         /// <summary>
         /// Gets list of vehicles from autopark with Engine greater then 1.5
