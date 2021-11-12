@@ -81,7 +81,7 @@ namespace VehicleXML.Model.VehicleComponents
 
                 foreach (char symbol in value)
                 {
-                    if (!(Char.IsDigit(symbol) || Char.IsLetter(symbol)))
+                    if (!Char.IsLetterOrDigit(symbol))
                     {
                         throw new InitializationException("Engine serial number must exists only letters and digits");
                     }

@@ -85,15 +85,7 @@ namespace VehicleXML
 
         static void ExceptionScenario(AutoPark autopark)
         {
-            try
-            {
-                throw new Exception();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                Console.WriteLine(ex.Message);
-            }
+
         }
     }
 }
