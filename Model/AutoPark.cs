@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using VehicleXML.Helper;
+using VehicleXML.Model.Exceptions;
 using VehicleXML.Model.VehicleComponents;
 using VehicleXML.Model.Vehicles;
 
@@ -10,12 +11,45 @@ namespace VehicleXML.Model
     public class AutoPark
     {
 
-        public AutoPark(IEnumerable<Vehicle> vehicles)
+        public AutoPark(IEnumerable<Vehicle> vehicles, int maxCapacity)
         {
             Vehicles = vehicles.ToList();
+            if (Vehicles.Capacity > maxCapacity)
+            {
+                throw new InitializationException("You tried create autopark with capacity less then amount of vehicles you have given");
+            }
+            MaxCapacity = maxCapacity;
+        }
+
+        public AutoPark(int maxCapacity)
+        {
+            Vehicles = new List<Vehicle>(maxCapacity);
+            MaxCapacity = maxCapacity;
         }
 
         public List<Vehicle> Vehicles { get; private set; }
+
+        public int MaxCapacity { get; set; }
+
+        public void AddAuto(Vehicle vehicle)
+        {
+            Vehicles.Add(vehicle);
+        }
+
+        public void UpdateAuto(Vehicle vehicle, int id)
+        {
+            Vehicles[id] = vehicle;
+        }
+
+        public void RemoveAuto(int id)
+        {
+            Vehicles.RemoveAt(id);
+        }
+
+        public void GetAutoByParameter(string param, string value)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Gets list of vehicles from autopark with Engine greater then 1.5
