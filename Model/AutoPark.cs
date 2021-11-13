@@ -61,7 +61,25 @@ namespace VehicleXML.Model
 
         public void UpdateAuto(Vehicle vehicle, int id)
         {
+            UpdateAutoExceptionThrow(vehicle, id);
             Vehicles[id] = vehicle;
+        }
+
+        private void UpdateAutoExceptionThrow(Vehicle vehicle, int id)
+        {
+            if (id >= Vehicles.Count || id < 0)
+            {
+                throw new UpdateAutoException("Incorrect given id.");
+            }
+            if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
+            {
+                string message = String.Format("Detail of vehicle is undefined {0} {1} {2}",
+                    vehicle.Chassis == null ? "\n Chassis is undefined" : String.Empty,
+                    vehicle.Engine == null ? "\n Engine is undefined" : String.Empty,
+                    vehicle.Transmission == null ? "\n Transmission is undefined" : String.Empty);
+
+                throw new UpdateAutoException(message, vehicle);
+            }
         }
 
         public void RemoveAuto(int id)
