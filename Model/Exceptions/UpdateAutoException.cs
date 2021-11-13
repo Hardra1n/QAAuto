@@ -5,12 +5,10 @@ using VehicleXML.Model.Vehicles;
 
 namespace VehicleXML.Model.Exceptions
 {
-    public class UpdateAutoException : Exception
+    public class UpdateAutoException : VehicleException
     {
         public UpdateAutoException(string message) : base(message) { }
 
-        public UpdateAutoException(string message, Vehicle problemVehicle) : base(message) { }
-
-        public Vehicle ProblemVehicle { get; private set; }
+        public UpdateAutoException(Vehicle problemVehicle) : base(problemVehicle) { }
     }
 }

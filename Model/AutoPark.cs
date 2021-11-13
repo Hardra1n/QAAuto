@@ -50,12 +50,7 @@ namespace VehicleXML.Model
             }
             if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
             {
-                string message = String.Format("Detail of vehicle is undefined {0} {1} {2}",
-                    vehicle.Chassis == null ? "\n Chassis is undefined" : String.Empty,
-                    vehicle.Engine == null ? "\n Engine is undefined" : String.Empty,
-                    vehicle.Transmission == null ? "\n Transmission is undefined" : String.Empty);
-
-                throw new AddException(message, vehicle);
+                throw new AddException(vehicle);
             }
         }
 
@@ -73,12 +68,7 @@ namespace VehicleXML.Model
             }
             if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
             {
-                string message = String.Format("Detail of vehicle is undefined {0} {1} {2}",
-                    vehicle.Chassis == null ? "\n Chassis is undefined" : String.Empty,
-                    vehicle.Engine == null ? "\n Engine is undefined" : String.Empty,
-                    vehicle.Transmission == null ? "\n Transmission is undefined" : String.Empty);
-
-                throw new UpdateAutoException(message, vehicle);
+                throw new UpdateAutoException(vehicle);
             }
         }
 
