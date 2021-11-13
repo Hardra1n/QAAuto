@@ -13,12 +13,17 @@ namespace VehicleXML.Model
 
         public AutoPark(IEnumerable<Vehicle> vehicles, int maxCapacity)
         {
-            Vehicles = vehicles.ToList();
-            if (Vehicles.Capacity > maxCapacity)
+            if (vehicles.ToList().Count > maxCapacity)
             {
                 throw new InitializationException("You tried create autopark with capacity less then amount of vehicles you have given");
             }
             MaxCapacity = maxCapacity;
+
+            Vehicles = new List<Vehicle>();
+            foreach (Vehicle vehicle in vehicles)
+            {
+                AddAuto(vehicle);
+            }
         }
 
         public AutoPark(int maxCapacity)
@@ -29,11 +34,29 @@ namespace VehicleXML.Model
 
         public List<Vehicle> Vehicles { get; private set; }
 
-        public int MaxCapacity { get; set; }
+        public int MaxCapacity { get; private set; }
 
         public void AddAuto(Vehicle vehicle)
         {
+            AddAutoExceptionThrow(vehicle);
             Vehicles.Add(vehicle);
+        }
+
+        private void AddAutoExceptionThrow(Vehicle vehicle)
+        {
+            if (MaxCapacity <= Vehicles.Count)
+            {
+                throw new AddException("Autopark is full, impossible to add another vehicle.");
+            }
+            if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
+            {
+                string message = String.Format("Detail of vehicle is undefined {0} {1} {2}",
+                    vehicle.Chassis == null ? "\n Chassis is undefined" : String.Empty,
+                    vehicle.Engine == null ? "\n Engine is undefined" : String.Empty,
+                    vehicle.Transmission == null ? "\n Transmission is undefined" : String.Empty);
+
+                throw new AddException(message, vehicle);
+            }
         }
 
         public void UpdateAuto(Vehicle vehicle, int id)
