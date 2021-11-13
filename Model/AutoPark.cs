@@ -74,7 +74,16 @@ namespace VehicleXML.Model
 
         public void RemoveAuto(int id)
         {
+            RemoveAutoExceptionThrow(id);
             Vehicles.RemoveAt(id);
+        }
+
+        private void RemoveAutoExceptionThrow(int id)
+        {
+            if (id < 0 || id >= Vehicles.Count)
+            {
+                throw new RemoveAutoException("Incorrect given id");
+            }
         }
 
         public void GetAutoByParameter(string param, string value)
