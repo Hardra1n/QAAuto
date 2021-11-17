@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using VehicleXML.Helper;
 using VehicleXML.Model.Exceptions;
 using VehicleXML.Model.VehicleComponents;
@@ -86,10 +87,57 @@ namespace VehicleXML.Model
             }
         }
 
-        public void GetAutoByParameter(string param, string value)
+        public Vehicle[] GetAutoByParameter(string param, string value)
         {
-            throw new NotImplementedException();
+            GetAutoByParameterExceptionThrow(param, value);
+            try
+            {
+                var vehicles = Vehicles.Where(delegate (Vehicle vehicle)
+                {
+                    PropertyInfo propInfo = null;
+                    object propValue = null;
+                    foreach (string paramNamePart in param.Split('.'))
+                    {
+                        propInfo = propInfo == null ?
+                            vehicle.GetType().GetProperty(paramNamePart) :
+                            propInfo?.PropertyType.GetProperty(paramNamePart);
+
+                        propValue = propValue == null ?
+                            propInfo?.GetValue(vehicle) :
+                            propInfo?.GetValue(propValue);
+                    }
+                    if (propValue?.ToString() == value)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+
+                return vehicles.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new GetAutoByParameterException("Unexpected exception", ex);
+            }
         }
+
+        private void GetAutoByParameterExceptionThrow(string param, string value)
+        {
+            List<String> listOfParamNames = 
+                ReflectionVehicleHelper.GetUniqueListOfPropertiesNames(GetAutoParkVehicleTypes());
+
+            if (!listOfParamNames.Contains(param))
+            {
+                string msg = String.Format("Parameter name {0} haven't found as autopark vehicle's param.", param);
+                throw new GetAutoByParameterException(msg);
+            }
+        }
+
+        public Type[] GetAutoParkVehicleTypes() 
+            => Vehicles.GroupBy(x => x.GetType()).Select(x => x.Key).ToArray();
 
         /// <summary>
         /// Gets list of vehicles from autopark with Engine greater then 1.5
