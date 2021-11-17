@@ -40,7 +40,8 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value <= 0)
                 {
-                    throw new InitializationException("Number of gears must be greater then 0");
+                    throw new InitializationException("Number of gears must be greater then 0." +
+                        $"Your input {value}");
                 }
                 _gearsNumber = value;
             }

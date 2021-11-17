@@ -32,7 +32,8 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value <= 1)
                 {
-                    throw new InitializationException("Number of wheels must be greater then 1");
+                    throw new InitializationException("Number of wheels must be greater then 1. " +
+                        $"Your input {value}");
                 }
                 _wheelNumber = value;
             }
@@ -48,14 +49,16 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value.Length != 5)
                 {
-                    throw new InitializationException("Chassis serial number must exists only five symbols");
+                    throw new InitializationException("Chassis serial number must exists only five symbols. " +
+                        $"Your input {value}");
                 }
 
                 foreach (char symbol in value)
                 {
                     if (!Char.IsLetterOrDigit(symbol))
                     {
-                        throw new InitializationException("Chassis serial number must exists only letters and digits");
+                        throw new InitializationException("Chassis serial number must exists only letters and digits." +
+                            $"Your input {value}");
                     }
                 }
 
@@ -73,7 +76,8 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value <= 0)
                 {
-                    throw new InitializationException("Chassis maximum weight must be greater then 0");
+                    throw new InitializationException("Chassis maximum weight must be greater then 0. " +
+                        $"Your input {value}");
                 }
                 _maxWeight = value;
             }

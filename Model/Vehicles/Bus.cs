@@ -27,7 +27,8 @@ namespace VehicleXML.Model.Vehicles
             {
                 if (value <= 6)
                 {
-                    throw new InitializationException("Bus amount of seats myst be greater then 6");
+                    throw new InitializationException($"Bus amount of seats myst be greater then 6. " +
+                        $"Your input:{value}");
                 }
                 _seatAmount = value;
             }

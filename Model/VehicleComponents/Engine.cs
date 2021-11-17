@@ -42,7 +42,8 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value <= 0)
                 {
-                    throw new InitializationException("Engine power must be greater then 0");
+                    throw new InitializationException("Engine power must be greater then 0.  " +
+                        $"Your input {value}");
                 }
                 _power = value;
             }
@@ -58,7 +59,8 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value <= 0)
                 {
-                    throw new InitializationException("Engine volume must be grater then 0");
+                    throw new InitializationException("Engine volume must be grater then 0. " +
+                        $"Your input {value}");
                 }
                 _volume = value;
             }
@@ -76,14 +78,16 @@ namespace VehicleXML.Model.VehicleComponents
             {
                 if (value.Length != 5)
                 {
-                    throw new InitializationException("Engine serial number must exists only five symbols");
+                    throw new InitializationException("Engine serial number must exists only five symbols." +
+                        $"Your input {value}");
                 }
 
                 foreach (char symbol in value)
                 {
                     if (!Char.IsLetterOrDigit(symbol))
                     {
-                        throw new InitializationException("Engine serial number must exists only letters and digits");
+                        throw new InitializationException("Engine serial number must exists only letters and digits" +
+                            $"Your input { value }");
                     }
                 }
 

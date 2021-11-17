@@ -35,7 +35,8 @@ namespace VehicleXML.Model.Vehicles
             {
                 if (value <= 1)
                 {
-                    throw new InitializationException("Car door amount must be greater then 1");
+                    throw new InitializationException($"Car door amount must be greater then 1. " +
+                        $"Your input {value}");
                 }
                 _doorAmount = value;
             }
