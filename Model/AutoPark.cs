@@ -65,7 +65,7 @@ namespace VehicleXML.Model
         {
             if (id >= Vehicles.Count || id < 0)
             {
-                throw new UpdateAutoException("Incorrect given id.");
+                throw new UpdateAutoException($"Incorrect given id. You gave {id}.");
             }
             if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
             {
@@ -83,7 +83,7 @@ namespace VehicleXML.Model
         {
             if (id < 0 || id >= Vehicles.Count)
             {
-                throw new RemoveAutoException("Incorrect given id");
+                throw new RemoveAutoException($"Incorrect given id. You gave {id}.");
             }
         }
 
@@ -131,7 +131,7 @@ namespace VehicleXML.Model
 
             if (!listOfParamNames.Contains(param))
             {
-                string msg = String.Format("Parameter name {0} haven't found as autopark vehicle's param.", param);
+                string msg = String.Format("Parameter name '{0}' haven't found as autopark vehicle's param.", param);
                 throw new GetAutoByParameterException(msg);
             }
         }

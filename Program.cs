@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using VehicleXML.Helper;
 using VehicleXML.Model;
 using VehicleXML.Model.Exceptions;
@@ -12,7 +13,7 @@ namespace VehicleXML
         {
             Vehicle[] vehicles = new Vehicle[8];
             InitVehicles(vehicles);
-            AutoPark autopark = new AutoPark(vehicles);
+            AutoPark autopark = new AutoPark(vehicles, 8);
 
             //GetFullInfoAboutAutoPark(autopark);
 
@@ -85,7 +86,117 @@ namespace VehicleXML
 
         static void ExceptionScenario(AutoPark autopark)
         {
+            AddExceptionScenario();
 
+            InitializationAutoExceptionScenario();
+
+            UpdateAutoExceptionScenario(autopark);
+
+            RemoveAutoExceptionScenario(autopark);
+
+            GetAutoByParameterExceptionScenario(autopark);
         }
+
+        static void AddExceptionScenario()
+        {
+            Console.WriteLine("AddException Scenario:");
+            AutoPark autopark = new AutoPark(1);
+            Car car = new Car("Lada", "2107", 3, "Left");
+            car.SetChassis(4, "D2HEL", 500);
+            car.SetEngine(100, 1.9, "Gas", "DRsf1");
+            try
+            {
+                autopark.AddAuto(car);
+            }
+            catch (AddException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            car.SetTransmission("Hybrid", 5, "BadTrans");
+
+            try
+            {
+                autopark.AddAuto(car);
+                autopark.AddAuto(car);
+            }
+            catch (AddException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+        }
+
+        static void InitializationAutoExceptionScenario()
+        {
+            Console.WriteLine("InitializationAutoException Scenario:");
+            try
+            {
+                Car car = new Car("Wolf", "Pancrate", 2, "Front");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+        }
+
+        static void UpdateAutoExceptionScenario(AutoPark autoPark)
+        {
+            Console.WriteLine("UpdateAutoException Scenario:");
+            Car car = new Car("Lada", "2107", 3, "Left");
+            car.SetChassis(4, "D2HEL", 500);
+            car.SetEngine(100, 1.9, "Gas", "DRsf1");
+            try
+            {
+                autoPark.UpdateAuto(car, 2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            car.SetTransmission("Hybrid", 5, "BadTrans");
+
+            try
+            {
+                autoPark.UpdateAuto(car, 300);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+        }
+
+        static void RemoveAutoExceptionScenario(AutoPark autoPark)
+        {
+            Console.WriteLine("RemoveAutoException Scenario:");
+            try
+            {
+                autoPark.RemoveAuto(300);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+        }
+        
+        static void GetAutoByParameterExceptionScenario(AutoPark autoPark)
+        {
+            Console.WriteLine("GetAutoByParameterException Scenario:");
+            try
+            {
+                autoPark.GetAutoByParameter("Undefined name", "10");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Console.WriteLine();
+        }
+
+
+
     }
 }
