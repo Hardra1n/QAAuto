@@ -2,6 +2,7 @@
 using System.Linq;
 using VehicleXML.Helper;
 using VehicleXML.Model;
+using VehicleXML.Model.Enums;
 using VehicleXML.Model.Exceptions;
 using VehicleXML.Model.Vehicles;
 
@@ -28,46 +29,46 @@ namespace VehicleXML
         /// <param name="vehicles"></param>
         static void InitVehicles(Vehicle[] vehicles)
         {
-            vehicles[0] = new Car("Ford", "Mustafa", 4, "Right");
+            vehicles[0] = new Car("Ford", "Mustafa", 4, Side.Right);
             vehicles[0].SetChassis(4, "3A11C", 700);
-            vehicles[0].SetEngine(300, 3.2, "Gas", "1Ds3p");
-            vehicles[0].SetTransmission("Mechanic", 6, "KindTrans");
+            vehicles[0].SetEngine(300, 3.2, EngineType.Gas, "1Ds3p");
+            vehicles[0].SetTransmission(TransmissionType.Mechanic, 6, "KindTrans");
 
 
-            vehicles[1] = new Scooter("Racer", "Meteor RC50", false, "Left");
+            vehicles[1] = new Scooter("Racer", "Meteor RC50", false, Side.Left);
             vehicles[1].SetChassis(2, "6AC39", 300);
-            vehicles[1].SetEngine(4, 1.1, "Gas", "4dPG8");
-            vehicles[1].SetTransmission("Automatic", 4, "BadTrans");
+            vehicles[1].SetEngine(4, 1.1, EngineType.Gas, "4dPG8");
+            vehicles[1].SetTransmission(TransmissionType.Automatic, 4, "BadTrans");
 
             vehicles[2] = new Bus("Peugeot", "Boxer", 10, false);
             vehicles[2].SetChassis(4, "7VK23", 1300);
-            vehicles[2].SetEngine(160, 2.0, "Diesel", "1fdR3");
-            vehicles[2].SetTransmission("Mechanic", 6, "Guys&Trans");
+            vehicles[2].SetEngine(160, 2.0, EngineType.Diesel, "1fdR3");
+            vehicles[2].SetTransmission(TransmissionType.Mechanic, 6, "Guys&Trans");
 
             vehicles[3] = new Truck("Ford", "F150", true);
             vehicles[3].SetChassis(4, "901DA", 2000);
-            vehicles[3].SetEngine(400, 5.0, "Gas", "dAmJ4");
-            vehicles[3].SetTransmission("Automatic", 6, "DanceWithTrans");
+            vehicles[3].SetEngine(400, 5.0, EngineType.Gas, "dAmJ4");
+            vehicles[3].SetTransmission(TransmissionType.Automatic, 6, "DanceWithTrans");
 
             vehicles[4] = new Bus("Volkswagen", "Sprinter", 9, false);
             vehicles[4].SetChassis(4, "90R98", 1800);
-            vehicles[4].SetEngine(400, 5.0, "Gas", "3Cds8");
-            vehicles[4].SetTransmission("Mechanic", 6, "BadTrans");
+            vehicles[4].SetEngine(400, 5.0, EngineType.Electric, "3Cds8");
+            vehicles[4].SetTransmission(TransmissionType.Mechanic, 6, "BadTrans");
 
-            vehicles[5] = new Scooter("Dream", "Comet2C", true, "Right");
+            vehicles[5] = new Scooter("Dream", "Comet2C", true, Side.Right);
             vehicles[5].SetChassis(2, "4CD21", 250);
-            vehicles[5].SetEngine(10, 1.4, "Gas", "JdS81");
-            vehicles[5].SetTransmission("Automatic", 3, "KindTrans");
+            vehicles[5].SetEngine(10, 1.4, EngineType.Gas, "JdS81");
+            vehicles[5].SetTransmission(TransmissionType.Automatic, 3, "KindTrans");
 
-            vehicles[6] = new Car("Lada", "2107", 3, "Left");
+            vehicles[6] = new Car("Lada", "2107", 3, Side.Left);
             vehicles[6].SetChassis(4, "D2HEL", 500);
-            vehicles[6].SetEngine(100, 1.9, "Gas", "DRsf1");
-            vehicles[6].SetTransmission("Hybrid", 5, "BadTrans");
+            vehicles[6].SetEngine(100, 1.9, EngineType.Gas, "DRsf1");
+            vehicles[6].SetTransmission(TransmissionType.Hybrid, 5, "BadTrans");
 
             vehicles[7] = new Truck("Delivery", "Monster", false);
             vehicles[7].SetChassis(4, "K01DA", 1700);
-            vehicles[7].SetEngine(280, 3.4, "Gas", "dAHD4");
-            vehicles[7].SetTransmission("Hybrid", 6, "RollingTrans");
+            vehicles[7].SetEngine(280, 3.4, EngineType.Gas, "dAHD4");
+            vehicles[7].SetTransmission(TransmissionType.Hybrid, 6, "RollingTrans");
 
         }
 
@@ -101,9 +102,9 @@ namespace VehicleXML
         {
             Console.WriteLine("AddException Scenario:");
             AutoPark autopark = new AutoPark(1);
-            Car car = new Car("Lada", "2107", 3, "Left");
+            Car car = new Car("Lada", "2107", 3, Side.Left);
             car.SetChassis(4, "D2HEL", 500);
-            car.SetEngine(100, 1.9, "Gas", "DRsf1");
+            car.SetEngine(100, 1.9, EngineType.Gas, "DRsf1");
             try
             {
                 autopark.AddAuto(car);
@@ -112,7 +113,7 @@ namespace VehicleXML
             {
                 Console.WriteLine(ex.Message);
             }
-            car.SetTransmission("Hybrid", 5, "BadTrans");
+            car.SetTransmission(TransmissionType.Hybrid, 5, "BadTrans");
 
             try
             {
@@ -131,7 +132,7 @@ namespace VehicleXML
             Console.WriteLine("InitializationAutoException Scenario:");
             try
             {
-                Car car = new Car("Wolf", "Pancrate", 2, "Front");
+                Car car = new Car("Wolf", "Pancrate", 0, Side.Right);
             }
             catch (Exception ex)
             {
@@ -143,9 +144,9 @@ namespace VehicleXML
         static void UpdateAutoExceptionScenario(AutoPark autoPark)
         {
             Console.WriteLine("UpdateAutoException Scenario:");
-            Car car = new Car("Lada", "2107", 3, "Left");
+            Car car = new Car("Lada", "2107", 3, Side.Left);
             car.SetChassis(4, "D2HEL", 500);
-            car.SetEngine(100, 1.9, "Gas", "DRsf1");
+            car.SetEngine(100, 1.9, EngineType.Gas, "DRsf1");
             try
             {
                 autoPark.UpdateAuto(car, 2);
@@ -155,7 +156,7 @@ namespace VehicleXML
                 Console.WriteLine(ex.Message);
             }
 
-            car.SetTransmission("Hybrid", 5, "BadTrans");
+            car.SetTransmission(TransmissionType.Hybrid, 5, "BadTrans");
 
             try
             {

@@ -12,18 +12,10 @@ namespace VehicleXML.Model.Vehicles
 
         public Scooter() { }
 
-        public Scooter(string mark, string model, bool isBacketOn, string lockerSide) : base(mark, model)
+        public Scooter(string mark, string model, bool isBacketOn, Side lockerSide) : base(mark, model)
         {
             IsBacketOn = isBacketOn;
-
-            try
-            {
-                LockerSide = (Side)Enum.Parse(LockerSide.GetType(), lockerSide);
-            }
-            catch (Exception ex)
-            {
-                throw new InitializationException("Incorrect scooter locker side", ex);
-            }
+            LockerSide = lockerSide;
         }
         public bool IsBacketOn { get; set; }
 

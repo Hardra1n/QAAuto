@@ -17,19 +17,20 @@ namespace VehicleXML.Model.VehicleComponents
 
         public Engine() { }
 
-        public Engine(int power, double volume, string type, string serialNumber)
+        public Engine(int power, double volume, EngineType type, string serialNumber)
         {
             Power = power;
             Volume = volume;
             SerialNumber = serialNumber;
-            try
-            {
-                Type = (EngineType)Enum.Parse(Type.GetType(), type);
-            }
-            catch (Exception ex)
-            {
-                throw new InitializationException("Incorrect engine type", ex);
-            }
+            Type = type;
+            //try
+            //{
+            //    Type = (EngineType)Enum.Parse(Type.GetType(), type);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new InitializationException("Incorrect engine type", ex);
+            //}
         }
 
         public int Power

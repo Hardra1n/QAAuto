@@ -13,17 +13,17 @@ namespace VehicleXML.Model.VehicleComponents
 
         public Transmission() { }
 
-        public Transmission(string type, byte gearsNumber, string manufacturer)
+        public Transmission(TransmissionType type, byte gearsNumber, string manufacturer)
         {
-            try
-            {
-                Type = (TransmissionType)Enum.Parse(Type.GetType(), type);
-            } 
-            catch (Exception ex)
-            {
-                throw new InitializationException("Incorrect transmission type", ex);
-            }
-
+            //try
+            //{
+            //    Type = (TransmissionType)Enum.Parse(Type.GetType(), type);
+            //} 
+            //catch (Exception ex)
+            //{
+            //    throw new InitializationException("Incorrect transmission type", ex);
+            //}
+            Type = type;
             GearsNumber = gearsNumber;
             Manufacturer = manufacturer;
         }

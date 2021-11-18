@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using VehicleXML.Model.Enums;
 using VehicleXML.Model.VehicleComponents;
 
 namespace VehicleXML.Model.Vehicles
@@ -38,7 +39,7 @@ namespace VehicleXML.Model.Vehicles
         /// <param name="volume"> Volume of engine in l</param>
         /// <param name="type"> Engine type</param>
         /// <param name="serialNumber"> Engine serial number</param>
-        public void SetEngine(int power, double volume, string type, string serialNumber)
+        public void SetEngine(int power, double volume, EngineType type, string serialNumber)
             => Engine = new Engine(power, volume, type, serialNumber);
 
         /// <summary>
@@ -56,7 +57,7 @@ namespace VehicleXML.Model.Vehicles
         /// <param name="type"> Transmission type</param>
         /// <param name="gearsNumber"> Number of gears</param>
         /// <param name="manufacturer"> Creater of transmission</param>
-        public void SetTransmission(string type, byte gearsNumber, string manufacturer)
+        public void SetTransmission(TransmissionType type, byte gearsNumber, string manufacturer)
             => Transmission = new Transmission(type, gearsNumber, manufacturer);
 
         /// <summary>

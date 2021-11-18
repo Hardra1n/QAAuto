@@ -13,17 +13,18 @@ namespace VehicleXML.Model.Vehicles
 
         public Car() { }
 
-        public Car(string mark, string model, byte doorAmount, string handDrive) : base(mark, model)
+        public Car(string mark, string model, byte doorAmount, Side handDrive) : base(mark, model)
         {
             DoorAmount = doorAmount;
-            try
-            {
-                HandDrive = (Side)Enum.Parse(HandDrive.GetType(), handDrive);
-            }
-            catch (Exception ex)
-            {
-                throw new InitializationException("Incorrect car hand drive side", ex);
-            }
+            HandDrive = handDrive;
+            //try
+            //{
+            //    HandDrive = (Side)Enum.Parse(HandDrive.GetType(), handDrive);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new InitializationException("Incorrect car hand drive side", ex);
+            //}
         }
         public byte DoorAmount
         {
