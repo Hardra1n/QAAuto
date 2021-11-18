@@ -7,7 +7,7 @@ namespace VehicleXML.Model.Exceptions
 {
     public class UpdateAutoException : VehicleException
     {
-        public UpdateAutoException(string message) : base(message) { }
+        public UpdateAutoException(int id) : base(id) { }
 
         public UpdateAutoException(Vehicle problemVehicle) : base(problemVehicle) { }
     }

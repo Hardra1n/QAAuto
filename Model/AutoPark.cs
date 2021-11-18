@@ -39,11 +39,11 @@ namespace VehicleXML.Model
 
         public void AddAuto(Vehicle vehicle)
         {
-            AddAutoExceptionThrow(vehicle);
+            ValidateAddAuto(vehicle);
             Vehicles.Add(vehicle);
         }
 
-        private void AddAutoExceptionThrow(Vehicle vehicle)
+        private void ValidateAddAuto(Vehicle vehicle)
         {
             if (MaxCapacity <= Vehicles.Count)
             {
@@ -57,15 +57,15 @@ namespace VehicleXML.Model
 
         public void UpdateAuto(Vehicle vehicle, int id)
         {
-            UpdateAutoExceptionThrow(vehicle, id);
+            ValidateUpdateAuto(vehicle, id);
             Vehicles[id] = vehicle;
         }
 
-        private void UpdateAutoExceptionThrow(Vehicle vehicle, int id)
+        private void ValidateUpdateAuto(Vehicle vehicle, int id)
         {
             if (id >= Vehicles.Count || id < 0)
             {
-                throw new UpdateAutoException($"Incorrect given id. You gave {id}.");
+                throw new UpdateAutoException(id);
             }
             if (vehicle.Chassis == null || vehicle.Transmission == null || vehicle.Engine == null)
             {
@@ -75,21 +75,21 @@ namespace VehicleXML.Model
 
         public void RemoveAuto(int id)
         {
-            RemoveAutoExceptionThrow(id);
+            ValidateRemoveAuto(id);
             Vehicles.RemoveAt(id);
         }
 
-        private void RemoveAutoExceptionThrow(int id)
+        private void ValidateRemoveAuto(int id)
         {
             if (id < 0 || id >= Vehicles.Count)
             {
-                throw new RemoveAutoException($"Incorrect given id. You gave {id}.");
+                throw new RemoveAutoException(id);
             }
         }
 
         public Vehicle[] GetAutoByParameter(string param, string value)
         {
-            GetAutoByParameterExceptionThrow(param, value);
+            ValidateGetAutoByParameter(param, value);
             try
             {
                 var vehicles = Vehicles.Where(delegate (Vehicle vehicle)
@@ -124,7 +124,7 @@ namespace VehicleXML.Model
             }
         }
 
-        private void GetAutoByParameterExceptionThrow(string param, string value)
+        private void ValidateGetAutoByParameter(string param, string value)
         {
             List<String> listOfParamNames = 
                 ReflectionVehicleHelper.GetUniqueListOfPropertiesNames(GetAutoParkVehicleTypes());

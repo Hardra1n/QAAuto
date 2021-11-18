@@ -6,6 +6,6 @@ namespace VehicleXML.Model.Exceptions
 {
     public class RemoveAutoException : VehicleException 
     {
-        public RemoveAutoException(string message) : base(message) { }
+        public RemoveAutoException(int id) : base(id) { }
     }
 }
