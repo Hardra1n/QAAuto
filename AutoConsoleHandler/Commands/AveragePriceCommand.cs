@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AutoConsoleHandler.Model;
+using AutoConsoleHandler.UI;
 
 namespace AutoConsoleHandler.Commands
 {
     public class AveragePriceCommand : ICommand
     {
+        IWriter _writer;
+
+        public AveragePriceCommand(IWriter writer)
+        {
+            _writer = writer;
+        }
+
         public void Execute()
         {
-            throw new NotImplementedException();
+            CarPark carPark = CarPark.GetInstance();
+            _writer.Write(carPark.CountAllCars());
         }
     }
 }
