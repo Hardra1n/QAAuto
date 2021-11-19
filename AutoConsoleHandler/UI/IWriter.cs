@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutoConsoleHandler.UI
 {
-    interface IWriter
+    public interface IWriter
     {
         void Write<T>(T data);
     }
