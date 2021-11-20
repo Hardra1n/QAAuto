@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoConsoleHandler.Model;
+using AutoConsoleHandler.UI;
+using System;
 
 namespace AutoConsoleHandler
 {
@@ -6,7 +8,9 @@ namespace AutoConsoleHandler
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleCarParkAdder.StartFillingCarPark();
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.Start();
         }
     }
 }
