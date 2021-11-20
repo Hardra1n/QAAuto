@@ -8,7 +8,7 @@ namespace AutoConsoleHandler.Commands
     {
         public void Execute()
         {
-            throw new NotImplementedException();
+            Environment.Exit(0);
         }
     }
 }
