@@ -9,6 +9,7 @@ namespace AutoConsoleHandler
         static void Main(string[] args)
         {
             ConsoleCarParkAdder.StartFillingCarPark();
+
             ConsoleHandler consoleHandler = new ConsoleHandler();
             consoleHandler.Start();
         }

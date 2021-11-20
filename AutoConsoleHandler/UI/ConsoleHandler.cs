@@ -21,7 +21,7 @@ namespace AutoConsoleHandler.UI
         {
             while (true)
             {
-                InterpitateCommand(ReadCommand());
+                InterpitateCommand(Console.ReadLine());
             }
         }
         
@@ -40,8 +40,6 @@ namespace AutoConsoleHandler.UI
                 commands.Add("average price " + type, new AveragePriceTypeCommand(this, type));
             }
         }
-
-        private string ReadCommand() => Console.ReadLine();
 
         private void InterpitateCommand(string command)
         {

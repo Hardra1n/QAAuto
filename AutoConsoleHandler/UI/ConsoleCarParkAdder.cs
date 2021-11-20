@@ -10,6 +10,7 @@ namespace AutoConsoleHandler.UI
     public static class ConsoleCarParkAdder
     {
         static ICarParkAdder _adder = new CarParkAdder();
+
         static string _nameOfAddMethod = "AddCarGroup";
 
         public static void StartFillingCarPark()
