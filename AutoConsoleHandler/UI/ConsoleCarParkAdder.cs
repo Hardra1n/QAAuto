@@ -9,8 +9,8 @@ namespace AutoConsoleHandler.UI
 {
     public static class ConsoleCarParkAdder
     {
-        static ICarParkAdder adder = new CarParkAdder();
-        static string nameOfAddMethod = "AddCarGroup";
+        static ICarParkAdder _adder = new CarParkAdder();
+        static string _nameOfAddMethod = "AddCarGroup";
 
         public static void StartFillingCarPark()
         {
@@ -21,6 +21,11 @@ namespace AutoConsoleHandler.UI
                 if (data == "exit")
                 {
                     break;
+                }
+                if (data == "scenario1")
+                {
+                    AddScenario();
+                    continue;
                 }
                 try
                 {
@@ -35,15 +40,33 @@ namespace AutoConsoleHandler.UI
             }
         }
 
+        private static void AddScenario()
+        {
+            string[] data = new string[]
+             {
+                "volvo mc13 15 100",
+                "volvo mc23 23 20",
+                "audi a6 5,1 3",
+                "audi a4 1,3 10",
+                "chvrolet comaro 6,1 1"
+             };
+            foreach (string str in data)
+            {
+                List<object> convertedData = ParseData(SplitData(str));
+                AddCarGroupToCarPark(convertedData.ToArray());
+            }
+
+        }
+
         private static string CreateInputFormatMessage()
         {
             StringBuilder message = new StringBuilder();
-            var paramsOfAddMethod = adder.GetType().GetMethod(nameOfAddMethod).GetParameters();
+            var paramsOfAddMethod = _adder.GetType().GetMethod(_nameOfAddMethod).GetParameters();
             foreach(var param in paramsOfAddMethod)
             {
                 message.Append(param.Name + "\t");
             }
-
+            message.Append("\nEnter 'exit' to finalize adding.");
             return message.ToString();
         }
 
@@ -51,12 +74,12 @@ namespace AutoConsoleHandler.UI
 
         private static void AddCarGroupToCarPark(object[] convertedData)
         {
-            adder.GetType().GetMethod(nameOfAddMethod).Invoke(adder, convertedData);
+            _adder.GetType().GetMethod(_nameOfAddMethod).Invoke(_adder, convertedData);
         }
 
         private static List<object> ParseData(string[] data)
         {
-            var paramsOfAddMethod = adder.GetType().GetMethod(nameOfAddMethod).GetParameters();
+            var paramsOfAddMethod = _adder.GetType().GetMethod(_nameOfAddMethod).GetParameters();
 
             if (data.Length != paramsOfAddMethod.Length)
             {
