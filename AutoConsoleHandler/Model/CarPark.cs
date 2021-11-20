@@ -33,7 +33,13 @@ namespace AutoConsoleHandler.Model
         public int CountAllCars() => _carGroups.Sum(x => x.Amount);
 
         public float CountAveragePrice()
-            => _carGroups.Sum(x => x.ConcreteCar.Price * x.Amount) / CountAllCars();
+        {
+            if (_carGroups.Count == 0)
+            {
+                return 0;
+            }
+            return _carGroups.Sum(x => x.ConcreteCar.Price * x.Amount) / CountAllCars();
+        }
 
         public string[] GetUniqueTypes()
         {

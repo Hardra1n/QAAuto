@@ -15,7 +15,7 @@ namespace AutoConsoleHandler.Commands
         public void Execute()
         {
             CarPark carPark = CarPark.GetInstance();
-            _writer.Write(carPark.CountAllCars());
+            _writer.Write(carPark.CountAveragePrice());
         }
     }
 }
