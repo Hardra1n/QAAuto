@@ -7,7 +7,7 @@ namespace AutoConsoleHandler.Model
 {
     public class CarPark
     {
-        List<CarGroup> _carGroups = new List<CarGroup>();
+        List<Car> _cars = new List<Car>();
 
         static CarPark _carPark;
 
@@ -25,27 +25,35 @@ namespace AutoConsoleHandler.Model
 
         public void AddCarGroup(string mark, string model, float price, int amount)
         {
-            _carGroups.Add(new CarGroup(mark, model, price, amount));
+            if (amount <= 0)
+            {
+                throw new Exception($"Amount must be more then 0, your input {amount}");
+            }
+            for (int i = 0; i < amount; i++)
+            {
+                _cars.Add(new Car(mark, model, price));
+            }
         }
 
         public int CountUniqueTypes() => GetUniqueTypes().Length;
 
-        public int CountAllCars() => _carGroups.Sum(x => x.Amount);
+        public int CountAllCars() => _cars.Count;
 
         public float CountAveragePrice()
         {
-            if (_carGroups.Count == 0)
+            if (_cars.Count == 0)
             {
                 return 0;
             }
-            return _carGroups.Sum(x => x.ConcreteCar.Price * x.Amount) / CountAllCars();
+
+            return _cars.Sum(x => x.Price) / CountAllCars();
         }
 
         public string[] GetUniqueTypes()
         {
-            var typesOfAllCars = _carGroups.Select(x => x.ConcreteCar.Mark);
+            var carTypes = _cars.Select(x => x.Mark);
             List<string> uniqueTypes = new List<string>();
-            foreach (string carType in typesOfAllCars)
+            foreach (string carType in carTypes)
             {
                 if (!uniqueTypes.Contains(carType))
                 {
@@ -57,16 +65,13 @@ namespace AutoConsoleHandler.Model
 
         public float CountAveragePriceOfType(string type)
         {
-            var groupsOfType = SelectCarGroupsOfType(type);
-            if (groupsOfType is null)
+            var carsOfType = _cars.Where(x => x.Mark.Equals(type)).ToList();
+            if (carsOfType is null)
             {
                 return 0;
             }
-            return groupsOfType.Sum(x => x.ConcreteCar.Price * x.Amount) /
-                groupsOfType.Sum(x => x.Amount);
-        }
 
-        private IEnumerable<CarGroup> SelectCarGroupsOfType(string type)
-            => _carGroups.Where(x => x.ConcreteCar.Mark.Equals(type));
+            return carsOfType.Sum(x => x.Price) / carsOfType.Count;
+        }
     }
 }
