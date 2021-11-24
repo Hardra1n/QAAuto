@@ -14,6 +14,7 @@ namespace AutoConsoleHandler.Commands
         {
             _writer = writer;
         }
+
         public void Execute()
         {
             CarPark carPark = CarPark.GetInstance();

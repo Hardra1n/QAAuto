@@ -16,7 +16,6 @@ namespace AutoConsoleHandler.UI
             CommandInit();
         }
 
-        //TODO Implement 'exit command'
         public void Start()
         {
             while (true)
@@ -33,6 +32,7 @@ namespace AutoConsoleHandler.UI
             commands.Add("exit", new ExitCommand());
             InitAveragePriceTypeCommand();
         }
+
         private void InitAveragePriceTypeCommand()
         {
             foreach (string type in CarPark.GetInstance().GetUniqueTypes())
