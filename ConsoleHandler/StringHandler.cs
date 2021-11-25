@@ -12,7 +12,7 @@ namespace Console_handler
         /// </summary>
         /// <param name="str"> Pointer to string, which max unique length calculates </param>
         /// <returns></returns>
-        public static int GetUniqueStringMaxLength(string str)
+        public static int GetUniqueMaxLength(string str)
         {
             if (String.IsNullOrEmpty(str))
             {
@@ -46,11 +46,13 @@ namespace Console_handler
 
             int counter = 0;
             int maxLength = 0;
+
             if (IsLatinLetter(str[0]))
             {
                 counter++;
                 maxLength++;
             }
+            str = str.ToLower();
 
             for (int i = 0; i < str.Length - 1; i++)
             {
