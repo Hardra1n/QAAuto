@@ -43,7 +43,7 @@ namespace ConsoleHandlerTests.StringHandlerTests
         }
 
         [TestMethod()]
-        public void GetUniqueMaxLength_NullString_Gets0()
+        public void GetUniqueMaxLength_Null_Gets0()
         {
             string str = null;
             int expected = 0;
