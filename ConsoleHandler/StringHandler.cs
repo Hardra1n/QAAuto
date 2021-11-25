@@ -18,7 +18,9 @@ namespace Console_handler
             {
                 return 0;
             }
+
             int maxLength = 1;
+
             for (int i = 0, temp = 1; i < str.Length - 1; i++)
             {
                 if (str[i] == str[i + 1])
@@ -26,6 +28,7 @@ namespace Console_handler
                     temp = 0;
                 }
                 temp++;
+
                 if (maxLength < temp)
                 {
                     maxLength = temp;
@@ -51,20 +54,14 @@ namespace Console_handler
 
             for (int i = 0; i < str.Length - 1; i++)
             {
-                if (str[i] == str[i + 1] && IsLatinLetter(str[i + 1]))
+                if (str[i] == str[i + 1] && IsLatinLetter(str[i + 1]) || 
+                    counter == 0 && IsLatinLetter(str[i + 1])) 
                 {
                     counter++;
-                    maxLength = maxLength < counter ? counter : maxLength;
-                    continue;
                 }
                 else
                 {
                     counter = 0;
-                }
-
-                if (IsLatinLetter(str[i + 1]))
-                {
-                    counter++;
                 }
 
                 maxLength = maxLength < counter ? counter : maxLength;
@@ -91,19 +88,14 @@ namespace Console_handler
 
             for (int i = 0; i < str.Length - 1; i++)
             {
-                if (str[i] == str[i + 1] && Char.IsDigit(str[i + 1]))
+                if (str[i] == str[i + 1] && Char.IsDigit(str[i + 1]) || 
+                    counter == 0 && Char.IsDigit(str[i +1]))
                 {
                     counter++;
-                    maxLength = maxLength < counter ? counter : maxLength;
-                    continue;
                 }
                 else
                 {
                     counter = 0;
-                }
-                if (Char.IsDigit(str[i + 1]))
-                {
-                    counter++;
                 }
 
                 maxLength = maxLength < counter ? counter : maxLength;
