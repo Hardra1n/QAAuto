@@ -2,29 +2,31 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace ConsoleHandlerTests
+namespace ConsoleHandlerTests.StringHandlerTests
 {
     [TestClass()]
-    public class StringHandlerTests
+    public class GetUniqueMaxLengthTests
     {
         [TestMethod()]
-        public void GetUniqueStringMaxLength_ValidString_Gets7()
+        [DataRow("dsdakwwdds", 6)]
+        [DataRow("d4k%sasswwdds", 7)]
+        [DataRow("d fwas dww lddw", 9)]
+        public void GetUniqueMaxLength_ValidString(string str, int expected)
         {
-            string str = "asdmwkaadsds";
-            int expected = 7;
-
-            int actual = StringHandler.GetUniqueStringMaxLength(str);
+            int actual = StringHandler.GetUniqueMaxLength(str);
 
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void GetUniqueStringMaxLength_OneSymbol_Gets1()
+        [DataRow("a")]
+        [DataRow("$")]
+        [DataRow(" ")]
+        public void GetUniqueMaxLength_OneSymbol_Gets1(string str)
         {
-            string str = "$";
             int expected = 1;
 
-            int actual = StringHandler.GetUniqueStringMaxLength(str);
+            int actual = StringHandler.GetUniqueMaxLength(str);
 
             Assert.AreEqual(expected, actual);
         }
@@ -35,7 +37,7 @@ namespace ConsoleHandlerTests
             string str = string.Empty;
             int expected = 0;
 
-            int actual = StringHandler.GetUniqueStringMaxLength(str);
+            int actual = StringHandler.GetUniqueMaxLength(str);
 
             Assert.AreEqual(expected, actual);
         }
@@ -46,18 +48,20 @@ namespace ConsoleHandlerTests
             string str = null;
             int expected = 0;
 
-            int actual = StringHandler.GetUniqueStringMaxLength(str);
+            int actual = StringHandler.GetUniqueMaxLength(str);
 
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod()]
-        public void GetUniqueLength_SequenceOfOneSymbol_Gets1()
+        [DataRow("lllll")]
+        [DataRow("########")]
+        [DataRow("22")]
+        public void GetUniqueLength_SequenceOfOneSymbol_Gets1(string str)
         {
-            string str = "lllllll";
             int expected = 1;
 
-            int actual = StringHandler.GetUniqueStringMaxLength(str);
+            int actual = StringHandler.GetUniqueMaxLength(str);
 
             Assert.AreEqual(expected, actual);
         }
