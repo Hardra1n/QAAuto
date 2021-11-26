@@ -30,37 +30,16 @@ namespace ConsoleHandlerTests.StringHandlerTests
         
         [TestMethod()]
         [DataRow("dwaaadsfwazs", 3)]
-        [DataRow("dsswaadf ff fff dswas", 3)]
-        [DataRow("123421d232421", 1)]
+        [DataRow("fffdssw^&*()$d232 dswas", 3)]
+        [DataRow("123421232421dd", 2)]
+        [DataRow("1", 0)]
+        [DataRow("a", 1)]
+        [DataRow("AaaAa", 5)]
         public void GetMaxAmountOfIdenticalLettersSequenceTests_ValidString(string str, int expected)
         {
             var actual = StringHandler.GetMaxAmountOfIdentnicalLettersSequence(str);
 
             Assert.AreEqual(expected, actual);
         }
-
-        [TestMethod()]
-        [DataRow("a")]
-        [DataRow("t")]
-        [DataRow("B")]
-        public void GetMaxAmountOfIdenticalLettersSequenceTests_OneLetter(string str)
-        {
-            int expected = 1;
-
-            var actual = StringHandler.GetMaxAmountOfIdentnicalLettersSequence(str);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        [DataRow("AaaAaA", 6)]
-        [DataRow("bbbBbbb", 7)]
-        public void GetMaxAmountOfIdenticalLettersSequenceTests_CamelLetters(string str, int expected)
-        {
-            int actual = StringHandler.GetMaxAmountOfIdentnicalLettersSequence(str);
-
-            Assert.AreEqual(expected, actual);
-        }
-
     }
 }
