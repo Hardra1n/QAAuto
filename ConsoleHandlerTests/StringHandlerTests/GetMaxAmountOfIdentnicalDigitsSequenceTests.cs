@@ -3,28 +3,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConsoleHandlerTests.StringHandlerTests
 {
-    [TestClass()]
+    [TestClass]
     public class GetMaxAmountOfIdentnicalDigitsSequenceTests
     {
         [TestMethod]
         public void GetMaxAmountOfIdentnicalDigitsSequenceTest_Null_Gets0()
         {
+            // Arrange
             string str = null;
             int expected = 0;
 
+            // Act
             int actual = StringHandler.GetMaxAmountOfIdentnicalDigitsSequence(str);
 
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void GetMaxAmountOfIdentnicalDigitsSequence_EmptyString_Gets0()
         {
+            // Arrange
             string str = string.Empty;
             int expected = 0;
 
+            // Act
             int actual = StringHandler.GetMaxAmountOfIdentnicalDigitsSequence(str);
 
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
@@ -37,8 +43,10 @@ namespace ConsoleHandlerTests.StringHandlerTests
 
         public void GetMaxAmountOfIdentnicalDigitsSequence_ValidString(string str, int expected)
         {
+            // Act
             int actual = StringHandler.GetMaxAmountOfIdentnicalDigitsSequence(str);
 
+            // Assert
             Assert.AreEqual(expected, actual);
         }
     }

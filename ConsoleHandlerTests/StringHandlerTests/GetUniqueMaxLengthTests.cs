@@ -4,32 +4,38 @@ using System;
 
 namespace ConsoleHandlerTests.StringHandlerTests
 {
-    [TestClass()]
+    [TestClass]
     public class GetUniqueMaxLengthTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void GetUniqueMaxLength_EmptyString_Gets0()
         {
+            // Arrange
             string str = string.Empty;
             int expected = 0;
 
+            // Act
             int actual = StringHandler.GetUniqueMaxLength(str);
 
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GetUniqueMaxLength_Null_Gets0()
         {
+            // Arrange 
             string str = null;
             int expected = 0;
 
+            // Act
             int actual = StringHandler.GetUniqueMaxLength(str);
 
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod()]
+        [TestMethod]
         [DataRow("dswwddswasxmck", 9)]
         [DataRow("d4k%sasswwdds", 7)]
         [DataRow("ddvnfjwakdd", 9)]
@@ -37,8 +43,10 @@ namespace ConsoleHandlerTests.StringHandlerTests
         [DataRow("#######", 1)]
         public void GetUniqueMaxLength_ValidString(string str, int expected)
         {
+            // Act
             int actual = StringHandler.GetUniqueMaxLength(str);
-
+            
+            // Assert
             Assert.AreEqual(expected, actual);
         }
 
