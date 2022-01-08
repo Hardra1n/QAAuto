@@ -35,7 +35,7 @@ namespace Pages.Mailru
         {
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginButton);
             Driver.FindElement(_submitLoginButton).Submit();
-            throw new System.NotImplementedException();
+            return new MailruHomePage(Driver);
         }
 
         public ILoginPage SubmitLoginWithoutSwitchToNewPage()
