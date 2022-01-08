@@ -31,6 +31,7 @@ namespace ExecutionPoint
                 loginPage.SubmitLoginWithoutSwitchToNewPage();
                 loginPage.TypePassword(password);
                 YandexHomePage homePage = (YandexHomePage)loginPage.SubmitLogin();
+                YandexMailboxPage mailPage = (YandexMailboxPage)homePage.GoToMailboxPage();
                 Thread.Sleep(40000);
                 Console.WriteLine(driver.Title);
             }

@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
 using System;
+using System.Threading;
 
 namespace Pages.Yandex
 {
@@ -17,9 +18,10 @@ namespace Pages.Yandex
 
         public IMailboxPage GoToMailboxPage()
         {
+            Thread.Sleep(10000);
             Driver.Url = _urlToMailbox;
             YandexMailboxPage mailboxPage = new YandexMailboxPage(Driver);
-            return (IMailboxPage)mailboxPage;
+            return mailboxPage;
         }
     }
 }
