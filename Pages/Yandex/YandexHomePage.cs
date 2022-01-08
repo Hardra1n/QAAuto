@@ -6,7 +6,7 @@ namespace Pages.Yandex
 {
     public class YandexHomePage : IHomePage
     {
-        string _urlToMailBox;
+        string _urlToMailbox = "https://mail.yandex.by/";
 
         public YandexHomePage(IWebDriver driver)
         {
@@ -17,7 +17,9 @@ namespace Pages.Yandex
 
         public IMailboxPage GoToMailboxPage()
         {
-            throw new NotImplementedException();
+            Driver.Url = _urlToMailbox;
+            YandexMailboxPage mailboxPage = new YandexMailboxPage(Driver);
+            return (IMailboxPage)mailboxPage;
         }
     }
 }
