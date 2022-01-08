@@ -1,4 +1,4 @@
-﻿namespace Pages
+﻿namespace Pages.Interfaces
 {
     public interface IMailboxPage
     {

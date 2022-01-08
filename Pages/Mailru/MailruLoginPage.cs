@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Pages;
+using Pages.Interfaces;
 
 namespace Pages.Mailru
 {
