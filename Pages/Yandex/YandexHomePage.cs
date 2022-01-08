@@ -18,7 +18,7 @@ namespace Pages.Yandex
 
         IWebDriver Driver { get; set; }
 
-        public IMailBoxPage GoToMailboxPage()
+        public IMailboxPage GoToMailboxPage()
         {
             throw new NotImplementedException();
         }

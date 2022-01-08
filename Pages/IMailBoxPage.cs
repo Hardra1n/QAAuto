@@ -1,6 +1,6 @@
 ﻿namespace Pages
 {
-    public interface IMailBoxPage
+    public interface IMailboxPage
     {
     }
 }

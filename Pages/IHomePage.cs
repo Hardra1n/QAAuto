@@ -8,6 +8,6 @@ namespace Pages
 {
     public interface IHomePage
     {
-        public IMailBoxPage GoToMailboxPage();
+        public IMailboxPage GoToMailboxPage();
     }
 }
