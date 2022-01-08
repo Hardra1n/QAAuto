@@ -26,17 +26,18 @@ namespace ExecutionPoint
             {
                 driver.Url = "https://passport.yandex.by/";
                 Console.WriteLine(driver.Title);
-                YandexLoginPage page = new YandexLoginPage(driver);
-                page.TypeUsername(username);
-                page.SubmitLoginWithoutSwitchToNewPage();
-                page.TypePassword(password);
-                //page.SubmitLogin();
-                Thread.Sleep(10000);
+                YandexLoginPage loginPage = new YandexLoginPage(driver);
+                loginPage.TypeUsername(username);
+                loginPage.SubmitLoginWithoutSwitchToNewPage();
+                loginPage.TypePassword(password);
+                YandexHomePage homePage = (YandexHomePage)loginPage.SubmitLogin();
+                Thread.Sleep(40000);
                 Console.WriteLine(driver.Title);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine("I'm in catcher zone");
             }
             finally
             {
