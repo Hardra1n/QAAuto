@@ -9,6 +9,8 @@ namespace Pages.Yandex
 {
     public class YandexHomePage : IHomePage
     {
+        string _urlToMailBox;
+
         public YandexHomePage(IWebDriver driver)
         {
             Driver = driver;
@@ -16,7 +18,7 @@ namespace Pages.Yandex
 
         IWebDriver Driver { get; set; }
 
-        public IHomePage GoToMailboxPage()
+        public IMailBoxPage GoToMailboxPage()
         {
             throw new NotImplementedException();
         }

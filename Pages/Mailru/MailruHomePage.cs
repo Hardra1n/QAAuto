@@ -16,7 +16,7 @@ namespace Pages.Mailru
 
         private IWebDriver Driver { get; set; }
 
-        public IHomePage GoToMailboxPage()
+        public IMailBoxPage GoToMailboxPage()
         {
             throw new NotImplementedException();
         }
