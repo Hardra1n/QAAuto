@@ -16,7 +16,7 @@ namespace Pages.Yandex
 
         IWebDriver Driver { get; set; }
 
-        public IHomePage SendMessage(string mailToSend, string text)
+        public IHomePage GoToMailboxPage()
         {
             throw new NotImplementedException();
         }
