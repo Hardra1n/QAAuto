@@ -34,7 +34,7 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _submitLogin);
             Driver.FindElement(_submitLogin).Submit();
-            throw new NotImplementedException();
+            return new YandexHomePage(Driver);
         }
 
         public ILoginPage SubmitLoginWithoutSwitchToNewPage()
