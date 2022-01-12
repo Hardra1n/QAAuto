@@ -15,7 +15,7 @@ namespace Pages.Mailru
 
         public IMailboxPage GoToMailboxPage()
         {
-            throw new NotImplementedException();
+            return new MailruMailboxPage(Driver);
         }
     }
 }
