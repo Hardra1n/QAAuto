@@ -13,4 +13,12 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mailru\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pages\Pages.csproj" />
+  </ItemGroup>
+
 </Project>
