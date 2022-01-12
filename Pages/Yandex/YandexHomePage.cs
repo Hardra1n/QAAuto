@@ -7,7 +7,9 @@ namespace Pages.Yandex
 {
     public class YandexHomePage : IHomePage
     {
-        string _urlToMailbox = "https://mail.yandex.by/";
+        By _buttonToMailbox = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
+
+        By _buttonToOpenMenubar = By.XPath("//a[@target='_parent']");
 
         public YandexHomePage(IWebDriver driver)
         {
@@ -16,12 +18,20 @@ namespace Pages.Yandex
 
         IWebDriver Driver { get; set; }
 
+        private IHomePage OpenMenubar()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _buttonToOpenMenubar);
+            Driver.FindElement(_buttonToOpenMenubar).Click();
+            return this;
+            
+        }
+
         public IMailboxPage GoToMailboxPage()
         {
-            Thread.Sleep(10000);
-            Driver.Url = _urlToMailbox;
-            YandexMailboxPage mailboxPage = new YandexMailboxPage(Driver);
-            return mailboxPage;
+            OpenMenubar();
+            Waiters.WaitUntilDisplayElement(Driver, _buttonToMailbox);
+            Driver.FindElement(_buttonToMailbox).Click();
+            return new YandexMailboxPage(Driver);
         }
     }
 }
