@@ -29,10 +29,10 @@ namespace Pages.Yandex
             {
                 Waiters.WaitUntilTitleEquals(Driver, _pageTitle);
             }
-            catch (NoSuchElementException ex)
+            catch (WebDriverTimeoutException ex)
             {
-                string additionalMessage = "\nIncorrect driver url";
-                throw new NoSuchElementException(ex.Message + additionalMessage);
+                string additionalMessage = '\n' + "Incorrect driver url";
+                throw new WebDriverTimeoutException(ex.Message + additionalMessage);
             }
         }
 

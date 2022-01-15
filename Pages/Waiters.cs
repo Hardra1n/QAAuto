@@ -6,7 +6,7 @@ namespace Pages
 {
     static public class Waiters
     {
-        private static TimeSpan _waitTimer = new TimeSpan(0, 0, 30);
+        private static TimeSpan _waitTimer = new TimeSpan(0, 0, 20);
 
         static public void WaitUntilDisplayElement(IWebDriver driver, By locator)
         {
@@ -15,6 +15,19 @@ namespace Pages
             {
                 IWebElement element = driver.FindElement(locator);
                 if (element.Displayed)
+                {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        static public void WaitUntilTitleEquals(IWebDriver driver, string title)
+        {
+            WebDriverWait waiter = WaiterInitializer(driver);
+            waiter.Until(driver =>
+            {
+                if (driver.Title == title)
                 {
                     return true;
                 }
