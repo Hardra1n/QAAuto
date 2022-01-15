@@ -3,7 +3,7 @@ using Pages.Interfaces;
 
 namespace Pages.Yandex
 {
-    public class YandexMailboxPage : IMailboxPage
+    public class YandexMailboxPage : Page, IMailboxPage
     {
         public YandexMailboxPage(IWebDriver driver)
         {

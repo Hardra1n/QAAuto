@@ -5,15 +5,18 @@ using System.Threading;
 
 namespace Pages.Yandex
 {
-    public class YandexHomePage : IHomePage
+    public class YandexHomePage : Page, IHomePage
     {
         By _buttonToMailbox = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
 
         By _buttonToOpenMenubar = By.XPath("//a[@target='_parent']");
 
+        string _pageTitle = "Яндекс ID";
+
         public YandexHomePage(IWebDriver driver)
         {
             Driver = driver;
+            CheckForCorrectPage(Driver, _pageTitle);
         }
 
         IWebDriver Driver { get; set; }
