@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using Pages.Interfaces;
 using Pages.Yandex;
-using System;
-using System.Threading;
 
 namespace Tests.Yandex
 {
@@ -65,7 +61,10 @@ namespace Tests.Yandex
             string incorrectPassword = "1234564321";
             string expectedAlertMessage = "Неверный пароль";
 
-            _page.LoginAs(_correctUsername, incorrectPassword);
+            _page.TypeUsername(_correctUsername);
+            _page.SubmitLoginWithoutSwitchToNewPage();
+            _page.TypePassword(incorrectPassword);
+            _page.SubmitLoginWithoutSwitchToNewPage();
             string actualAlertMessage = _page.GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
@@ -89,7 +88,10 @@ namespace Tests.Yandex
             string emptyPassword = string.Empty;
             string expectedAlertMessage = "Пароль не указан";
 
-            _page.LoginAs(_correctUsername, emptyPassword);
+            _page.TypeUsername(_correctUsername);
+            _page.SubmitLoginWithoutSwitchToNewPage();
+            _page.TypePassword(emptyPassword);
+            _page.SubmitLoginWithoutSwitchToNewPage();
             string actualAlertMessage = _page.GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
@@ -98,12 +100,11 @@ namespace Tests.Yandex
         [Test]
         public void LoginWithCorrectUsernameAndPassword()
         {
-            string expectedDriverTitle = "";
+            string expectedDriverTitle = "Яндекс ID";
 
             _page.LoginAs(_correctUsername, _correctPassword);
 
             Assert.AreEqual(expectedDriverTitle, _driver.Title);
-            throw new NotImplementedException();
         }
 
     }
