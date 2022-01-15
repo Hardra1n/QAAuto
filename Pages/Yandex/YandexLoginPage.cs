@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using System;
 
 namespace Pages.Yandex
 {
@@ -11,9 +12,28 @@ namespace Pages.Yandex
 
         private By _submitLogin = By.XPath("//button[@type='submit']");
 
+        private By _alertMessage = By.XPath("//div[@role = 'alert']");
+
+        private string _pageTitle = "Авторизация";
+
         public YandexLoginPage(IWebDriver driver)
         {
             Driver = driver;
+
+            IsCorrectPage();
+        }
+
+        private void IsCorrectPage()
+        {
+            try
+            {
+                Waiters.WaitUntilTitleEquals(Driver, _pageTitle);
+            }
+            catch (NoSuchElementException ex)
+            {
+                string additionalMessage = "\nIncorrect driver url";
+                throw new NoSuchElementException(ex.Message + additionalMessage);
+            }
         }
 
         private IWebDriver Driver { get; set; }
@@ -52,6 +72,12 @@ namespace Pages.Yandex
             Waiters.WaitUntilDisplayElement(Driver, _usernameInput);
             Driver.FindElement(_usernameInput).SendKeys(username);
             return this;
+        }
+
+        public string GetAlertMessageText()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _alertMessage);
+            return Driver.FindElement(_alertMessage).Text;
         }
     }
 }
