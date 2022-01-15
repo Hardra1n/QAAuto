@@ -4,7 +4,7 @@ using System;
 
 namespace Pages.Yandex
 {
-    public class YandexLoginPage : ILoginPage
+    public class YandexLoginPage : Page, ILoginPage
     {
         private By _usernameInput = By.XPath("//input[@name='login']");
 
@@ -19,21 +19,7 @@ namespace Pages.Yandex
         public YandexLoginPage(IWebDriver driver)
         {
             Driver = driver;
-
-            IsCorrectPage();
-        }
-
-        private void IsCorrectPage()
-        {
-            try
-            {
-                Waiters.WaitUntilTitleEquals(Driver, _pageTitle);
-            }
-            catch (WebDriverTimeoutException ex)
-            {
-                string additionalMessage = '\n' + "Incorrect driver url";
-                throw new WebDriverTimeoutException(ex.Message + additionalMessage);
-            }
+            CheckForCorrectPage(Driver, _pageTitle);
         }
 
         private IWebDriver Driver { get; set; }
