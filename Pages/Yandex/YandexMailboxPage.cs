@@ -11,5 +11,10 @@ namespace Pages.Yandex
         }
 
         IWebDriver Driver { get; set; }
+
+        public IMessageComposerPage OpenMessageComposer()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

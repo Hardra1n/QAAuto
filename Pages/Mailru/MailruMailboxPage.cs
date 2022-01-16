@@ -3,7 +3,7 @@ using Pages.Interfaces;
 
 namespace Pages.Mailru
 {
-    public class MailruMailboxPage : IMailboxPage
+    public class MailruMailboxPage : Page, IMailboxPage
     {
         public MailruMailboxPage(IWebDriver driver)
         {
@@ -11,5 +11,10 @@ namespace Pages.Mailru
         }
 
         IWebDriver Driver { get; set; }
+
+        public IMessageComposerPage OpenMessageComposer()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
