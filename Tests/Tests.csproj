@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mailru\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Pages\Pages.csproj" />
   </ItemGroup>
 
