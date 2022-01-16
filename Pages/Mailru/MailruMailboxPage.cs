@@ -5,6 +5,8 @@ namespace Pages.Mailru
 {
     public class MailruMailboxPage : Page, IMailboxPage
     {
+        By _messageComposerButton = By.XPath("//a[contains(@class, 'compose-button')]");
+
         public MailruMailboxPage(IWebDriver driver)
         {
             Driver = driver;
@@ -14,7 +16,9 @@ namespace Pages.Mailru
 
         public IMessageComposerPage OpenMessageComposer()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButton);
+            Driver.FindElement(_messageComposerButton).Click();
+            return new MailruMessageComposerPage(Driver);
         }
     }
 }
