@@ -22,12 +22,26 @@ namespace Pages
             });
         }
 
-        static public void WaitUntilTitleEquals(IWebDriver driver, string title)
+        static public bool WaitUntilTitleEquals(IWebDriver driver, string title)
         {
             WebDriverWait waiter = WaiterInitializer(driver);
-            waiter.Until(driver =>
+            return waiter.Until(driver =>
             {
                 if (driver.Title == title)
+                {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        static public bool WaitUntilTitleContains(IWebDriver driver, string substring)
+        {
+            WebDriverWait waiter = WaiterInitializer(driver);
+            return waiter.Until(driver =>
+            {
+                string driverTitle = driver.Title;
+                if (driverTitle.Contains(substring))
                 {
                     return true;
                 }
