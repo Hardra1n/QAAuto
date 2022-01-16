@@ -11,6 +11,8 @@ namespace Pages.Mailru
 
         private By _submitLoginButton = By.XPath("//button[@type='submit']");
 
+        private By _alertMessage = By.XPath("//div[@data-test-id='error-footer-text']");
+
         public MailruLoginPage(IWebDriver driver)
         {
             Driver = driver;
@@ -51,6 +53,12 @@ namespace Pages.Mailru
             SubmitLoginWithoutSwitchToNewPage();
             TypePassword(password);
             return SubmitLogin();
+        }
+
+        public string GetAlertMessageText()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _alertMessage);
+            return Driver.FindElement(_alertMessage).Text;
         }
     }
 }
