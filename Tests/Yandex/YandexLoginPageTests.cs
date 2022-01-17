@@ -25,69 +25,23 @@ namespace Tests.Yandex
             _driver.Close();
         }
 
-        [Test]
-        public void CannotLoginWithInccorrectUsername()
+        [TestCase("12342321", "Такой логин не подойдет")]
+        [TestCase("dsamksaldwasfwas", "Такого аккаунта нет")]
+        [TestCase("", "Логин не указан")]
+        public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
         {
-            string incorrectUsername = "12342321";
-            string expectedAlertMessage = "Такой логин не подойдет";
-            
-            _page.TypeUsername(incorrectUsername);
-            _page.SubmitLoginWithoutSwitchToNewPage();
+            _page.TypeUsername(username).SubmitLoginWithoutSwitchToNewPage();
             string actualAlertMessage = _page.GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
         }
 
-        [Test]
-        public void CannotLoginWithNotFoundUsername()
+        [TestCase("1234564321", "Неверный пароль")]
+        [TestCase("", "Пароль не указан")]
+        public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string notfoundUsername = "dsamksaldwasfwas";
-            string expectedAlertMessage = "Такого аккаунта нет";
-
-            _page.TypeUsername(notfoundUsername);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
-
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
-        }
-
-        [Test]
-        public void CannotLoginWithIncorrectPassword()
-        {
-            string incorrectPassword = "1234564321";
-            string expectedAlertMessage = "Неверный пароль";
-
-            _page.TypeUsername(AccountCredenitals.yandexLogin);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            _page.TypePassword(incorrectPassword);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
-
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
-        }
-
-        [Test]
-        public void CannotLoginWithEmptyUsername()
-        {
-            string emptyUsername = string.Empty;
-            string expectedAlertMessage = "Логин не указан";
-
-            _page.TypeUsername(emptyUsername);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
-        }
-
-        [Test]
-        public void CannotLoginWithEmptyPassword()
-        {
-            string emptyPassword = string.Empty;
-            string expectedAlertMessage = "Пароль не указан";
-
-            _page.TypeUsername(AccountCredenitals.yandexLogin);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            _page.TypePassword(emptyPassword);
-            _page.SubmitLoginWithoutSwitchToNewPage();
+            _page.TypeUsername(AccountCredenitals.yandexLogin).SubmitLoginWithoutSwitchToNewPage();
+            _page.TypePassword(password).SubmitLoginWithoutSwitchToNewPage();
             string actualAlertMessage = _page.GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
