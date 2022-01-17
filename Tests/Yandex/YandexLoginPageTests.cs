@@ -9,10 +9,6 @@ namespace Tests.Yandex
     {
         private YandexLoginPage _page;
 
-        private string _correctUsername = "kirylkho123456";
-
-        private string _correctPassword = "Qwerty1231";
-
         IWebDriver _driver;
 
         [SetUp]
@@ -61,7 +57,7 @@ namespace Tests.Yandex
             string incorrectPassword = "1234564321";
             string expectedAlertMessage = "Неверный пароль";
 
-            _page.TypeUsername(_correctUsername);
+            _page.TypeUsername(AccountCredenitals.yandexLogin);
             _page.SubmitLoginWithoutSwitchToNewPage();
             _page.TypePassword(incorrectPassword);
             _page.SubmitLoginWithoutSwitchToNewPage();
@@ -88,7 +84,7 @@ namespace Tests.Yandex
             string emptyPassword = string.Empty;
             string expectedAlertMessage = "Пароль не указан";
 
-            _page.TypeUsername(_correctUsername);
+            _page.TypeUsername(AccountCredenitals.yandexLogin);
             _page.SubmitLoginWithoutSwitchToNewPage();
             _page.TypePassword(emptyPassword);
             _page.SubmitLoginWithoutSwitchToNewPage();
@@ -102,7 +98,7 @@ namespace Tests.Yandex
         {
             string expectedDriverTitle = "Яндекс ID";
 
-            _page.LoginAs(_correctUsername, _correctPassword);
+            _page.LoginAs(AccountCredenitals.yandexLogin, AccountCredenitals.yandexPassword);
 
             Assert.AreEqual(expectedDriverTitle, _driver.Title);
         }

@@ -11,10 +11,6 @@ namespace Tests.Mailru
     {
         MailruLoginPage _page;
 
-        string _correctUsername = "khovan123456";
-
-        string _correctPassword = "tiSpaOUrN33&";
-
         IWebDriver _driver;
 
         [SetUp]
@@ -46,7 +42,7 @@ namespace Tests.Mailru
         [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            _page.TypeUsername(_correctUsername);
+            _page.TypeUsername(AccountCredenitals.mailruLogin);
             _page.SubmitLoginWithoutSwitchToNewPage();
             _page.TypePassword(password);
             _page.SubmitLoginWithoutSwitchToNewPage();
@@ -60,7 +56,7 @@ namespace Tests.Mailru
         {
             string titleHomepageSubstring = "Почта@Mail.Ru";
 
-            _page.LoginAs(_correctUsername, _correctPassword);
+            _page.LoginAs(AccountCredenitals.mailruLogin, AccountCredenitals.mailruPassword);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
 
             Assert.IsTrue(isContains);
