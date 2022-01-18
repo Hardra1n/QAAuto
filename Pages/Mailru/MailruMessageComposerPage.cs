@@ -5,6 +5,7 @@ namespace Pages.Mailru
 {
     public class MailruMessageComposerPage : IMessageComposerPage
     {
+        By _recipientsEmailInput = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
 
         public MailruMessageComposerPage(IWebDriver driver)
         {
@@ -18,9 +19,11 @@ namespace Pages.Mailru
             throw new System.NotImplementedException();
         }
 
-        public IMessageComposerPage EnterRecipientEmailSendingMessage(string[] recipients)
+        public IMessageComposerPage EnterRecipientEmailSendingMessage(params string[] recipients)
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _recipientsEmailInput);
+            Driver.FindElement(_recipientsEmailInput).SendKeys(recipients.ToString());
+            return this;
         }
 
         public IMessageComposerPage EnterTextSendingMessage(string text)
