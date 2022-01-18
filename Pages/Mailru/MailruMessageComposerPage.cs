@@ -7,6 +7,12 @@ namespace Pages.Mailru
     {
         By _recipientsEmailInput = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
 
+        By _subjectInput = By.XPath("//input[@name = 'Subject']");
+
+        By _textInput = By.XPath("//div[@role='textbox']/div[1]");
+
+        By _sendButton = By.XPath("//span[@title='Отправить']");
+
         public MailruMessageComposerPage(IWebDriver driver)
         {
             Driver = driver;
@@ -16,7 +22,9 @@ namespace Pages.Mailru
 
         public IMessageComposerPage ClickSendMessageButton()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _sendButton);
+            Driver.FindElement(_sendButton).Click();
+            return this;
         }
 
         public IMessageComposerPage EnterRecipientEmailSendingMessage(params string[] recipients)
@@ -28,17 +36,25 @@ namespace Pages.Mailru
 
         public IMessageComposerPage EnterTextSendingMessage(string text)
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _textInput);
+            Driver.FindElement(_textInput).SendKeys(text);
+            return this;
         }
 
         public IMessageComposerPage EnterTopicSendingMessage(string topic)
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _subjectInput);
+            Driver.FindElement(_subjectInput).SendKeys(topic);
+            return this;
         }
 
-        public IMessageComposerPage SendMessage(string[] recipients, string topic, string text)
+        public IMessageComposerPage SendMessage(string topic, string text, params string[] recipients)
         {
-            throw new System.NotImplementedException();
+            EnterRecipientEmailSendingMessage(recipients);
+            EnterTopicSendingMessage(topic);
+            EnterTextSendingMessage(text);
+            ClickSendMessageButton();
+            return this;
         }
     }
 }
