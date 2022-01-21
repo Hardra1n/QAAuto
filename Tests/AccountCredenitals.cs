@@ -12,8 +12,8 @@ namespace Tests
 
         public static string mailruPassword = "tiSpaOUrN33&";
 
-        public static string yandexLogin = "kirylkho123456";
+        public static string yandexLogin = "kirylkho654321";
 
-        public static string yandexPassword = "Qwerty1231";
+        public static string yandexPassword = "tiSpaOUrN33&";
     }
 }

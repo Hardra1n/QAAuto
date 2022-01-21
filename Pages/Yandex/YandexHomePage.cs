@@ -16,7 +16,6 @@ namespace Pages.Yandex
         public YandexHomePage(IWebDriver driver)
         {
             Driver = driver;
-            CheckForCorrectPage(Driver, _pageTitle);
         }
 
         IWebDriver Driver { get; set; }

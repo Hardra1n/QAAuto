@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using Pages;
 using Pages.Yandex;
 
 namespace Tests.Yandex
@@ -51,10 +52,11 @@ namespace Tests.Yandex
         public void LoginWithCorrectUsernameAndPassword()
         {
             string expectedDriverTitle = "Яндекс ID";
-
+            
             _page.LoginAs(AccountCredenitals.yandexLogin, AccountCredenitals.yandexPassword);
+            bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
-            Assert.AreEqual(expectedDriverTitle, _driver.Title);
+            Assert.IsTrue(isContains);
         }
 
     }
