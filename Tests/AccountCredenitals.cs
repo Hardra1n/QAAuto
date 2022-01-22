@@ -8,7 +8,7 @@ namespace Tests
 {
     public static class AccountCredenitals
     {
-        public static string mailruLogin = "khovan123456";
+        public static string mailruLogin = "khovan654321";
 
         public static string mailruPassword = "tiSpaOUrN33&";
 
