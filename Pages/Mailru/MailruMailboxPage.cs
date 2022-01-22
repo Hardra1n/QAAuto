@@ -19,7 +19,7 @@ namespace Pages.Mailru
 
         IWebDriver Driver { get; set; }
 
-        public IMessageReaderPage OpenLastMessageFromConcreteAuthor(string author)
+        public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
             string xPath = _xpathToMessageGroup +
                             $"//*[contains(@title, '{author}')]//ancestor::a";

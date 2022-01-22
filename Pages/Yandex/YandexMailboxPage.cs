@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using System.Threading;
 
 namespace Pages.Yandex
 {
@@ -16,7 +17,7 @@ namespace Pages.Yandex
 
         IWebDriver Driver { get; set; }
 
-        public IMessageReaderPage OpenLastMessageFromConcreteAuthor(string author)
+        public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
             throw new System.NotImplementedException();
         }

@@ -4,6 +4,6 @@
     {
         IMessageComposerPage OpenMessageComposer();
 
-        IMessageReaderPage OpenLastMessageFromConcreteAuthor(string author);
+        IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author);
     }
 }
