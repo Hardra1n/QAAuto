@@ -4,7 +4,7 @@ using System;
 
 namespace Pages.Yandex
 {
-    public class YandexLoginPage : Page, ILoginPage
+    public class YandexLoginPage : ILoginPage
     {
         public static string url = "https://passport.yandex.by/";
 
@@ -21,7 +21,6 @@ namespace Pages.Yandex
         public YandexLoginPage(IWebDriver driver)
         {
             Driver = driver;
-            CheckForCorrectPage(Driver, _pageTitle);
         }
 
         private IWebDriver Driver { get; set; }

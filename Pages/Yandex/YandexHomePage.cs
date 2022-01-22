@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Pages.Yandex
 {
-    public class YandexHomePage : Page, IHomePage
+    public class YandexHomePage : IHomePage
     {
         By _buttonToMailbox = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
 

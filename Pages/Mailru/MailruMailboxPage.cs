@@ -3,7 +3,7 @@ using Pages.Interfaces;
 
 namespace Pages.Mailru
 {
-    public class MailruMailboxPage : Page, IMailboxPage
+    public class MailruMailboxPage : IMailboxPage
     {
         public static string url = "https://e.mail.ru/inbox";
 

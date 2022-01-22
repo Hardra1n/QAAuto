@@ -3,7 +3,7 @@ using Pages.Interfaces;
 
 namespace Pages.Yandex
 {
-    public class YandexMailboxPage : Page, IMailboxPage
+    public class YandexMailboxPage : IMailboxPage
     {
         public static string url = "https://mail.yandex.by/";
 
