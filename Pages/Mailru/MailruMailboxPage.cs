@@ -5,7 +5,7 @@ namespace Pages.Mailru
 {
     public class MailruMailboxPage : Page, IMailboxPage
     {
-        public static string Url = "https://e.mail.ru/inbox";
+        public static string url = "https://e.mail.ru/inbox";
 
         By _messageComposerButton = By.XPath("//a[contains(@class, 'compose-button')]");
 
