@@ -5,6 +5,10 @@ namespace Pages.Yandex
 {
     public class YandexMailboxPage : Page, IMailboxPage
     {
+        public static string url = "https://mail.yandex.by/";
+
+        By _messageComposerButton = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
+
         public YandexMailboxPage(IWebDriver driver)
         {
             Driver = driver;
@@ -14,7 +18,9 @@ namespace Pages.Yandex
 
         public IMessageComposerPage OpenMessageComposer()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButton);
+            Driver.FindElement(_messageComposerButton).Click();
+            return new YandexMessageComposerPage(Driver);
         }
     }
 }
