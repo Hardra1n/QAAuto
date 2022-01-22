@@ -4,6 +4,8 @@
     {
         string GetAuthor();
 
+        string GetAuthorEmail();
+
         string GetSubject();
 
         string GetText();

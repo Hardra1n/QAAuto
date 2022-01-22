@@ -12,8 +12,12 @@ namespace Tests
 
         public static string mailruPassword = "tiSpaOUrN33&";
 
+        public static string mailruEmail = mailruLogin + "@mail.ru";
+
         public static string yandexLogin = "kirylkho654321";
 
         public static string yandexPassword = "tiSpaOUrN33&";
+
+        public static string yandexEmail = yandexLogin + "@yandex.by";
     }
 }

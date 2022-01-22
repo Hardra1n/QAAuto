@@ -5,6 +5,16 @@ namespace Pages.Mailru
 {
     public class MailruMessageReaderPage : IMessageReaderPage
     {
+        By _closeMessageButton = By.XPath("//*[@title = 'Вернуться']");
+
+        By _deleteMessageButton = By.XPath("//*[@title = 'Удалить']");
+
+        By _authorContactText = By.XPath("//*[contains(@class, 'letter-contact')]");
+
+        By _subjectText = By.XPath("//*[contains(@class, 'thread-subject')]");
+
+        By _letterBody = By.XPath("//*[@class = 'letter-body']");
+
         public MailruMessageReaderPage(IWebDriver driver)
         {
             Driver = driver;
@@ -14,27 +24,40 @@ namespace Pages.Mailru
 
         public IMailboxPage CloseMessage()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _closeMessageButton);
+            Driver.FindElement(_closeMessageButton).Click();
+            return new MailruMailboxPage(Driver);
         }
 
         public IMailboxPage DeleteMessage()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _deleteMessageButton);
+            Driver.FindElement(_deleteMessageButton).Click();
+            return new MailruMailboxPage(Driver);
         }
 
         public string GetAuthor()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _authorContactText);
+            return Driver.FindElement(_authorContactText).Text;
+        }
+
+        public string GetAuthorEmail()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _authorContactText);
+            return Driver.FindElement(_authorContactText).GetAttribute("title");
         }
 
         public string GetSubject()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _subjectText);
+            return Driver.FindElement(_subjectText).Text;
         }
 
         public string GetText()
         {
-            throw new System.NotImplementedException();
+            Waiters.WaitUntilDisplayElement(Driver, _letterBody);
+            return Driver.FindElement(_letterBody).Text;
         }
     }
 }

@@ -22,7 +22,9 @@ namespace Pages.Mailru
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
             string xPath = _xpathToMessageGroup +
-                            $"//*[contains(@title, '{author}')]//ancestor::a";
+                            $"//a[" +
+                            $".//*[contains(@title, '{author}')] and " +
+                            $".//*[contains(@title, 'Пометить прочитанным')]]";
             By locator = By.XPath(xPath);
             Waiters.WaitUntilDisplayElement(Driver, locator);
             Driver.FindElement(locator).Click();

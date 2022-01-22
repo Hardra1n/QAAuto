@@ -62,7 +62,7 @@ namespace Pages.Yandex
             return this;
         }
 
-        public IMailboxPage SendMessage(string topic, string text,params string[] recipients)
+        public IMailboxPage SendMessage(string topic, string text, params string[] recipients)
         {
             EnterRecipientEmailSendingMessage(recipients);
             EnterTopicSendingMessage(topic);

@@ -8,7 +8,7 @@ namespace Pages.Interfaces
 {
     public interface IMessageComposerPage
     {
-        IMailboxPage SendMessage(string topic, string text, string[] recipients);
+        IMailboxPage SendMessage(string topic, string text, params string[] recipients);
 
         IMessageComposerPage EnterRecipientEmailSendingMessage(params string[] recipients);
 

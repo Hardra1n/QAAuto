@@ -34,7 +34,7 @@ namespace Tests.Mailru
         [SetUp]
         public void SetUp()
         {
-            _driver.Url = "https://e.mail.ru/inbox";
+            _driver.Url = MailruMailboxPage.url;
         }
 
         [Test]
