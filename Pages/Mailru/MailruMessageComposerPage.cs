@@ -30,7 +30,11 @@ namespace Pages.Mailru
         public IMessageComposerPage EnterRecipientEmailSendingMessage(params string[] recipients)
         {
             Waiters.WaitUntilDisplayElement(Driver, _recipientsEmailInput);
-            Driver.FindElement(_recipientsEmailInput).SendKeys(recipients.ToString());
+            IWebElement recipientsInput = Driver.FindElement(_recipientsEmailInput);
+            foreach (string recipient in recipients)
+            {
+                recipientsInput.SendKeys(recipient + ' ');
+            }
             return this;
         }
 
