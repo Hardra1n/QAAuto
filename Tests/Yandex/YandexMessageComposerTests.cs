@@ -1,14 +1,13 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using Pages.Mailru;
-using System.Threading;
+using Pages.Yandex;
 
-namespace Tests.Mailru
+namespace Tests.Yandex
 {
     [TestFixture]
-    public class MailruMessageComposerTests : BaseTest
+    public class YandexMessageComposerTests : BaseTest
     {
-        MailruMessageComposerPage _page;
+        YandexMessageComposerPage _page;
 
         IWebDriver _driver;
 
@@ -16,11 +15,11 @@ namespace Tests.Mailru
         public void OneTimeSetUp()
         {
             _driver = GetNewChromeDriver();
-            _driver.Url = "https://account.mail.ru/";
-            MailruLoginPage loginPage = new MailruLoginPage(_driver);
+            _driver.Url = "https://passport.yandex.by/";
+            YandexLoginPage loginPage = new YandexLoginPage(_driver);
 
-            loginPage.LoginAs(AccountCredenitals.mailruLogin,
-                              AccountCredenitals.mailruPassword)
+            loginPage.LoginAs(AccountCredenitals.yandexLogin,
+                              AccountCredenitals.yandexPassword)
                      .GoToMailboxPage();
         }
 
@@ -33,8 +32,8 @@ namespace Tests.Mailru
         [SetUp]
         public void SetUp()
         {
-            _driver.Url = "https://e.mail.ru/inbox";
-            _page = (MailruMessageComposerPage)new MailruMailboxPage(_driver).OpenMessageComposer();
+            _driver.Url = YandexMailboxPage.url;
+            _page = (YandexMessageComposerPage)new YandexMailboxPage(_driver).OpenMessageComposer();
         }
 
         [Test]

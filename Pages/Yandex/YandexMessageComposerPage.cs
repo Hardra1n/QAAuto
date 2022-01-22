@@ -5,7 +5,7 @@ namespace Pages.Yandex
 {
     public class YandexMessageComposerPage : IMessageComposerPage
     {
-        By _sendButton = By.XPath("//button//*[text() = 'Отправить']");
+        By _sendButton = By.XPath("//*[text() = 'Отправить']//ancestor::button");
 
         By _recipientsEmailInput = By.XPath("//div[contains(@class, 'composeYabbles')]");
 
@@ -48,11 +48,11 @@ namespace Pages.Yandex
         public IMessageComposerPage EnterTopicSendingMessage(string topic)
         {
             Waiters.WaitUntilDisplayElement(Driver, _subjectInput);
-            Driver.FindElement(_textInput).SendKeys(topic);
+            Driver.FindElement(_subjectInput).SendKeys(topic);
             return this;
         }
 
-        public IMessageComposerPage SendMessage(string topic, string text, string[] recipients)
+        public IMessageComposerPage SendMessage(string topic, string text,params string[] recipients)
         {
             EnterRecipientEmailSendingMessage(recipients).EnterTopicSendingMessage(topic);
             return EnterTextSendingMessage(text).ClickSendMessageButton();
