@@ -15,7 +15,7 @@ namespace Tests.Yandex
         public void OneTimeSetUp()
         {
             _driver = GetNewChromeDriver();
-            _driver.Url = YandexMailboxPage.url;
+            _driver.Url = YandexLoginPage.url;
             YandexLoginPage loginPage = new YandexLoginPage(_driver);
 
             _page = (YandexMailboxPage)loginPage.LoginAs(AccountCredenitals.yandexLogin,

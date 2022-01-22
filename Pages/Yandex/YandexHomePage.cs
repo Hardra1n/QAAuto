@@ -16,6 +16,7 @@ namespace Pages.Yandex
         public YandexHomePage(IWebDriver driver)
         {
             Driver = driver;
+            Waiters.WaitUntilTitleEquals(Driver, _pageTitle);
         }
 
         IWebDriver Driver { get; set; }

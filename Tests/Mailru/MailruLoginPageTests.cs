@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using Pages;
 using Pages.Mailru;
 using System;
+using System.Threading;
 
 namespace Tests.Mailru
 {
@@ -54,7 +55,7 @@ namespace Tests.Mailru
         [Test]
         public void LoginWithCorrectUsernameAndPassword()
         {
-            string titleHomepageSubstring = "Почта@Mail.Ru";
+            string titleHomepageSubstring = "Почта Mail.ru";
 
             _page.LoginAs(AccountCredenitals.mailruLogin, AccountCredenitals.mailruPassword);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
