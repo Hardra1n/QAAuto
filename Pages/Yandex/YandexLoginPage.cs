@@ -6,6 +6,8 @@ namespace Pages.Yandex
 {
     public class YandexLoginPage : Page, ILoginPage
     {
+        public static string url = "https://passport.yandex.by/";
+
         private By _usernameInput = By.XPath("//input[@name='login']");
 
         private By _passwordInput = By.XPath("//input[@name='passwd']");

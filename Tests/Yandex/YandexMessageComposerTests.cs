@@ -15,7 +15,7 @@ namespace Tests.Yandex
         public void OneTimeSetUp()
         {
             _driver = GetNewChromeDriver();
-            _driver.Url = "https://passport.yandex.by/";
+            _driver.Url = YandexLoginPage.url;
             YandexLoginPage loginPage = new YandexLoginPage(_driver);
 
             loginPage.LoginAs(AccountCredenitals.yandexLogin,

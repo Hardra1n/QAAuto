@@ -5,6 +5,8 @@ namespace Pages.Mailru
 {
     public class MailruLoginPage : ILoginPage
     {
+        public static string url = "https://account.mail.ru/";
+
         private By _usernameInput = By.XPath("//input[@name='username']");
 
         private By _passwordInput = By.XPath("//input[@name='password']");

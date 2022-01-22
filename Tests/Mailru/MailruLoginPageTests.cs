@@ -17,7 +17,7 @@ namespace Tests.Mailru
         public void SetUp()
         {
             _driver = GetNewChromeDriver();
-            _driver.Url = "https://account.mail.ru/";
+            _driver.Url = MailruLoginPage.url;
             _page = new MailruLoginPage(_driver);
         }
 

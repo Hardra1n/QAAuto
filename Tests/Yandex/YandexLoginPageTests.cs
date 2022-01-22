@@ -16,7 +16,7 @@ namespace Tests.Yandex
         public void SetUp()
         {
             _driver = GetNewChromeDriver();
-            _driver.Url = "https://passport.yandex.by/";
+            _driver.Url = YandexLoginPage.url;
             _page = new YandexLoginPage(_driver);
         }
 
