@@ -17,5 +17,7 @@ namespace Pages.Interfaces
         IMessageComposerPage EnterTopicSendingMessage(string topic);
 
         IMessageComposerPage ClickSendMessageButton();
+
+        IMailboxPage BackToMailboxPageAfterSendingMessage();
     }
 }

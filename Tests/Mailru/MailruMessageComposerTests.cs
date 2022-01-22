@@ -41,6 +41,7 @@ namespace Tests.Mailru
         public void TempTest()
         {
             _page.SendMessage("SOME TOPIC", "HEY IM WRITING TO U", "kirylkho654321@yandex.ru");
+            _page.BackToMailboxPageAfterSendingMessage();
         }
     }
 }

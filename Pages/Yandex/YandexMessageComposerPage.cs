@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using Pages.Mailru;
 
 namespace Pages.Yandex
 {
@@ -13,12 +14,21 @@ namespace Pages.Yandex
 
         By _textInput = By.XPath("//div[@role = 'textbox']/div[1]");
 
+        By _backToMailboxButtonAfterSending = By.XPath("//a[contains(text(), 'Вернуться')]");
+
         public YandexMessageComposerPage(IWebDriver driver)
         {
             Driver = driver;
         }
 
         IWebDriver Driver { get; set; }
+
+        public IMailboxPage BackToMailboxPageAfterSendingMessage()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSending);
+            Driver.FindElement(_backToMailboxButtonAfterSending).Click();
+            return new MailruMailboxPage(Driver);
+        }
 
         public IMessageComposerPage ClickSendMessageButton()
         {

@@ -13,12 +13,21 @@ namespace Pages.Mailru
 
         By _sendButton = By.XPath("//span[@title='Отправить']");
 
+        By _backToMailboxButtonAfterSending = By.XPath("//*[@title = 'Закрыть']/span");
+
         public MailruMessageComposerPage(IWebDriver driver)
         {
             Driver = driver;
         }
 
         IWebDriver Driver { get; set; }
+
+        public IMailboxPage BackToMailboxPageAfterSendingMessage()
+        {
+            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSending);
+            Driver.FindElement(_backToMailboxButtonAfterSending).Click();
+            return new MailruMailboxPage(Driver);
+        }
 
         public IMessageComposerPage ClickSendMessageButton()
         {
