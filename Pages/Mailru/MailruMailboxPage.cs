@@ -16,6 +16,11 @@ namespace Pages.Mailru
 
         IWebDriver Driver { get; set; }
 
+        public IMessageReaderPage OpenLastMessageFromConcreteAuthor(string author)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IMessageComposerPage OpenMessageComposer()
         {
             Waiters.WaitUntilDisplayElement(Driver, _messageComposerButton);
