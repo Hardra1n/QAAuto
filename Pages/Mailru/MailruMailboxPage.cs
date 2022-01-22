@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using System.Threading;
 
 namespace Pages.Mailru
 {
@@ -8,6 +9,8 @@ namespace Pages.Mailru
         public static string url = "https://e.mail.ru/inbox";
 
         By _messageComposerButton = By.XPath("//a[contains(@class, 'compose-button')]");
+
+        string _xpathToMessageGroup = "//div[@role = 'rowgroup']";
 
         public MailruMailboxPage(IWebDriver driver)
         {
@@ -18,8 +21,14 @@ namespace Pages.Mailru
 
         public IMessageReaderPage OpenLastMessageFromConcreteAuthor(string author)
         {
-            throw new System.NotImplementedException();
+            string xPath = _xpathToMessageGroup +
+                            $"//*[contains(@title, '{author}')]//ancestor::a";
+            By locator = By.XPath(xPath);
+            Waiters.WaitUntilDisplayElement(Driver, locator);
+            Driver.FindElement(locator).Click();
+            return new MailruMessageReaderPage(Driver);
         }
+
 
         public IMessageComposerPage OpenMessageComposer()
         {

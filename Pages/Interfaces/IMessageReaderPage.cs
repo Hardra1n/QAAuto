@@ -7,5 +7,9 @@
         string GetSubject();
 
         string GetText();
+
+        IMailboxPage CloseMessage();
+
+        IMailboxPage DeleteMessage();
     }
 }
