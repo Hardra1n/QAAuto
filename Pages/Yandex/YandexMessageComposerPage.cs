@@ -62,10 +62,13 @@ namespace Pages.Yandex
             return this;
         }
 
-        public IMessageComposerPage SendMessage(string topic, string text,params string[] recipients)
+        public IMailboxPage SendMessage(string topic, string text,params string[] recipients)
         {
-            EnterRecipientEmailSendingMessage(recipients).EnterTopicSendingMessage(topic);
-            return EnterTextSendingMessage(text).ClickSendMessageButton();
+            EnterRecipientEmailSendingMessage(recipients);
+            EnterTopicSendingMessage(topic);
+            EnterTextSendingMessage(text);
+            ClickSendMessageButton();
+            return BackToMailboxPageAfterSendingMessage();
         }
     }
 }

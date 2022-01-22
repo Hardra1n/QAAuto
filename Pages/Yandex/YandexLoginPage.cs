@@ -16,8 +16,6 @@ namespace Pages.Yandex
 
         private By _alertMessage = By.XPath("//div[@role = 'alert']");
 
-        private string _pageTitle = "Авторизация";
-
         public YandexLoginPage(IWebDriver driver)
         {
             Driver = driver;
