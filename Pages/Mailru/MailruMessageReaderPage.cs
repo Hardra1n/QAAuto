@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using System.Threading;
 
 namespace Pages.Mailru
 {
     public class MailruMessageReaderPage : IMessageReaderPage
     {
-        By _closeMessageButton = By.XPath("//*[@title = 'Вернуться']");
+        By _backToMailboxButton = By.XPath("//a[text() = 'Почта']");
 
         By _deleteMessageButton = By.XPath("//*[@title = 'Удалить']");
 
@@ -15,6 +16,8 @@ namespace Pages.Mailru
 
         By _letterBody = By.XPath("//*[@class = 'letter-body']");
 
+        By _isInBacketText = By.XPath("//*[@class = 'notify__message__text']");
+
         public MailruMessageReaderPage(IWebDriver driver)
         {
             Driver = driver;
@@ -22,18 +25,19 @@ namespace Pages.Mailru
 
         IWebDriver Driver { get; set; }
 
-        public IMailboxPage CloseMessage()
+        public IMailboxPage BackToMailbox()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _closeMessageButton);
-            Driver.FindElement(_closeMessageButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButton);
+            Driver.FindElement(_backToMailboxButton).Click();
             return new MailruMailboxPage(Driver);
         }
 
-        public IMailboxPage DeleteMessage()
+        public IMessageReaderPage DeleteMessage()
         {
             Waiters.WaitUntilDisplayElement(Driver, _deleteMessageButton);
             Driver.FindElement(_deleteMessageButton).Click();
-            return new MailruMailboxPage(Driver);
+            Waiters.WaitUntilDisplayElement(Driver, _isInBacketText);
+            return this;
         }
 
         public string GetAuthor()

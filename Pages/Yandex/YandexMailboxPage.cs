@@ -19,7 +19,13 @@ namespace Pages.Yandex
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
-            throw new System.NotImplementedException();
+            string xPath = $"//a[" +
+                              $".//*[contains(@title, '{author}')] and " +
+                              $".//*[contains(@title, 'Отметить как прочитанное')]]";
+            By locator = By.XPath(xPath);
+            Waiters.WaitUntilDisplayElement(Driver, locator);
+            Driver.FindElement(locator).Click();
+            return new YandexMessageReaderPage(Driver);
         }
 
         public IMessageComposerPage OpenMessageComposer()

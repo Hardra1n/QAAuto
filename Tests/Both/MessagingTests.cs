@@ -41,7 +41,7 @@ namespace Tests.Both
         [Test]
         public void MessageFromYandexToMailru()
         {
-            string messageSubject = "Topic123";
+            string messageSubject = "YandexToMailru";
             string messageText = "This text should be checked";
 
             _driver.Url = YandexMailboxPage.url;
@@ -54,6 +54,26 @@ namespace Tests.Both
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
             Assert.AreEqual(AccountCredenitals.yandexEmail, readerPage.GetAuthorEmail());
+
+            readerPage.DeleteMessage();
+        }
+        
+        [Test]
+        public void MessageFromMailruToYandex()
+        {
+            string messageSubject = "MailruToYandex";
+            string messageText = "This text should be checked";
+
+            _driver.Url = MailruMailboxPage.url;
+            IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
+            mailboxPage.OpenMessageComposer().SendMessage(messageSubject, messageText, AccountCredenitals.yandexEmail);
+            _driver.Url = YandexMailboxPage.url;
+            mailboxPage = new YandexMailboxPage(_driver);
+            IMessageReaderPage readerPage = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+
+            Assert.AreEqual(messageText, readerPage.GetText());
+            Assert.AreEqual(messageSubject, readerPage.GetSubject());
+            Assert.AreEqual(AccountCredenitals.mailruEmail, readerPage.GetAuthorEmail());
 
             readerPage.DeleteMessage();
         }

@@ -10,8 +10,8 @@
 
         string GetText();
 
-        IMailboxPage CloseMessage();
+        IMailboxPage BackToMailbox();
 
-        IMailboxPage DeleteMessage();
+        IMessageReaderPage DeleteMessage();
     }
 }
