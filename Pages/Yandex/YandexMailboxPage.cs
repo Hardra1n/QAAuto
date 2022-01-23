@@ -34,5 +34,10 @@ namespace Pages.Yandex
             Driver.FindElement(_messageComposerButton).Click();
             return new YandexMessageComposerPage(Driver);
         }
+
+        public IHomePage GoToHomePage()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

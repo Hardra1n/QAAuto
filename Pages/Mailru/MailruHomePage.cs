@@ -13,6 +13,11 @@ namespace Pages.Mailru
 
         private IWebDriver Driver { get; set; }
 
+        public IHomePage ChangeNickname(string nickname)
+        {
+            throw new NotImplementedException();
+        }
+
         public IMailboxPage GoToMailboxPage()
         {
             return new MailruMailboxPage(Driver);

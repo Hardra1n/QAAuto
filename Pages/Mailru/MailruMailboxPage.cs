@@ -38,5 +38,10 @@ namespace Pages.Mailru
             Driver.FindElement(_messageComposerButton).Click();
             return new MailruMessageComposerPage(Driver);
         }
+
+        public IHomePage GoToHomePage()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

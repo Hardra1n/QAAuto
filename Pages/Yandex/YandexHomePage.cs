@@ -36,5 +36,10 @@ namespace Pages.Yandex
             Driver.FindElement(_buttonToMailbox).Click();
             return new YandexMailboxPage(Driver);
         }
+
+        public IHomePage ChangeNickname(string nickname)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

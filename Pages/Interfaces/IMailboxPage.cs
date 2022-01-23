@@ -5,5 +5,7 @@
         IMessageComposerPage OpenMessageComposer();
 
         IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author);
+
+        IHomePage GoToHomePage();
     }
 }
