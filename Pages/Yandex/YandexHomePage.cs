@@ -11,6 +11,8 @@ namespace Pages.Yandex
 
         By _buttonToOpenMenubar = By.XPath("//a[@target='_parent']");
 
+        public static string url = "https://passport.yandex.by/profile";
+
         string _pageTitle = "Яндекс ID";
 
         public YandexHomePage(IWebDriver driver)

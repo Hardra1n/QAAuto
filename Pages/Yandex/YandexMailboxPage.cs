@@ -37,7 +37,8 @@ namespace Pages.Yandex
 
         public IHomePage GoToHomePage()
         {
-            throw new System.NotImplementedException();
+            Driver.Url = YandexHomePage.url;
+            return new YandexHomePage(Driver);
         }
     }
 }

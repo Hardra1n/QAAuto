@@ -41,7 +41,7 @@ namespace Pages.Mailru
 
         public IHomePage GoToHomePage()
         {
-            throw new System.NotImplementedException();
+            return new MailruHomePage(Driver);
         }
     }
 }
