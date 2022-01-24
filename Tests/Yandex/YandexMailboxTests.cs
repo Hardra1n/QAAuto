@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using Pages;
 using Pages.Yandex;
+using System.Threading;
 
 namespace Tests.Yandex
 {
@@ -47,6 +49,20 @@ namespace Tests.Yandex
             {
                 Assert.Fail(ex.Message);
             }
+        }
+
+        [Test]
+        public void CanChangeNickname()
+        {
+            string changingNickname = "Lola";
+            IHomePage homepage = _page.GoToHomePage();
+            string primaryNickname = homepage.GetNickname();
+            
+            homepage.ChangeNickname(changingNickname);
+            string actualNickname = homepage.GetNickname();
+            homepage.ChangeNickname(primaryNickname);
+
+            Assert.AreEqual(changingNickname, actualNickname);
         }
     }
 }

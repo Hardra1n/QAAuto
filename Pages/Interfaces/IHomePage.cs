@@ -6,6 +6,8 @@ namespace Pages
     {
         public IMailboxPage GoToMailboxPage();
 
+        public string GetNickname();
+
         public IHomePage ChangeNickname(string nickname);
     }
 }

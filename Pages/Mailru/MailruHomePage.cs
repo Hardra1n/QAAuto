@@ -20,6 +20,11 @@ namespace Pages.Mailru
             throw new NotImplementedException();
         }
 
+        public string GetNickname()
+        {
+            throw new NotImplementedException();
+        }
+
         public IMailboxPage GoToMailboxPage()
         {
             Waiters.WaitUntilDisplayElement(Driver, _goToMailboxButton);

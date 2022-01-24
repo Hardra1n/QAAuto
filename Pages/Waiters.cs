@@ -22,6 +22,34 @@ namespace Pages
             });
         }
 
+        static public bool WaitUntilElementClickable(IWebDriver driver, By locator)
+        {
+            WebDriverWait waiter = WaiterInitializer(driver);
+            return waiter.Until(driver => 
+            {
+                IWebElement element = driver.FindElement(locator);
+                if (element != null && element.Displayed && element.Enabled)
+                {
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        static public bool WaitUntilNotVisable(IWebDriver driver, By locator)
+        {
+            WebDriverWait waiter = WaiterInitializer(driver);
+            return waiter.Until(driver =>
+            {
+                IWebElement element = driver.FindElement(locator);
+                if (!element.Displayed)
+                {
+                    return true;
+                }
+                return false;
+            });
+        }
+
         static public bool WaitUntilTitleEquals(IWebDriver driver, string title)
         {
             WebDriverWait waiter = WaiterInitializer(driver);
