@@ -77,5 +77,32 @@ namespace Tests.Both
 
             readerPage.DeleteMessage();
         }
+
+        [Test]
+        public void ChangeYandexNicknameOnMailruMessage()
+        {
+            string messageSubjct = "Changing nickname";
+            string messageText = "Contro";
+
+            _driver.Url = MailruMailboxPage.url;
+            IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
+            mailboxPage.OpenMessageComposer().SendMessage(messageSubjct, messageText, AccountCredenitals.yandexEmail);
+            _driver.Url = YandexMailboxPage.url;
+            mailboxPage = new YandexMailboxPage(_driver);
+            IMessageReaderPage readerPage = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+            string actualRecivedNickname = readerPage.GetText();
+
+            Assert.AreEqual(messageText, actualRecivedNickname);
+
+            IHomePage homePage = readerPage.DeleteMessage().BackToMailbox().GoToHomePage();
+            string defaultNickame = homePage.GetNickname();
+            homePage.ChangeNickname(actualRecivedNickname);
+            string actualChangedNickname = homePage.GetNickname();
+
+            Assert.AreEqual(actualRecivedNickname, actualChangedNickname);
+
+            homePage.ChangeNickname(defaultNickame);
+
+        }
     }
 }
