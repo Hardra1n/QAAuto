@@ -15,15 +15,13 @@ namespace Pages.Yandex
 
         By _displayNameWindowButton = By.XPath("//*[@class='AdditionalPersonalInfo-name']//a");
 
-        By _nicknameSelector = By.XPath("//select[@name = 'displayname']");
+        By _nicknameSelector = By.XPath("//select");
 
         By _nicknameInput = By.XPath("//input[@name = 'display_name']");
 
         By _displaynameSaveButton = By.XPath("//*[contains(text(), 'Сохранить')]/ancestor::button");
 
         By _nicknameText = By.XPath("//*[contains(@class, 'personal-info__displayname')]");
-
-        By _tempLocator = By.XPath("//div[@class='AdditionalPersonalInfo-name']");
 
         public static string url = "https://passport.yandex.by/profile";
 
@@ -46,7 +44,7 @@ namespace Pages.Yandex
 
         private IHomePage MoveCoursorToShowAdditionalWindows()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _tempLocator);
+            Waiters.WaitUntilDisplayElement(Driver, _nicknameText);
             new Actions(Driver).MoveToElement(Driver.FindElement(_nicknameText)).Perform();
             return this;
         }
@@ -61,7 +59,6 @@ namespace Pages.Yandex
 
         private IHomePage SelectAnotherDisplayName()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _nicknameSelector);
             SelectElement selectElement = new SelectElement(Driver.FindElement(_nicknameSelector));
             selectElement.SelectByValue("ANOTHER");
             return this;
@@ -95,7 +92,7 @@ namespace Pages.Yandex
         public IHomePage ChangeNickname(string nickname)
         {
             OpenDisplayNameWindow();
-            //SelectAnotherDisplayName();
+            SelectAnotherDisplayName();
             PutDisplayName(nickname);
             return SaveDisplayName();
         }
