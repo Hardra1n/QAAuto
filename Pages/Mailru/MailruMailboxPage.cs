@@ -4,20 +4,17 @@ using System.Threading;
 
 namespace Pages.Mailru
 {
-    public class MailruMailboxPage : IMailboxPage
+    public class MailruMailboxPage : BasePage, IMailboxPage
     {
         public static string url = "https://e.mail.ru/inbox";
 
-        By _messageComposerButton = By.XPath("//a[contains(@class, 'compose-button')]");
-
         string _xpathToMessageGroup = "//div[@role = 'rowgroup']";
 
-        public MailruMailboxPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
+        By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'compose-button')]");
 
-        IWebDriver Driver { get; set; }
+
+        public MailruMailboxPage(IWebDriver driver) : base(driver) { }
+
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
@@ -34,8 +31,8 @@ namespace Pages.Mailru
 
         public IMessageComposerPage OpenMessageComposer()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButton);
-            Driver.FindElement(_messageComposerButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButtonLocator);
+            Driver.FindElement(_messageComposerButtonLocator).Click();
             return new MailruMessageComposerPage(Driver);
         }
 

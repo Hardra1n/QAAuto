@@ -4,16 +4,20 @@ using System;
 
 namespace Pages.Mailru
 {
-    public class MailruHomePage : IHomePage
+    public class MailruHomePage : BasePage, IHomePage
     {
-        By _goToMailboxButton = By.XPath("//a[text() = 'Почта'] | //a[@id = 'ph_mail']");
+        By _goToMailboxButtonLocator = By.XPath("//a[text() = 'Почта'] | //a[@id = 'ph_mail']");
 
-        public MailruHomePage(IWebDriver driver)
+
+        public MailruHomePage(IWebDriver driver) :base(driver) { }
+
+
+        public IMailboxPage GoToMailboxPage()
         {
-            Driver = driver;
+            Waiters.WaitUntilDisplayElement(Driver, _goToMailboxButtonLocator);
+            Driver.FindElement(_goToMailboxButtonLocator).Click();
+            return new MailruMailboxPage(Driver);
         }
-
-        private IWebDriver Driver { get; set; }
 
         public IHomePage ChangeNickname(string nickname)
         {
@@ -23,13 +27,6 @@ namespace Pages.Mailru
         public string GetNickname()
         {
             throw new NotImplementedException();
-        }
-
-        public IMailboxPage GoToMailboxPage()
-        {
-            Waiters.WaitUntilDisplayElement(Driver, _goToMailboxButton);
-            Driver.FindElement(_goToMailboxButton).Click();
-            return new MailruMailboxPage(Driver);
         }
     }
 }

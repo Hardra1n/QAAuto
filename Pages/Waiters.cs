@@ -8,6 +8,16 @@ namespace Pages
     {
         private static TimeSpan _waitTimer = new TimeSpan(0, 0, 20);
 
+
+        static private WebDriverWait WaiterInitializer(IWebDriver driver)
+        {
+            WebDriverWait waiter = new WebDriverWait(driver, _waitTimer);
+            waiter.IgnoreExceptionTypes(typeof(NoSuchElementException), 
+                                        typeof(StaleElementReferenceException));
+            return waiter;
+        }
+
+
         static public void WaitUntilDisplayElement(IWebDriver driver, By locator)
         {
             WebDriverWait waiter = WaiterInitializer(driver);
@@ -15,20 +25,6 @@ namespace Pages
             {
                 IWebElement element = driver.FindElement(locator);
                 if (element.Displayed)
-                {
-                    return true;
-                }
-                return false;
-            });
-        }
-
-        static public bool WaitUntilElementClickable(IWebDriver driver, By locator)
-        {
-            WebDriverWait waiter = WaiterInitializer(driver);
-            return waiter.Until(driver => 
-            {
-                IWebElement element = driver.FindElement(locator);
-                if (element != null && element.Displayed && element.Enabled)
                 {
                     return true;
                 }
@@ -75,13 +71,6 @@ namespace Pages
                 }
                 return false;
             });
-        }
-
-        static private WebDriverWait WaiterInitializer(IWebDriver driver)
-        {
-            WebDriverWait waiter = new WebDriverWait(driver, _waitTimer);
-            waiter.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
-            return waiter;
         }
     }
 }

@@ -3,63 +3,60 @@ using Pages.Interfaces;
 
 namespace Pages.Yandex
 {
-    public class YandexMessageReaderPage : IMessageReaderPage
+    public class YandexMessageReaderPage : BasePage, IMessageReaderPage
     {
-        By _subjectText = By.XPath("//*[contains(@class, 'Title__subject')]");
+        By _subjectTextLocator = By.XPath("//*[contains(@class, 'Title__subject')]");
 
-        By _letterBody = By.XPath("//*[contains(@class, 'MessageBody__body')]/div");
+        By _letterBodyLocator = By.XPath("//*[contains(@class, 'MessageBody__body')]/div");
 
-        By _senderName = By.XPath("//*[contains(@class, 'SenderName')]");
+        By _senderNameLocator = By.XPath("//*[contains(@class, 'SenderName')]");
 
-        By _senderEmail = By.XPath("//*[contains(@class, 'SenderEmail')]");
+        By _senderEmailLocator = By.XPath("//*[contains(@class, 'SenderEmail')]");
 
-        By _deleteButton = By.XPath("//*[contains(@title, 'Удалить')]");
+        By _deleteButtonLocator = By.XPath("//*[contains(@title, 'Удалить')]");
 
-        By _backToMailboxButton = By.XPath("//a[@title = 'Входящие']");
+        By _backToMailboxButtonLocator = By.XPath("//a[@title = 'Входящие']");
 
-        public YandexMessageReaderPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
 
-        IWebDriver Driver { get; set; }
+        public YandexMessageReaderPage(IWebDriver driver) : base(driver) { }
+
 
         public IMailboxPage BackToMailbox()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButton);
-            Driver.FindElement(_backToMailboxButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonLocator);
+            Driver.FindElement(_backToMailboxButtonLocator).Click();
             return new YandexMailboxPage(Driver);
         }
 
         public IMessageReaderPage DeleteMessage()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _deleteButton);
-            Driver.FindElement(_deleteButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _deleteButtonLocator);
+            Driver.FindElement(_deleteButtonLocator).Click();
             return this;
         }
 
         public string GetAuthor()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _senderName);
-            return Driver.FindElement(_senderName).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _senderNameLocator);
+            return Driver.FindElement(_senderNameLocator).Text;
         }
 
         public string GetAuthorEmail()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _senderEmail);
-            return Driver.FindElement(_senderEmail).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _senderEmailLocator);
+            return Driver.FindElement(_senderEmailLocator).Text;
         }
 
         public string GetSubject()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _subjectText);
-            return Driver.FindElement(_subjectText).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _subjectTextLocator);
+            return Driver.FindElement(_subjectTextLocator).Text;
         }
 
         public string GetText()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _letterBody);
-            return Driver.FindElement(_letterBody).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _letterBodyLocator);
+            return Driver.FindElement(_letterBodyLocator).Text;
         }
     }
 }

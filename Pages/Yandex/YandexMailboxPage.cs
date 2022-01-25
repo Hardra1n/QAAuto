@@ -4,18 +4,15 @@ using System.Threading;
 
 namespace Pages.Yandex
 {
-    public class YandexMailboxPage : IMailboxPage
+    public class YandexMailboxPage : BasePage, IMailboxPage
     {
         public static string url = "https://mail.yandex.by/";
 
-        By _messageComposerButton = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
+        By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
 
-        public YandexMailboxPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
 
-        IWebDriver Driver { get; set; }
+        public YandexMailboxPage(IWebDriver driver) : base(driver) { }
+
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
@@ -30,8 +27,8 @@ namespace Pages.Yandex
 
         public IMessageComposerPage OpenMessageComposer()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButton);
-            Driver.FindElement(_messageComposerButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _messageComposerButtonLocator);
+            Driver.FindElement(_messageComposerButtonLocator).Click();
             return new YandexMessageComposerPage(Driver);
         }
 

@@ -3,49 +3,46 @@ using Pages.Interfaces;
 
 namespace Pages.Mailru
 {
-    public class MailruLoginPage : ILoginPage
+    public class MailruLoginPage : BasePage, ILoginPage
     {
         public static string url = "https://account.mail.ru/";
 
-        private By _usernameInput = By.XPath("//input[@name='username']");
+        By _usernameInputLocator = By.XPath("//input[@name='username']");
 
-        private By _passwordInput = By.XPath("//input[@name='password']");
+        By _passwordInputLocator = By.XPath("//input[@name='password']");
 
-        private By _submitLoginButton = By.XPath("//button[@type='submit']");
+        By _submitLoginButtonLocator = By.XPath("//button[@type='submit']");
 
-        private By _alertMessage = By.XPath("//div[@data-test-id='error-footer-text']");
+        By _alertMessageLocator = By.XPath("//div[@data-test-id='error-footer-text']");
 
-        public MailruLoginPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
 
-        IWebDriver Driver { get; set; }
+        public MailruLoginPage(IWebDriver driver) : base(driver) { }
+
 
         public ILoginPage TypeUsername(string username)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _usernameInput);
-            Driver.FindElement(_usernameInput).SendKeys(username);
+            Waiters.WaitUntilDisplayElement(Driver, _usernameInputLocator);
+            Driver.FindElement(_usernameInputLocator).SendKeys(username);
             return this;
         }
         public ILoginPage TypePassword(string password)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _passwordInput);
-            Driver.FindElement(_passwordInput).SendKeys(password);
+            Waiters.WaitUntilDisplayElement(Driver, _passwordInputLocator);
+            Driver.FindElement(_passwordInputLocator).SendKeys(password);
             return this;
         }
 
         public IHomePage SubmitLogin()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _submitLoginButton);
-            Driver.FindElement(_submitLoginButton).Submit();
+            Waiters.WaitUntilDisplayElement(Driver, _submitLoginButtonLocator);
+            Driver.FindElement(_submitLoginButtonLocator).Submit();
             return new MailruHomePage(Driver);
         }
 
         public ILoginPage SubmitLoginWithoutSwitchToNewPage()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _submitLoginButton);
-            Driver.FindElement(_submitLoginButton).Submit();
+            Waiters.WaitUntilDisplayElement(Driver, _submitLoginButtonLocator);
+            Driver.FindElement(_submitLoginButtonLocator).Submit();
             return this;
         }
 
@@ -59,8 +56,8 @@ namespace Pages.Mailru
 
         public string GetAlertMessageText()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _alertMessage);
-            return Driver.FindElement(_alertMessage).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _alertMessageLocator);
+            return Driver.FindElement(_alertMessageLocator).Text;
         }
     }
 }

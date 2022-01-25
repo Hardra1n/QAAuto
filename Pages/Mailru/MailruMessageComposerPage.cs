@@ -3,43 +3,40 @@ using Pages.Interfaces;
 
 namespace Pages.Mailru
 {
-    public class MailruMessageComposerPage : IMessageComposerPage
+    public class MailruMessageComposerPage : BasePage, IMessageComposerPage
     {
-        By _recipientsEmailInput = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
+        By _recipientsEmailInputLocator = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
 
-        By _subjectInput = By.XPath("//input[@name = 'Subject']");
+        By _subjectInputLocator = By.XPath("//input[@name = 'Subject']");
 
-        By _textInput = By.XPath("//div[@role='textbox']/div[1]");
+        By _textInputLocator = By.XPath("//div[@role='textbox']/div[1]");
 
-        By _sendButton = By.XPath("//span[@title='Отправить']");
+        By _sendButtonLocator = By.XPath("//span[@title='Отправить']");
 
-        By _backToMailboxButtonAfterSending = By.XPath("//*[@title = 'Закрыть']/span");
+        By _backToMailboxButtonAfterSendingLocator = By.XPath("//*[@title = 'Закрыть']/span");
 
-        public MailruMessageComposerPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
 
-        IWebDriver Driver { get; set; }
+        public MailruMessageComposerPage(IWebDriver driver) : base(driver) { }
+
 
         public IMailboxPage BackToMailboxPageAfterSendingMessage()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSending);
-            Driver.FindElement(_backToMailboxButtonAfterSending).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSendingLocator);
+            Driver.FindElement(_backToMailboxButtonAfterSendingLocator).Click();
             return new MailruMailboxPage(Driver);
         }
 
         public IMessageComposerPage ClickSendMessageButton()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _sendButton);
-            Driver.FindElement(_sendButton).Click();
+            Waiters.WaitUntilDisplayElement(Driver, _sendButtonLocator);
+            Driver.FindElement(_sendButtonLocator).Click();
             return this;
         }
 
         public IMessageComposerPage EnterRecipientEmailSendingMessage(params string[] recipients)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _recipientsEmailInput);
-            IWebElement recipientsInput = Driver.FindElement(_recipientsEmailInput);
+            Waiters.WaitUntilDisplayElement(Driver, _recipientsEmailInputLocator);
+            IWebElement recipientsInput = Driver.FindElement(_recipientsEmailInputLocator);
             foreach (string recipient in recipients)
             {
                 recipientsInput.SendKeys(recipient + ' ');
@@ -49,15 +46,15 @@ namespace Pages.Mailru
 
         public IMessageComposerPage EnterTextSendingMessage(string text)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _textInput);
-            Driver.FindElement(_textInput).SendKeys(text);
+            Waiters.WaitUntilDisplayElement(Driver, _textInputLocator);
+            Driver.FindElement(_textInputLocator).SendKeys(text);
             return this;
         }
 
         public IMessageComposerPage EnterTopicSendingMessage(string topic)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _subjectInput);
-            Driver.FindElement(_subjectInput).SendKeys(topic);
+            Waiters.WaitUntilDisplayElement(Driver, _subjectInputLocator);
+            Driver.FindElement(_subjectInputLocator).SendKeys(topic);
             return this;
         }
 

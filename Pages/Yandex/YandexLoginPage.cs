@@ -4,24 +4,21 @@ using System;
 
 namespace Pages.Yandex
 {
-    public class YandexLoginPage : ILoginPage
+    public class YandexLoginPage : BasePage, ILoginPage
     {
         public static string url = "https://passport.yandex.by/";
 
-        private By _usernameInput = By.XPath("//input[@name='login']");
+        By _usernameInputLocator = By.XPath("//input[@name='login']");
 
-        private By _passwordInput = By.XPath("//input[@name='passwd']");
+        By _passwordInputLocator = By.XPath("//input[@name='passwd']");
 
-        private By _submitLogin = By.XPath("//button[@type='submit']");
+        By _submitLoginLocator = By.XPath("//button[@type='submit']");
 
-        private By _alertMessage = By.XPath("//div[@role = 'alert']");
+        By _alertMessageLocator = By.XPath("//div[@role = 'alert']");
 
-        public YandexLoginPage(IWebDriver driver)
-        {
-            Driver = driver;
-        }
 
-        private IWebDriver Driver { get; set; }
+        public YandexLoginPage(IWebDriver driver) : base(driver) { }
+
 
         public IHomePage LoginAs(string username, string password)
         {
@@ -33,36 +30,36 @@ namespace Pages.Yandex
 
         public IHomePage SubmitLogin()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _submitLogin);
-            Driver.FindElement(_submitLogin).Submit();
+            Waiters.WaitUntilDisplayElement(Driver, _submitLoginLocator);
+            Driver.FindElement(_submitLoginLocator).Submit();
             return new YandexHomePage(Driver);
         }
 
         public ILoginPage SubmitLoginWithoutSwitchToNewPage()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _submitLogin);
-            Driver.FindElement(_submitLogin).Submit();
+            Waiters.WaitUntilDisplayElement(Driver, _submitLoginLocator);
+            Driver.FindElement(_submitLoginLocator).Submit();
             return this;
         }
 
         public ILoginPage TypePassword(string password)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _passwordInput);
-            Driver.FindElement(_passwordInput).SendKeys(password);
+            Waiters.WaitUntilDisplayElement(Driver, _passwordInputLocator);
+            Driver.FindElement(_passwordInputLocator).SendKeys(password);
             return this;
         }
 
         public ILoginPage TypeUsername(string username)
         {
-            Waiters.WaitUntilDisplayElement(Driver, _usernameInput);
-            Driver.FindElement(_usernameInput).SendKeys(username);
+            Waiters.WaitUntilDisplayElement(Driver, _usernameInputLocator);
+            Driver.FindElement(_usernameInputLocator).SendKeys(username);
             return this;
         }
 
         public string GetAlertMessageText()
         {
-            Waiters.WaitUntilDisplayElement(Driver, _alertMessage);
-            return Driver.FindElement(_alertMessage).Text;
+            Waiters.WaitUntilDisplayElement(Driver, _alertMessageLocator);
+            return Driver.FindElement(_alertMessageLocator).Text;
         }
     }
 }
