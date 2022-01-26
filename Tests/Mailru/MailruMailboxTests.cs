@@ -6,7 +6,7 @@ using System.Threading;
 namespace Tests.Mailru
 {
     [TestFixture]
-    class MailruMailboxTests : BaseTest
+    class MailruMailboxTests
     {
         MailruMailboxPage _page;
 
@@ -16,7 +16,7 @@ namespace Tests.Mailru
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _driver = GetNewChromeDriver();
+            _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.url;
             MailruLoginPage loginPage = new MailruLoginPage(_driver);
 

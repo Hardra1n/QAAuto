@@ -8,14 +8,14 @@ using Pages.Yandex;
 namespace Tests.Both
 {
     [TestFixture]
-    public class MessagingTests : BaseTest
+    public class MessagingTests
     {
         IWebDriver _driver;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _driver = GetNewChromeDriver();
+            _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.url;
             MailruLoginPage mailruLoginPage = new MailruLoginPage(_driver);
 

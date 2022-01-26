@@ -6,7 +6,7 @@ using Pages.Yandex;
 namespace Tests.Yandex
 {
     [TestFixture]
-    public class YandexLoginPageTests : BaseTest
+    public class YandexLoginPageTests
     {
         private YandexLoginPage _page;
 
@@ -15,7 +15,7 @@ namespace Tests.Yandex
         [SetUp]
         public void SetUp()
         {
-            _driver = GetNewChromeDriver();
+            _driver = Driver.GetChromeDriver();
             _driver.Url = YandexLoginPage.url;
             _page = new YandexLoginPage(_driver);
         }

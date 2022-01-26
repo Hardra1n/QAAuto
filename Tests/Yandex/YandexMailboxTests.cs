@@ -7,7 +7,7 @@ using System.Threading;
 namespace Tests.Yandex
 {
     [TestFixture]
-    public class YandexMailboxTests : BaseTest
+    public class YandexMailboxTests
     {
         YandexMailboxPage _page;
 
@@ -16,7 +16,7 @@ namespace Tests.Yandex
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _driver = GetNewChromeDriver();
+            _driver = Driver.GetChromeDriver();
             _driver.Url = YandexLoginPage.url;
             YandexLoginPage loginPage = new YandexLoginPage(_driver);
 
