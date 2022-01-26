@@ -22,14 +22,12 @@ namespace Tests.Both
             mailruLoginPage.LoginAs(AccountCredenitals.mailruLogin,
                                     AccountCredenitals.mailruPassword)
                            .GoToMailboxPage();
-            Waiters.WaitUntilTitleContains(_driver, "Почта Mail.ru");
 
             _driver.Url = YandexLoginPage.url;
             YandexLoginPage yandexLoginPage = new YandexLoginPage(_driver);
 
             yandexLoginPage.LoginAs(AccountCredenitals.yandexLogin,
                                     AccountCredenitals.yandexPassword);
-            Waiters.WaitUntilTitleContains(_driver, "Яндекс ID");
         }
 
         [OneTimeTearDown]

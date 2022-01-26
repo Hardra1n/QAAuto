@@ -7,6 +7,8 @@ namespace Pages.Mailru
     {
         public static string url = "https://account.mail.ru/";
 
+        string _afterLoginDriverTitle = "Почта Mail.ru";
+
         By _usernameInputLocator = By.XPath("//input[@name='username']");
 
         By _passwordInputLocator = By.XPath("//input[@name='password']");
@@ -36,6 +38,7 @@ namespace Pages.Mailru
         {
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginButtonLocator);
             Driver.FindElement(_submitLoginButtonLocator).Submit();
+            Waiters.WaitUntilTitleContains(Driver, _afterLoginDriverTitle);
             return new MailruHomePage(Driver);
         }
 

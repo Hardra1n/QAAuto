@@ -11,7 +11,7 @@ namespace Pages.Yandex
     {
         public static string url = "https://passport.yandex.by/profile";
 
-        string _pageTitle = "Яндекс ID";
+        public static string pageTitle = "Яндекс ID";
 
         By _buttonToMailboxLocator = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
 
@@ -30,7 +30,7 @@ namespace Pages.Yandex
 
         public YandexHomePage(IWebDriver driver) : base(driver)
         {
-            Waiters.WaitUntilTitleEquals(Driver, _pageTitle);
+            Waiters.WaitUntilTitleEquals(Driver, pageTitle);
         }
 
         public IMailboxPage GoToMailboxPage()

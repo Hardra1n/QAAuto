@@ -32,6 +32,7 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginLocator);
             Driver.FindElement(_submitLoginLocator).Submit();
+            Waiters.WaitUntilTitleContains(Driver, YandexHomePage.pageTitle);
             return new YandexHomePage(Driver);
         }
 
