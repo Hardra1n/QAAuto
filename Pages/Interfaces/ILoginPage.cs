@@ -11,5 +11,7 @@
         ILoginPage SubmitLoginWithoutSwitchToNewPage();
 
         IHomePage LoginAs(string username, string password);
+
+        string GetAlertMessageText();
     }
 }

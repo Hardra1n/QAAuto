@@ -8,9 +8,9 @@ namespace Tests.Mailru
     [TestFixture]
     class MailruMailboxTests
     {
-        MailruMailboxPage _page;
+        private MailruMailboxPage _page;
 
-        IWebDriver _driver;
+        private IWebDriver _driver;
 
 
         [OneTimeSetUp]
@@ -18,11 +18,9 @@ namespace Tests.Mailru
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.url;
-            MailruLoginPage loginPage = new MailruLoginPage(_driver);
-
-            _page = (MailruMailboxPage)loginPage.LoginAs(AccountCredenitals.mailruLogin,
-                                      AccountCredenitals.mailruPassword)
-                                                .GoToMailboxPage();
+            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(AccountCredenitals.mailruLogin,
+                                                                            AccountCredenitals.mailruPassword)
+                                                                   .GoToMailboxPage();
         }
 
         [OneTimeTearDown]

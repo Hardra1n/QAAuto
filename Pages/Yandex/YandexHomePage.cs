@@ -2,8 +2,6 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Pages.Interfaces;
-using System;
-using System.Threading;
 
 namespace Pages.Yandex
 {
@@ -13,19 +11,19 @@ namespace Pages.Yandex
 
         public static string pageTitle = "Яндекс ID";
 
-        By _buttonToMailboxLocator = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
+        private By _buttonToMailboxLocator = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
 
-        By _buttonToOpenMenubarLocator = By.XPath("//a[@target='_parent']");
+        private By _buttonToOpenMenubarLocator = By.XPath("//a[@target='_parent']");
 
-        By _displayNameWindowButtonLocator = By.XPath("//*[@class='AdditionalPersonalInfo-name']//a");
+        private By _displayNameWindowButtonLocator = By.XPath("//*[@class='AdditionalPersonalInfo-name']//a");
 
-        By _nicknameSelectorLocator = By.XPath("//select");
+        private By _nicknameSelectorLocator = By.XPath("//select");
 
-        By _nicknameInputLocator = By.XPath("//input[@name = 'display_name']");
+        private By _nicknameInputLocator = By.XPath("//input[@name = 'display_name']");
 
-        By _displaynameSaveButtonLocator = By.XPath("//*[contains(text(), 'Сохранить')]/ancestor::button");
+        private By _displaynameSaveButtonLocator = By.XPath("//*[contains(text(), 'Сохранить')]/ancestor::button");
 
-        By _nicknameTextLocator = By.XPath("//*[contains(@class, 'personal-info__displayname')]");
+        private By _nicknameTextLocator = By.XPath("//*[contains(@class, 'personal-info__displayname')]");
 
 
         public YandexHomePage(IWebDriver driver) : base(driver)
@@ -55,21 +53,21 @@ namespace Pages.Yandex
             return Driver.FindElement(_nicknameTextLocator).Text;
         }
 
-        IHomePage OpenMenubar()
+        private IHomePage OpenMenubar()
         {
             Waiters.WaitUntilDisplayElement(Driver, _buttonToOpenMenubarLocator);
             Driver.FindElement(_buttonToOpenMenubarLocator).Click();
             return this;
         }
 
-        IHomePage MoveCoursorToShowAdditionalWindows()
+        private IHomePage MoveCoursorToShowAdditionalWindows()
         {
             Waiters.WaitUntilDisplayElement(Driver, _nicknameTextLocator);
             new Actions(Driver).MoveToElement(Driver.FindElement(_nicknameTextLocator)).Perform();
             return this;
         }
 
-        IHomePage OpenDisplayNameWindow()
+        private IHomePage OpenDisplayNameWindow()
         {
             MoveCoursorToShowAdditionalWindows();
             Waiters.WaitUntilDisplayElement(Driver, _displayNameWindowButtonLocator);
@@ -77,14 +75,14 @@ namespace Pages.Yandex
             return this;
         }
 
-        IHomePage SelectAnotherDisplayName()
+        private IHomePage SelectAnotherDisplayName()
         {
             SelectElement selectElement = new SelectElement(Driver.FindElement(_nicknameSelectorLocator));
             selectElement.SelectByValue("ANOTHER");
             return this;
         }
 
-        IHomePage PutDisplayName(string nickname)
+        private IHomePage PutDisplayName(string nickname)
         {
             Waiters.WaitUntilDisplayElement(Driver, _nicknameInputLocator);
             var element = Driver.FindElement(_nicknameInputLocator);
@@ -93,7 +91,7 @@ namespace Pages.Yandex
             return this;
         }
 
-        IHomePage SaveDisplayName()
+        private IHomePage SaveDisplayName()
         {
             Waiters.WaitUntilDisplayElement(Driver, _displaynameSaveButtonLocator);
             Driver.FindElement(_displaynameSaveButtonLocator).Click();

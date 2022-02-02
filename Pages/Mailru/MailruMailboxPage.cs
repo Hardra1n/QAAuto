@@ -1,16 +1,15 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
-using System.Threading;
 
 namespace Pages.Mailru
 {
     public class MailruMailboxPage : BasePage, IMailboxPage
     {
-        public static string url = "https://e.mail.ru/inbox";
+        public const string url = "https://e.mail.ru/inbox";
 
-        string _xpathToMessageGroup = "//div[@role = 'rowgroup']";
+        private string _xpathToMessageGroup = "//div[@role = 'rowgroup']";
 
-        By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'compose-button')]");
+        private By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'compose-button')]");
 
 
         public MailruMailboxPage(IWebDriver driver) : base(driver) { }

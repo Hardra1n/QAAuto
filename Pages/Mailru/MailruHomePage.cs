@@ -6,10 +6,10 @@ namespace Pages.Mailru
 {
     public class MailruHomePage : BasePage, IHomePage
     {
-        By _goToMailboxButtonLocator = By.XPath("//a[text() = 'Почта'] | //a[@id = 'ph_mail']");
+        private By _goToMailboxButtonLocator = By.XPath("//a[text() = 'Почта'] | //a[@id = 'ph_mail']");
 
 
-        public MailruHomePage(IWebDriver driver) :base(driver) { }
+        public MailruHomePage(IWebDriver driver) : base(driver) { }
 
 
         public IMailboxPage GoToMailboxPage()

@@ -10,9 +10,9 @@ namespace Tests.Mailru
     [TestFixture]
     public class MailruLoginPageTests
     {
-        MailruLoginPage _page;
+        private MailruLoginPage _page;
 
-        IWebDriver _driver;
+        private IWebDriver _driver;
 
         [SetUp]
         public void SetUp()
@@ -23,7 +23,7 @@ namespace Tests.Mailru
         }
 
         [TearDown]
-        public void CleanUp()
+        public void TearDown()
         {
             _driver.Close();
         }
@@ -32,9 +32,9 @@ namespace Tests.Mailru
         [TestCase("fmwdklasnfkwjas", "Такой аккаунт не зарегистрирован")]
         public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
         {
-            _page.TypeUsername(username);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
+            string actualAlertMessage = _page.TypeUsername(username)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
         }
@@ -43,11 +43,11 @@ namespace Tests.Mailru
         [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            _page.TypeUsername(AccountCredenitals.mailruLogin);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            _page.TypePassword(password);
-            _page.SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
+            string actualAlertMessage = _page.TypeUsername(AccountCredenitals.mailruLogin)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .TypePassword(password)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
         }

@@ -1,32 +1,29 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
-using System;
 
 namespace Pages.Yandex
 {
     public class YandexLoginPage : BasePage, ILoginPage
     {
-        public static string url = "https://passport.yandex.by/";
+        public static string URL = "https://passport.yandex.by/";
 
-        By _usernameInputLocator = By.XPath("//input[@name='login']");
+        private By _usernameInputLocator = By.XPath("//input[@name='login']");
 
-        By _passwordInputLocator = By.XPath("//input[@name='passwd']");
+        private By _passwordInputLocator = By.XPath("//input[@name='passwd']");
 
-        By _submitLoginLocator = By.XPath("//button[@type='submit']");
+        private By _submitLoginLocator = By.XPath("//button[@type='submit']");
 
-        By _alertMessageLocator = By.XPath("//div[@role = 'alert']");
+        private By _alertMessageLocator = By.XPath("//div[@role = 'alert']");
 
 
         public YandexLoginPage(IWebDriver driver) : base(driver) { }
 
 
-        public IHomePage LoginAs(string username, string password)
-        {
-            TypeUsername(username);
-            SubmitLoginWithoutSwitchToNewPage();
-            TypePassword(password);
-            return SubmitLogin();
-        }
+        public IHomePage LoginAs(string username, string password) 
+            => TypeUsername(username).SubmitLoginWithoutSwitchToNewPage()
+                                     .TypePassword(password)
+                                     .SubmitLogin();
+        
 
         public IHomePage SubmitLogin()
         {

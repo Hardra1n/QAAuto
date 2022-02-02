@@ -5,17 +5,17 @@ namespace Pages.Yandex
 {
     public class YandexMessageReaderPage : BasePage, IMessageReaderPage
     {
-        By _subjectTextLocator = By.XPath("//*[contains(@class, 'Title__subject')]");
+        private By _subjectTextLocator = By.XPath("//*[contains(@class, 'Title__subject')]");
 
-        By _letterBodyLocator = By.XPath("//*[contains(@class, 'MessageBody__body')]/div");
+        private By _letterBodyLocator = By.XPath("//*[contains(@class, 'MessageBody__body')]/div");
 
-        By _senderNameLocator = By.XPath("//*[contains(@class, 'SenderName')]");
+        private By _senderNameLocator = By.XPath("//*[contains(@class, 'SenderName')]");
 
-        By _senderEmailLocator = By.XPath("//*[contains(@class, 'SenderEmail')]");
+        private By _senderEmailLocator = By.XPath("//*[contains(@class, 'SenderEmail')]");
 
-        By _deleteButtonLocator = By.XPath("//*[contains(@title, 'Удалить')]");
+        private By _deleteButtonLocator = By.XPath("//*[contains(@title, 'Удалить')]");
 
-        By _backToMailboxButtonLocator = By.XPath("//a[@title = 'Входящие']");
+        private By _backToMailboxButtonLocator = By.XPath("//a[@title = 'Входящие']");
 
 
         public YandexMessageReaderPage(IWebDriver driver) : base(driver) { }

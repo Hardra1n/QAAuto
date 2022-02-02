@@ -7,15 +7,15 @@ namespace Pages.Mailru
     {
         public static string url = "https://account.mail.ru/";
 
-        string _afterLoginDriverTitle = "Почта Mail.ru";
+        private string _afterLoginDriverTitle = "Почта Mail.ru";
 
-        By _usernameInputLocator = By.XPath("//input[@name='username']");
+        private By _usernameInputLocator = By.XPath("//input[@name='username']");
 
-        By _passwordInputLocator = By.XPath("//input[@name='password']");
+        private By _passwordInputLocator = By.XPath("//input[@name='password']");
 
-        By _submitLoginButtonLocator = By.XPath("//button[@type='submit']");
+        private By _submitLoginButtonLocator = By.XPath("//button[@type='submit']");
 
-        By _alertMessageLocator = By.XPath("//div[@data-test-id='error-footer-text']");
+        private By _alertMessageLocator = By.XPath("//div[@data-test-id='error-footer-text']");
 
 
         public MailruLoginPage(IWebDriver driver) : base(driver) { }
@@ -49,13 +49,10 @@ namespace Pages.Mailru
             return this;
         }
 
-        public IHomePage LoginAs(string username, string password)
-        {
-            TypeUsername(username);
-            SubmitLoginWithoutSwitchToNewPage();
-            TypePassword(password);
-            return SubmitLogin();
-        }
+        public IHomePage LoginAs(string username, string password) 
+            => TypeUsername(username).SubmitLoginWithoutSwitchToNewPage()
+                                     .TypePassword(password)
+                                     .SubmitLogin();
 
         public string GetAlertMessageText()
         {

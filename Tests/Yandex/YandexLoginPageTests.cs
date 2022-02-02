@@ -10,18 +10,18 @@ namespace Tests.Yandex
     {
         private YandexLoginPage _page;
 
-        IWebDriver _driver;
+        private IWebDriver _driver;
 
         [SetUp]
         public void SetUp()
         {
             _driver = Driver.GetChromeDriver();
-            _driver.Url = YandexLoginPage.url;
+            _driver.Url = YandexLoginPage.URL;
             _page = new YandexLoginPage(_driver);
         }
 
         [TearDown]
-        public void CleanUp()
+        public void TearDown()
         {
             _driver.Close();
         }
@@ -31,8 +31,9 @@ namespace Tests.Yandex
         [TestCase("", "Логин не указан")]
         public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
         {
-            _page.TypeUsername(username).SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
+            string actualAlertMessage = _page.TypeUsername(username)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
         }
@@ -41,9 +42,11 @@ namespace Tests.Yandex
         [TestCase("", "Пароль не указан")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            _page.TypeUsername(AccountCredenitals.yandexLogin).SubmitLoginWithoutSwitchToNewPage();
-            _page.TypePassword(password).SubmitLoginWithoutSwitchToNewPage();
-            string actualAlertMessage = _page.GetAlertMessageText();
+            string actualAlertMessage = _page.TypeUsername(AccountCredenitals.yandexLogin)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .TypePassword(password)
+                                             .SubmitLoginWithoutSwitchToNewPage()
+                                             .GetAlertMessageText();
 
             Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
         }
@@ -53,7 +56,8 @@ namespace Tests.Yandex
         {
             string expectedDriverTitle = "Яндекс ID";
             
-            _page.LoginAs(AccountCredenitals.yandexLogin, AccountCredenitals.yandexPassword);
+            _page.LoginAs(AccountCredenitals.yandexLogin, 
+                          AccountCredenitals.yandexPassword);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
             Assert.IsTrue(isContains);

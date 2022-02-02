@@ -10,7 +10,7 @@ namespace Tests.Both
     [TestFixture]
     public class MessagingTests
     {
-        IWebDriver _driver;
+        private IWebDriver _driver;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -23,7 +23,7 @@ namespace Tests.Both
                                     AccountCredenitals.mailruPassword)
                            .GoToMailboxPage();
 
-            _driver.Url = YandexLoginPage.url;
+            _driver.Url = YandexLoginPage.URL;
             YandexLoginPage yandexLoginPage = new YandexLoginPage(_driver);
 
             yandexLoginPage.LoginAs(AccountCredenitals.yandexLogin,
@@ -42,12 +42,17 @@ namespace Tests.Both
             string messageSubject = "YandexToMailru";
             string messageText = "This text should be checked";
 
-            _driver.Url = YandexMailboxPage.url;
+            _driver.Url = YandexMailboxPage.URL;
             IMailboxPage mailboxPage = new YandexMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer().SendMessage(messageSubject, messageText, AccountCredenitals.mailruEmail);
+            mailboxPage.OpenMessageComposer()
+                       .SendMessage(messageSubject, 
+                                    messageText, 
+                                    AccountCredenitals.mailruEmail);
+
             _driver.Url = MailruLoginPage.url;
             mailboxPage = new MailruMailboxPage(_driver);
-            IMessageReaderPage readerPage = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.yandexLogin);
+            IMessageReaderPage readerPage 
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.yandexLogin);
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
@@ -64,10 +69,14 @@ namespace Tests.Both
 
             _driver.Url = MailruMailboxPage.url;
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer().SendMessage(messageSubject, messageText, AccountCredenitals.yandexEmail);
-            _driver.Url = YandexMailboxPage.url;
+            mailboxPage.OpenMessageComposer()
+                       .SendMessage(messageSubject, 
+                                    messageText, 
+                                    AccountCredenitals.yandexEmail);
+            _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
-            IMessageReaderPage readerPage = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+            IMessageReaderPage readerPage 
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
@@ -84,10 +93,14 @@ namespace Tests.Both
 
             _driver.Url = MailruMailboxPage.url;
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer().SendMessage(messageSubjct, messageText, AccountCredenitals.yandexEmail);
-            _driver.Url = YandexMailboxPage.url;
+            mailboxPage.OpenMessageComposer()
+                       .SendMessage(messageSubjct, 
+                                    messageText, 
+                                    AccountCredenitals.yandexEmail);
+            _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
-            IMessageReaderPage readerPage = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+            IMessageReaderPage readerPage 
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
             string actualRecivedNickname = readerPage.GetText();
 
             Assert.AreEqual(messageText, actualRecivedNickname);
@@ -100,7 +113,6 @@ namespace Tests.Both
             Assert.AreEqual(actualRecivedNickname, actualChangedNickname);
 
             homePage.ChangeNickname(defaultNickame);
-
         }
     }
 }

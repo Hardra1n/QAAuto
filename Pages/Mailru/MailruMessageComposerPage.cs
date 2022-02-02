@@ -5,15 +5,15 @@ namespace Pages.Mailru
 {
     public class MailruMessageComposerPage : BasePage, IMessageComposerPage
     {
-        By _recipientsEmailInputLocator = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
+        private By _recipientsEmailInputLocator = By.XPath("//div[contains(@class, 'contactsContainer')]//input");
 
-        By _subjectInputLocator = By.XPath("//input[@name = 'Subject']");
+        private By _subjectInputLocator = By.XPath("//input[@name = 'Subject']");
 
-        By _textInputLocator = By.XPath("//div[@role='textbox']/div[1]");
+        private By _textInputLocator = By.XPath("//div[@role='textbox']/div[1]");
 
-        By _sendButtonLocator = By.XPath("//span[@title='Отправить']");
+        private By _sendButtonLocator = By.XPath("//span[@title='Отправить']");
 
-        By _backToMailboxButtonAfterSendingLocator = By.XPath("//*[@title = 'Закрыть']/span");
+        private By _backToMailboxButtonAfterSendingLocator = By.XPath("//*[@title = 'Закрыть']/span");
 
 
         public MailruMessageComposerPage(IWebDriver driver) : base(driver) { }
@@ -59,12 +59,9 @@ namespace Pages.Mailru
         }
 
         public IMailboxPage SendMessage(string topic, string text, params string[] recipients)
-        {
-            EnterRecipientEmailSendingMessage(recipients);
-            EnterTopicSendingMessage(topic);
-            EnterTextSendingMessage(text);
-            ClickSendMessageButton();
-            return BackToMailboxPageAfterSendingMessage();
-        }
+            => EnterRecipientEmailSendingMessage(recipients).EnterTopicSendingMessage(topic)
+                                                            .EnterTextSendingMessage(text)
+                                                            .ClickSendMessageButton()
+                                                            .BackToMailboxPageAfterSendingMessage();
     }
 }

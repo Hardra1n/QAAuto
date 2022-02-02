@@ -1,22 +1,21 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
-using System.Threading;
 
 namespace Pages.Mailru
 {
     public class MailruMessageReaderPage : BasePage, IMessageReaderPage
     {
-        By _backToMailboxButtonLocator = By.XPath("//a[text() = 'Почта']");
+        private By _backToMailboxButtonLocator = By.XPath("//a[text() = 'Почта']");
 
-        By _deleteMessageButtonLocator = By.XPath("//*[@title = 'Удалить']");
+        private By _deleteMessageButtonLocator = By.XPath("//*[@title = 'Удалить']");
 
-        By _authorContactTextLocator = By.XPath("//*[contains(@class, 'letter-contact')]");
+        private By _authorContactTextLocator = By.XPath("//*[contains(@class, 'letter-contact')]");
 
-        By _subjectTextLocator = By.XPath("//*[contains(@class, 'thread-subject')]");
+        private By _subjectTextLocator = By.XPath("//*[contains(@class, 'thread-subject')]");
 
-        By _letterBodyLocator = By.XPath("//*[@class = 'letter-body']");
+        private By _letterBodyLocator = By.XPath("//*[@class = 'letter-body']");
 
-        By _isInBacketTextLocator = By.XPath("//*[@class = 'notify__message__text']");
+        private By _isInBacketTextLocator = By.XPath("//*[@class = 'notify__message__text']");
 
 
         public MailruMessageReaderPage(IWebDriver driver) : base(driver) { }

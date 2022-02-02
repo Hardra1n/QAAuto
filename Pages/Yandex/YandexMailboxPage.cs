@@ -1,14 +1,13 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
-using System.Threading;
 
 namespace Pages.Yandex
 {
     public class YandexMailboxPage : BasePage, IMailboxPage
     {
-        public static string url = "https://mail.yandex.by/";
+        public const string URL = "https://mail.yandex.by/";
 
-        By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
+        private By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
 
 
         public YandexMailboxPage(IWebDriver driver) : base(driver) { }

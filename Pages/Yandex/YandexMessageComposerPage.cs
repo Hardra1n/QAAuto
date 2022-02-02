@@ -6,15 +6,15 @@ namespace Pages.Yandex
 {
     public class YandexMessageComposerPage : BasePage, IMessageComposerPage
     {
-        By _sendButtonLocator = By.XPath("//*[text() = 'Отправить']//ancestor::button");
+        private By _sendButtonLocator = By.XPath("//*[text() = 'Отправить']//ancestor::button");
 
-        By _recipientsEmailInputLocator = By.XPath("//div[contains(@class, 'composeYabbles')]");
+        private By _recipientsEmailInputLocator = By.XPath("//div[contains(@class, 'composeYabbles')]");
 
-        By _subjectInputLocator = By.XPath("//input[@name = 'subject']");
+        private By _subjectInputLocator = By.XPath("//input[@name = 'subject']");
 
-        By _textInputLocator = By.XPath("//div[@role = 'textbox']/div[1]");
+        private By _textInputLocator = By.XPath("//div[@role = 'textbox']/div[1]");
 
-        By _backToMailboxButtonAfterSendingLocator = By.XPath("//a[contains(text(), 'Вернуться')]");
+        private By _backToMailboxButtonAfterSendingLocator = By.XPath("//a[contains(text(), 'Вернуться')]");
 
 
         public YandexMessageComposerPage(IWebDriver driver) : base(driver) { }
@@ -38,7 +38,7 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _recipientsEmailInputLocator);
             IWebElement recipientsInput = Driver.FindElement(_recipientsEmailInputLocator);
-            foreach(string recipient in recipients)
+            foreach (string recipient in recipients)
             {
                 recipientsInput.SendKeys(recipient + ' ');
             }
@@ -60,12 +60,9 @@ namespace Pages.Yandex
         }
 
         public IMailboxPage SendMessage(string topic, string text, params string[] recipients)
-        {
-            EnterRecipientEmailSendingMessage(recipients);
-            EnterTopicSendingMessage(topic);
-            EnterTextSendingMessage(text);
-            ClickSendMessageButton();
-            return BackToMailboxPageAfterSendingMessage();
-        }
+            => EnterRecipientEmailSendingMessage(recipients).EnterTopicSendingMessage(topic)
+                                                            .EnterTextSendingMessage(text)
+                                                            .ClickSendMessageButton()
+                                                            .BackToMailboxPageAfterSendingMessage();
     }
 }

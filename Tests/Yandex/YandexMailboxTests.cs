@@ -9,20 +9,18 @@ namespace Tests.Yandex
     [TestFixture]
     public class YandexMailboxTests
     {
-        YandexMailboxPage _page;
+        private YandexMailboxPage _page;
 
-        IWebDriver _driver;
+        private IWebDriver _driver;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _driver = Driver.GetChromeDriver();
-            _driver.Url = YandexLoginPage.url;
-            YandexLoginPage loginPage = new YandexLoginPage(_driver);
-
-            _page = (YandexMailboxPage)loginPage.LoginAs(AccountCredenitals.yandexLogin,
-                                                         AccountCredenitals.yandexPassword)
-                                                .GoToMailboxPage();
+            _driver.Url = YandexLoginPage.URL;
+            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(AccountCredenitals.yandexLogin,
+                                                                            AccountCredenitals.yandexPassword)
+                                                                   .GoToMailboxPage();
         }
 
         [OneTimeTearDown]
@@ -34,7 +32,7 @@ namespace Tests.Yandex
         [SetUp]
         public void SetUp()
         {
-            _driver.Url = YandexMailboxPage.url;
+            _driver.Url = YandexMailboxPage.URL;
         }
 
         [Test]
@@ -58,11 +56,12 @@ namespace Tests.Yandex
             IHomePage homepage = _page.GoToHomePage();
             string primaryNickname = homepage.GetNickname();
             
-            homepage.ChangeNickname(changingNickname);
-            string actualNickname = homepage.GetNickname();
-            homepage.ChangeNickname(primaryNickname);
+            string actualNickname = homepage.ChangeNickname(changingNickname)
+                                            .GetNickname();
 
             Assert.AreEqual(changingNickname, actualNickname);
+
+            homepage.ChangeNickname(primaryNickname);
         }
     }
 }
