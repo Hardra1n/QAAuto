@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ModelNService.Service;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages.Mailru;
 using System.Threading;
@@ -18,8 +19,8 @@ namespace Tests.Mailru
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.url;
-            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(AccountCredenitals.mailruLogin,
-                                                                            AccountCredenitals.mailruPassword)
+            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(AccountProvider.GetUsername("Mailru"),
+                                                                            AccountProvider.GetPassword("Mailru"))
                                                                    .GoToMailboxPage();
         }
 

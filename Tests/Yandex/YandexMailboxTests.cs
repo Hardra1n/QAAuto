@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ModelNService.Service;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Yandex;
@@ -18,8 +19,8 @@ namespace Tests.Yandex
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = YandexLoginPage.URL;
-            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(AccountCredenitals.yandexLogin,
-                                                                            AccountCredenitals.yandexPassword)
+            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(AccountProvider.GetUsername("Yandex"),
+                                                                            AccountProvider.GetPassword("Yandex"))
                                                                    .GoToMailboxPage();
         }
 

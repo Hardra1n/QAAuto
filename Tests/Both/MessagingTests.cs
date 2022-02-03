@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ModelNService.Service;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Interfaces;
@@ -19,15 +20,15 @@ namespace Tests.Both
             _driver.Url = MailruLoginPage.url;
             MailruLoginPage mailruLoginPage = new MailruLoginPage(_driver);
 
-            mailruLoginPage.LoginAs(AccountCredenitals.mailruLogin,
-                                    AccountCredenitals.mailruPassword)
+            mailruLoginPage.LoginAs(AccountProvider.GetUsername("Mailru"),
+                                    AccountProvider.GetPassword("Mailru"))
                            .GoToMailboxPage();
 
             _driver.Url = YandexLoginPage.URL;
             YandexLoginPage yandexLoginPage = new YandexLoginPage(_driver);
 
-            yandexLoginPage.LoginAs(AccountCredenitals.yandexLogin,
-                                    AccountCredenitals.yandexPassword);
+            yandexLoginPage.LoginAs(AccountProvider.GetUsername("Yandex"),
+                                    AccountProvider.GetPassword("Yandex"));
         }
 
         [OneTimeTearDown]
@@ -46,17 +47,17 @@ namespace Tests.Both
             IMailboxPage mailboxPage = new YandexMailboxPage(_driver);
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
-                                    messageText, 
-                                    AccountCredenitals.mailruEmail);
+                                    messageText,
+                                    AccountProvider.GetEmail("Mailru"));
 
             _driver.Url = MailruLoginPage.url;
             mailboxPage = new MailruMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.yandexLogin);
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Yandex"));
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(AccountCredenitals.yandexEmail, readerPage.GetAuthorEmail());
+            Assert.AreEqual(AccountProvider.GetEmail("Yandex"), readerPage.GetAuthorEmail());
 
             readerPage.DeleteMessage();
         }
@@ -71,16 +72,16 @@ namespace Tests.Both
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
-                                    messageText, 
-                                    AccountCredenitals.yandexEmail);
+                                    messageText,
+                                    AccountProvider.GetUsername("Yandex"));
             _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Mailru"));
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(AccountCredenitals.mailruEmail, readerPage.GetAuthorEmail());
+            Assert.AreEqual(AccountProvider.GetEmail("Mailru"), readerPage.GetAuthorEmail());
 
             readerPage.DeleteMessage();
         }
@@ -95,12 +96,12 @@ namespace Tests.Both
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubjct, 
-                                    messageText, 
-                                    AccountCredenitals.yandexEmail);
+                                    messageText,
+                                    AccountProvider.GetEmail("Yandex"));
             _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountCredenitals.mailruLogin);
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Mailru"));
             string actualRecivedNickname = readerPage.GetText();
 
             Assert.AreEqual(messageText, actualRecivedNickname);

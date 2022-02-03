@@ -15,10 +15,7 @@ namespace Pages.Yandex
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
-            string xPath = $"//a[" +
-                              $".//*[contains(@title, '{author}')] and " +
-                              $".//*[contains(@title, 'Отметить как прочитанное')]]";
-            By locator = By.XPath(xPath);
+            By locator = By.XPath(GetNewMessageFromConcreteAuthorLocator(author));
             Waiters.WaitUntilDisplayElement(Driver, locator);
             Driver.FindElement(locator).Click();
             return new YandexMessageReaderPage(Driver);
@@ -36,5 +33,8 @@ namespace Pages.Yandex
             Driver.Url = YandexHomePage.url;
             return new YandexHomePage(Driver);
         }
+
+        private string GetNewMessageFromConcreteAuthorLocator(string author)
+            => $"//a[.//*[contains(@title, {author})] and .//*[contains(@title, 'Отметить как прочитанное')]]";
     }
 }

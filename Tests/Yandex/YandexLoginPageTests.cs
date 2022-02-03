@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using ModelNService.Service;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Yandex;
@@ -42,7 +43,7 @@ namespace Tests.Yandex
         [TestCase("", "Пароль не указан")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(AccountCredenitals.yandexLogin)
+            string actualAlertMessage = _page.TypeUsername(AccountProvider.GetUsername("Yandex"))
                                              .SubmitLoginWithoutSwitchToNewPage()
                                              .TypePassword(password)
                                              .SubmitLoginWithoutSwitchToNewPage()
@@ -56,8 +57,8 @@ namespace Tests.Yandex
         {
             string expectedDriverTitle = "Яндекс ID";
             
-            _page.LoginAs(AccountCredenitals.yandexLogin, 
-                          AccountCredenitals.yandexPassword);
+            _page.LoginAs(AccountProvider.GetUsername("Yandex"),
+                          AccountProvider.GetPassword("Yandex"));
             bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
             Assert.IsTrue(isContains);
