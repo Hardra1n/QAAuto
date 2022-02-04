@@ -5,7 +5,7 @@ namespace Pages.Mailru
 {
     public class MailruLoginPage : BasePage, ILoginPage
     {
-        public static string url = "https://account.mail.ru/";
+        public const string URL = "https://account.mail.ru/";
 
         private string _afterLoginDriverTitle = "Почта Mail.ru";
 

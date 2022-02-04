@@ -7,9 +7,9 @@ namespace Pages.Yandex
 {
     public class YandexHomePage : BasePage, IHomePage
     {
-        public static string url = "https://passport.yandex.by/profile";
+        public const string URL = "https://passport.yandex.by/profile";
 
-        public static string pageTitle = "Яндекс ID";
+        public const string pageTitle = "Яндекс ID";
 
         private By _buttonToMailboxLocator = By.XPath("//ul[@class = 'menu__group']/li[1]/a");
 

@@ -18,7 +18,7 @@ namespace Tests.Mailru
         public void OneTimeSetUp()
         {
             _driver = Driver.GetChromeDriver();
-            _driver.Url = MailruLoginPage.url;
+            _driver.Url = MailruLoginPage.URL;
             _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(AccountProvider.GetUsername("Mailru"),
                                                                             AccountProvider.GetPassword("Mailru"))
                                                                    .GoToMailboxPage();
@@ -33,7 +33,7 @@ namespace Tests.Mailru
         [SetUp]
         public void SetUp()
         {
-            _driver.Url = MailruMailboxPage.url;
+            _driver.Url = MailruMailboxPage.URL;
         }
 
         [Test]

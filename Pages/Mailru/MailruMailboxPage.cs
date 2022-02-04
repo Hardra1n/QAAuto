@@ -5,9 +5,7 @@ namespace Pages.Mailru
 {
     public class MailruMailboxPage : BasePage, IMailboxPage
     {
-        public const string url = "https://e.mail.ru/inbox";
-
-        private string _xpathToMessageGroup = "//div[@role = 'rowgroup']";
+        public const string URL = "https://e.mail.ru/inbox";
 
         private By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'compose-button')]");
 
@@ -17,10 +15,7 @@ namespace Pages.Mailru
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)
         {
-            string xPath = _xpathToMessageGroup +
-                            $"//a[" +
-                            $".//*[contains(@title, '{author}')] and " +
-                            $".//*[contains(@title, 'Пометить прочитанным')]]";
+            string xPath = GetNewMessageFromConcreteAuthorLocator(author);
             By locator = By.XPath(xPath);
             Waiters.WaitUntilDisplayElement(Driver, locator);
             Driver.FindElement(locator).Click();
@@ -39,5 +34,8 @@ namespace Pages.Mailru
         {
             return new MailruHomePage(Driver);
         }
+
+        private string GetNewMessageFromConcreteAuthorLocator(string author)
+            => $"//a[.//*[contains(@title, '{author}')] and .//*[contains(@title, 'Пометить прочитанным')]]";
     }
 }

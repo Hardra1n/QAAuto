@@ -30,7 +30,7 @@ namespace Pages.Yandex
 
         public IHomePage GoToHomePage()
         {
-            Driver.Url = YandexHomePage.url;
+            Driver.Url = YandexHomePage.URL;
             return new YandexHomePage(Driver);
         }
 

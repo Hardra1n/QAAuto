@@ -17,7 +17,7 @@ namespace Tests.Both
         public void OneTimeSetUp()
         {
             _driver = Driver.GetChromeDriver();
-            _driver.Url = MailruLoginPage.url;
+            _driver.Url = MailruLoginPage.URL;
             MailruLoginPage mailruLoginPage = new MailruLoginPage(_driver);
 
             mailruLoginPage.LoginAs(AccountProvider.GetUsername("Mailru"),
@@ -50,7 +50,7 @@ namespace Tests.Both
                                     messageText,
                                     AccountProvider.GetEmail("Mailru"));
 
-            _driver.Url = MailruLoginPage.url;
+            _driver.Url = MailruLoginPage.URL;
             mailboxPage = new MailruMailboxPage(_driver);
             IMessageReaderPage readerPage 
                 = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Yandex"));
@@ -68,7 +68,7 @@ namespace Tests.Both
             string messageSubject = "MailruToYandex";
             string messageText = "This text should be checked";
 
-            _driver.Url = MailruMailboxPage.url;
+            _driver.Url = MailruMailboxPage.URL;
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
@@ -92,7 +92,7 @@ namespace Tests.Both
             string messageSubjct = "Changing nickname";
             string messageText = "Contro";
 
-            _driver.Url = MailruMailboxPage.url;
+            _driver.Url = MailruMailboxPage.URL;
             IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubjct, 

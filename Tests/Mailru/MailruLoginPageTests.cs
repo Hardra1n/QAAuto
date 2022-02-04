@@ -19,7 +19,7 @@ namespace Tests.Mailru
         public void SetUp()
         {
             _driver = Driver.GetChromeDriver();
-            _driver.Url = MailruLoginPage.url;
+            _driver.Url = MailruLoginPage.URL;
             _page = new MailruLoginPage(_driver);
         }
 
