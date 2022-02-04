@@ -35,6 +35,6 @@ namespace Pages.Yandex
         }
 
         private string GetNewMessageFromConcreteAuthorLocator(string author)
-            => $"//a[.//*[contains(@title, {author})] and .//*[contains(@title, 'Отметить как прочитанное')]]";
+            => $"//a[.//*[contains(@title, '{author}')] and .//*[contains(@title, 'Отметить как прочитанное')]]";
     }
 }

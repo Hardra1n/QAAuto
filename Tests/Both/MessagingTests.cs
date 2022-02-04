@@ -5,6 +5,7 @@ using Pages;
 using Pages.Interfaces;
 using Pages.Mailru;
 using Pages.Yandex;
+using System.Threading;
 
 namespace Tests.Both
 {
@@ -73,7 +74,7 @@ namespace Tests.Both
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
                                     messageText,
-                                    AccountProvider.GetUsername("Yandex"));
+                                    AccountProvider.GetEmail("Yandex"));
             _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
             IMessageReaderPage readerPage 
@@ -103,7 +104,7 @@ namespace Tests.Both
             IMessageReaderPage readerPage 
                 = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Mailru"));
             string actualRecivedNickname = readerPage.GetText();
-
+            
             Assert.AreEqual(messageText, actualRecivedNickname);
 
             IHomePage homePage = readerPage.DeleteMessage().BackToMailbox().GoToHomePage();
