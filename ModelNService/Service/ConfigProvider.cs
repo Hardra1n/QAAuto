@@ -1,34 +1,28 @@
 ﻿using Microsoft.Extensions.Configuration;
 using ModelNService.Model;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ModelNService.Service
 {
-    public static class ConfigProvider
+    public class ConfigProvider
     {
-        private static string _solutionDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName;
+        private const string _accountCredentialsPath = @"Resource\AccountCredentials.json";
 
-        private static string _accountCredentialsPath = _solutionDirectory + @"\ModelNService\Resource\AccountCredentials.json";
-
-        public static T Get<T>() where T: new()
+        private Dictionary<Type, string> _configPathDictionary = new()
         {
-            T obj = new T();
+            { new AccountCredentials().GetType(), _accountCredentialsPath}
+        };
+
+        public T Get<T>() where T: new()
+        {
+            T obj = new();
             var settings = new ConfigurationBuilder()
-                .AddJsonFile(GetFilePathByType<T>())
+                .AddJsonFile(_configPathDictionary[typeof(T)])
                 .Build();
             obj = settings.Get<T>();
             return obj;
-        }
-
-        private static string GetFilePathByType<T>() where T : new()
-        {
-            if (typeof(T) == new AccountCredentials().GetType())
-            {
-                return _accountCredentialsPath;
-            }
-
-            return null;
         }
     }
 }

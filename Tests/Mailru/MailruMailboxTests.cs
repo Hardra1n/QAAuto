@@ -17,8 +17,7 @@ namespace Tests.Mailru
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.URL;
-            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(accounts.Mailru.Username,
-                                                                            accounts.Mailru.Password)
+            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(accounts.Mailru)
                                                                    .GoToMailboxPage();
         }
 
