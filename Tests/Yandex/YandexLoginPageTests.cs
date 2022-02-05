@@ -55,8 +55,7 @@ namespace Tests.Yandex
         {
             string expectedDriverTitle = "Яндекс ID";
             
-            _page.LoginAs(accounts.Yandex.Username,
-                          accounts.Yandex.Password);
+            _page.LoginAs(accounts.Yandex);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
             Assert.IsTrue(isContains);

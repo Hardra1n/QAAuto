@@ -1,4 +1,6 @@
-﻿namespace Pages.Interfaces
+﻿using ModelNService.Model;
+
+namespace Pages.Interfaces
 {
     public interface ILoginPage
     {
@@ -10,7 +12,7 @@
 
         ILoginPage SubmitLoginWithoutSwitchToNewPage();
 
-        IHomePage LoginAs(string username, string password);
+        IHomePage LoginAs(User user);
 
         string GetAlertMessageText();
     }

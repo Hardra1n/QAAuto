@@ -55,7 +55,7 @@ namespace Tests.Mailru
         {
             string titleHomepageSubstring = "Почта Mail.ru";
 
-            _page.LoginAs(accounts.Mailru.Username, accounts.Mailru.Password);
+            _page.LoginAs(accounts.Mailru);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
 
             Assert.IsTrue(isContains);

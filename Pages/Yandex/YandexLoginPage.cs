@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Pages.Interfaces;
+using ModelNService.Model;
 
 namespace Pages.Yandex
 {
@@ -19,9 +20,9 @@ namespace Pages.Yandex
         public YandexLoginPage(IWebDriver driver) : base(driver) { }
 
 
-        public IHomePage LoginAs(string username, string password) 
-            => TypeUsername(username).SubmitLoginWithoutSwitchToNewPage()
-                                     .TypePassword(password)
+        public IHomePage LoginAs(User user) 
+            => TypeUsername(user.Username).SubmitLoginWithoutSwitchToNewPage()
+                                     .TypePassword(user.Password)
                                      .SubmitLogin();
         
 

@@ -19,15 +19,13 @@ namespace Tests.Both
             _driver.Url = MailruLoginPage.URL;
             MailruLoginPage mailruLoginPage = new MailruLoginPage(_driver);
 
-            mailruLoginPage.LoginAs(accounts.Mailru.Username,
-                                    accounts.Mailru.Password)
+            mailruLoginPage.LoginAs(accounts.Mailru)
                            .GoToMailboxPage();
 
             _driver.Url = YandexLoginPage.URL;
             YandexLoginPage yandexLoginPage = new YandexLoginPage(_driver);
 
-            yandexLoginPage.LoginAs(accounts.Yandex.Username,
-                                    accounts.Yandex.Password);
+            yandexLoginPage.LoginAs(accounts.Yandex);
         }
 
         [OneTimeTearDown]

@@ -17,8 +17,7 @@ namespace Tests.Yandex
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = YandexLoginPage.URL;
-            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(accounts.Yandex.Username,
-                                                                            accounts.Yandex.Password)
+            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(accounts.Yandex)
                                                                    .GoToMailboxPage();
         }
 

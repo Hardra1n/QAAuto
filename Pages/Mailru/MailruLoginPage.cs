@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using ModelNService.Model;
+using OpenQA.Selenium;
 using Pages.Interfaces;
 
 namespace Pages.Mailru
@@ -49,9 +50,9 @@ namespace Pages.Mailru
             return this;
         }
 
-        public IHomePage LoginAs(string username, string password) 
-            => TypeUsername(username).SubmitLoginWithoutSwitchToNewPage()
-                                     .TypePassword(password)
+        public IHomePage LoginAs(User user) 
+            => TypeUsername(user.Username).SubmitLoginWithoutSwitchToNewPage()
+                                     .TypePassword(user.Password)
                                      .SubmitLogin();
 
         public string GetAlertMessageText()
