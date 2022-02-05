@@ -10,10 +10,8 @@ using System.Threading;
 namespace Tests.Both
 {
     [TestFixture]
-    public class MessagingTests
+    public class MessagingTests : BaseTest
     {
-        private IWebDriver _driver;
-
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
@@ -21,15 +19,15 @@ namespace Tests.Both
             _driver.Url = MailruLoginPage.URL;
             MailruLoginPage mailruLoginPage = new MailruLoginPage(_driver);
 
-            mailruLoginPage.LoginAs(AccountProvider.GetUsername("Mailru"),
-                                    AccountProvider.GetPassword("Mailru"))
+            mailruLoginPage.LoginAs(accounts.Mailru.Username,
+                                    accounts.Mailru.Password)
                            .GoToMailboxPage();
 
             _driver.Url = YandexLoginPage.URL;
             YandexLoginPage yandexLoginPage = new YandexLoginPage(_driver);
 
-            yandexLoginPage.LoginAs(AccountProvider.GetUsername("Yandex"),
-                                    AccountProvider.GetPassword("Yandex"));
+            yandexLoginPage.LoginAs(accounts.Yandex.Username,
+                                    accounts.Yandex.Password);
         }
 
         [OneTimeTearDown]
@@ -49,16 +47,16 @@ namespace Tests.Both
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
                                     messageText,
-                                    AccountProvider.GetEmail("Mailru"));
+                                    accounts.Mailru.Email);
 
             _driver.Url = MailruLoginPage.URL;
             mailboxPage = new MailruMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Yandex"));
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Yandex.Username);
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(AccountProvider.GetEmail("Yandex"), readerPage.GetAuthorEmail());
+            Assert.AreEqual(accounts.Yandex.Email, readerPage.GetAuthorEmail());
 
             readerPage.DeleteMessage();
         }
@@ -74,15 +72,15 @@ namespace Tests.Both
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubject, 
                                     messageText,
-                                    AccountProvider.GetEmail("Yandex"));
+                                    accounts.Yandex.Email);
             _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Mailru"));
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
 
             Assert.AreEqual(messageText, readerPage.GetText());
             Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(AccountProvider.GetEmail("Mailru"), readerPage.GetAuthorEmail());
+            Assert.AreEqual(accounts.Mailru.Email, readerPage.GetAuthorEmail());
 
             readerPage.DeleteMessage();
         }
@@ -98,11 +96,11 @@ namespace Tests.Both
             mailboxPage.OpenMessageComposer()
                        .SendMessage(messageSubjct, 
                                     messageText,
-                                    AccountProvider.GetEmail("Yandex"));
+                                    accounts.Yandex.Email);
             _driver.Url = YandexMailboxPage.URL;
             mailboxPage = new YandexMailboxPage(_driver);
             IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(AccountProvider.GetUsername("Mailru"));
+                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
             string actualRecivedNickname = readerPage.GetText();
             
             Assert.AreEqual(messageText, actualRecivedNickname);

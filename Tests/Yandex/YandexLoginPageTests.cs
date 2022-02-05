@@ -7,11 +7,9 @@ using Pages.Yandex;
 namespace Tests.Yandex
 {
     [TestFixture]
-    public class YandexLoginPageTests
+    public class YandexLoginPageTests : BaseTest
     {
         private YandexLoginPage _page;
-
-        private IWebDriver _driver;
 
         [SetUp]
         public void SetUp()
@@ -43,7 +41,7 @@ namespace Tests.Yandex
         [TestCase("", "Пароль не указан")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(AccountProvider.GetUsername("Yandex"))
+            string actualAlertMessage = _page.TypeUsername(accounts.Yandex.Username)
                                              .SubmitLoginWithoutSwitchToNewPage()
                                              .TypePassword(password)
                                              .SubmitLoginWithoutSwitchToNewPage()
@@ -57,8 +55,8 @@ namespace Tests.Yandex
         {
             string expectedDriverTitle = "Яндекс ID";
             
-            _page.LoginAs(AccountProvider.GetUsername("Yandex"),
-                          AccountProvider.GetPassword("Yandex"));
+            _page.LoginAs(accounts.Yandex.Username,
+                          accounts.Yandex.Password);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
             Assert.IsTrue(isContains);

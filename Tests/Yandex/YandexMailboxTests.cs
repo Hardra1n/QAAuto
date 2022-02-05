@@ -8,19 +8,17 @@ using System.Threading;
 namespace Tests.Yandex
 {
     [TestFixture]
-    public class YandexMailboxTests
+    public class YandexMailboxTests : BaseTest
     {
         private YandexMailboxPage _page;
-
-        private IWebDriver _driver;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = YandexLoginPage.URL;
-            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(AccountProvider.GetUsername("Yandex"),
-                                                                            AccountProvider.GetPassword("Yandex"))
+            _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(accounts.Yandex.Username,
+                                                                            accounts.Yandex.Password)
                                                                    .GoToMailboxPage();
         }
 

@@ -1,19 +1,16 @@
-﻿using ModelNService.Service;
+﻿using ModelNService.Model;
+using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Mailru;
-using System;
-using System.Threading;
 
 namespace Tests.Mailru
 {
     [TestFixture]
-    public class MailruLoginPageTests
+    public class MailruLoginPageTests : BaseTest
     {
         private MailruLoginPage _page;
-
-        private IWebDriver _driver;
 
         [SetUp]
         public void SetUp()
@@ -44,7 +41,7 @@ namespace Tests.Mailru
         [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(AccountProvider.GetUsername("Mailru"))
+            string actualAlertMessage = _page.TypeUsername(accounts.Mailru.Username)
                                              .SubmitLoginWithoutSwitchToNewPage()
                                              .TypePassword(password)
                                              .SubmitLoginWithoutSwitchToNewPage()
@@ -58,7 +55,7 @@ namespace Tests.Mailru
         {
             string titleHomepageSubstring = "Почта Mail.ru";
 
-            _page.LoginAs(AccountProvider.GetUsername("Mailru"), AccountProvider.GetPassword("Mailru"));
+            _page.LoginAs(accounts.Mailru.Username, accounts.Mailru.Password);
             bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
 
             Assert.IsTrue(isContains);

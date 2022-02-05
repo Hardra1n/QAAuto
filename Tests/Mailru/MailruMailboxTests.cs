@@ -7,11 +7,9 @@ using System.Threading;
 namespace Tests.Mailru
 {
     [TestFixture]
-    class MailruMailboxTests
+    class MailruMailboxTests : BaseTest
     {
         private MailruMailboxPage _page;
-
-        private IWebDriver _driver;
 
 
         [OneTimeSetUp]
@@ -19,8 +17,8 @@ namespace Tests.Mailru
         {
             _driver = Driver.GetChromeDriver();
             _driver.Url = MailruLoginPage.URL;
-            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(AccountProvider.GetUsername("Mailru"),
-                                                                            AccountProvider.GetPassword("Mailru"))
+            _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(accounts.Mailru.Username,
+                                                                            accounts.Mailru.Password)
                                                                    .GoToMailboxPage();
         }
 
