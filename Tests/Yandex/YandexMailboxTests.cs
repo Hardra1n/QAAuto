@@ -1,4 +1,5 @@
-﻿using ModelNService.Service;
+﻿using ModelNService.Driver;
+using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
@@ -15,7 +16,7 @@ namespace Tests.Yandex
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _driver = Driver.GetChromeDriver();
+            _driver = DriverManager.GetWebDriver();
             _driver.Url = YandexLoginPage.URL;
             _page = (YandexMailboxPage)new YandexLoginPage(_driver).LoginAs(accounts.Yandex)
                                                                    .GoToMailboxPage();
@@ -24,7 +25,7 @@ namespace Tests.Yandex
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            _driver.Close();
+            DriverManager.CloseDriver();
         }
 
         [SetUp]

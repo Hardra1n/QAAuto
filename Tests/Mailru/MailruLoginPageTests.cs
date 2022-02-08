@@ -1,4 +1,5 @@
-﻿using ModelNService.Model;
+﻿using ModelNService.Driver;
+using ModelNService.Model;
 using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -15,7 +16,7 @@ namespace Tests.Mailru
         [SetUp]
         public void SetUp()
         {
-            _driver = Driver.GetChromeDriver();
+            _driver = DriverManager.GetWebDriver();
             _driver.Url = MailruLoginPage.URL;
             _page = new MailruLoginPage(_driver);
         }
@@ -23,7 +24,7 @@ namespace Tests.Mailru
         [TearDown]
         public void TearDown()
         {
-            _driver.Close();
+            DriverManager.CloseDriver();
         }
 
         [TestCase("", "Поле «Имя аккаунта» должно быть заполнено")]

@@ -1,4 +1,5 @@
-﻿using ModelNService.Service;
+﻿using ModelNService.Driver;
+using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages.Mailru;
@@ -15,7 +16,7 @@ namespace Tests.Mailru
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _driver = Driver.GetChromeDriver();
+            _driver = DriverManager.GetWebDriver();
             _driver.Url = MailruLoginPage.URL;
             _page = (MailruMailboxPage)new MailruLoginPage(_driver).LoginAs(accounts.Mailru)
                                                                    .GoToMailboxPage();
@@ -24,7 +25,7 @@ namespace Tests.Mailru
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            _driver.Close();
+            DriverManager.CloseDriver();
         }
 
         [SetUp]

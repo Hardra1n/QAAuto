@@ -1,4 +1,5 @@
-﻿using ModelNService.Service;
+﻿using ModelNService.Driver;
+using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
@@ -14,7 +15,7 @@ namespace Tests.Yandex
         [SetUp]
         public void SetUp()
         {
-            _driver = Driver.GetChromeDriver();
+            _driver = DriverManager.GetWebDriver();
             _driver.Url = YandexLoginPage.URL;
             _page = new YandexLoginPage(_driver);
         }
@@ -22,7 +23,7 @@ namespace Tests.Yandex
         [TearDown]
         public void TearDown()
         {
-            _driver.Close();
+            DriverManager.CloseDriver();
         }
 
         [TestCase("12342321", "Такой логин не подойдет")]
