@@ -9,6 +9,7 @@ using System.Threading;
 namespace Tests.Yandex
 {
     [TestFixture]
+    [Category("All")]
     public class YandexMailboxTests : BaseTest
     {
         private YandexMailboxPage _page;

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 
@@ -8,14 +9,24 @@ namespace ModelNService.Driver
     {
         private static IWebDriver _driver;
 
+        private static TestContext TestContext { get; set; }
+
         private DriverManager() { }
 
-        public static IWebDriver GetWebDriver() 
+        public static IWebDriver GetWebDriver()
         {
             if (_driver == null)
             {
-                //_driver = new ChromeDriver(GetChromeOptions());
-                _driver = new FirefoxDriver(GetFirefoxOptions());
+                switch (TestContext.Parameters["browser"])
+                {
+                    case "firefox":
+                        _driver = new FirefoxDriver(GetFirefoxOptions());
+                        break;
+                    case "chrome":
+                    default:
+                        _driver = new ChromeDriver(GetChromeOptions());
+                        break;
+                }
             }
 
             return _driver;
@@ -43,7 +54,7 @@ namespace ModelNService.Driver
             var options = new FirefoxOptions();
 
             options.AddArgument("--headless");
-            //options.AddArgument("--private");
+            options.AddArgument("--private");
             options.AddArgument("--width=1400");
             options.AddArgument("--height=900");
 

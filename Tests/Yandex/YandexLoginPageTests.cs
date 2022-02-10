@@ -8,6 +8,7 @@ using Pages.Yandex;
 namespace Tests.Yandex
 {
     [TestFixture]
+    [Category("All")]
     public class YandexLoginPageTests : BaseTest
     {
         private YandexLoginPage _page;
@@ -52,6 +53,7 @@ namespace Tests.Yandex
         }
 
         [Test]
+        [Category("Smoke")]
         public void LoginWithCorrectUsernameAndPassword()
         {
             string expectedDriverTitle = "Яндекс ID";

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace ModelNService.Service
 {
-    public class FileConfigProvider
+    public class ConfigProvider
     {
         private const string _accountCredentialsPath = @"Resource\AccountCredentials.json";
 

@@ -11,6 +11,8 @@ using System.Threading;
 namespace Tests.Both
 {
     [TestFixture]
+    [Category("All")]
+    [Category("Smoke")]
     public class MessagingTests : BaseTest
     {
         [OneTimeSetUp]

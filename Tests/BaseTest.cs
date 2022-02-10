@@ -6,7 +6,7 @@ namespace Tests
 {
     public class BaseTest
     {
-        protected AccountCredentials accounts = new FileConfigProvider().Get<AccountCredentials>();
+        protected AccountCredentials accounts = new ConfigProvider().Get<AccountCredentials>();
 
         protected IWebDriver _driver;
     }

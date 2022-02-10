@@ -9,6 +9,7 @@ using Pages.Mailru;
 namespace Tests.Mailru
 {
     [TestFixture]
+    [Category("All")]
     public class MailruLoginPageTests : BaseTest
     {
         private MailruLoginPage _page;
@@ -52,6 +53,7 @@ namespace Tests.Mailru
         }
 
         [Test]
+        [Category("Smoke")]
         public void LoginWithCorrectUsernameAndPassword()
         {
             string titleHomepageSubstring = "Почта Mail.ru";

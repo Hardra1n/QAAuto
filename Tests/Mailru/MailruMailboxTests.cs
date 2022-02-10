@@ -8,6 +8,7 @@ using System.Threading;
 namespace Tests.Mailru
 {
     [TestFixture]
+    [Category("All")]
     class MailruMailboxTests : BaseTest
     {
         private MailruMailboxPage _page;
