@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Pages
@@ -15,13 +16,13 @@ namespace Pages
         static public bool WaitUntilNotVisable(IWebDriver driver, By locator)
             => new WebDriverWait(driver, _waitTimer).Until(driver => !driver.FindElement(locator).Displayed);
 
-        static public bool WaitUntilNotEnable(IWebDriver driver, By locator)
-            => new WebDriverWait(driver, _waitTimer).Until(driver => !driver.FindElement(locator).Enabled);
-
         static public bool WaitUntilTitleEquals(IWebDriver driver, string title)
             => new WebDriverWait(driver, _waitTimer).Until(driver => driver.Title == title);
 
         static public bool WaitUntilTitleContains(IWebDriver driver, string substring) 
             => new WebDriverWait(driver, _waitTimer).Until(driver => driver.Title.Contains(substring));
+
+        static public bool WaitUntilNoSuchElement(IWebDriver driver, By locator)
+            => new WebDriverWait(driver, _waitTimer).Until(driver => driver.FindElements(locator).FirstOrDefault() == null);
     }
 }

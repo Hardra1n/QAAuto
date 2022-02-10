@@ -32,7 +32,7 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _deleteButtonLocator);
             Driver.FindElement(_deleteButtonLocator).Click();
-            Waiters.WaitUntilNotVisable(Driver, _senderEmailLocator);
+            Waiters.WaitUntilNoSuchElement(Driver, _senderEmailLocator);
             return this;
         }
 
