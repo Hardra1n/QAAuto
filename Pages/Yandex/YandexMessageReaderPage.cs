@@ -5,9 +5,9 @@ namespace Pages.Yandex
 {
     public class YandexMessageReaderPage : BasePage, IMessageReaderPage
     {
-        private By _subjectTextLocator = By.XPath("//*[contains(@class, 'Title__subject')]");
+        private By _subjectTextLocator = By.XPath("//*[contains(@class, 'Title_subject')]");
 
-        private By _letterBodyLocator = By.XPath("//*[contains(@class, 'MessageBody__body')]/div");
+        private By _letterBodyLocator = By.XPath("//*[contains(@class, 'MessageBody_body')]/div");
 
         private By _senderNameLocator = By.XPath("//*[contains(@class, 'SenderName')]");
 
@@ -32,6 +32,7 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _deleteButtonLocator);
             Driver.FindElement(_deleteButtonLocator).Click();
+            Waiters.WaitUntilNotVisable(Driver, _senderEmailLocator);
             return this;
         }
 
