@@ -18,7 +18,10 @@ namespace Pages.Yandex
         private By _backToMailboxButtonLocator = By.XPath("//a[@title = 'Входящие']");
 
 
-        public YandexMessageReaderPage(IWebDriver driver) : base(driver) { }
+        public YandexMessageReaderPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMailboxPage BackToMailbox()

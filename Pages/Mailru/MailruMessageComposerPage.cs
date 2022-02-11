@@ -16,7 +16,10 @@ namespace Pages.Mailru
         private By _backToMailboxButtonAfterSendingLocator = By.XPath("//*[@title = 'Закрыть']/span");
 
 
-        public MailruMessageComposerPage(IWebDriver driver) : base(driver) { }
+        public MailruMessageComposerPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMailboxPage BackToMailboxPageAfterSendingMessage()

@@ -17,7 +17,10 @@ namespace Pages.Yandex
         private By _backToMailboxButtonAfterSendingLocator = By.XPath("//a[contains(text(), 'Вернуться')]");
 
 
-        public YandexMessageComposerPage(IWebDriver driver) : base(driver) { }
+        public YandexMessageComposerPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMailboxPage BackToMailboxPageAfterSendingMessage()

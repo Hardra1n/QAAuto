@@ -17,7 +17,10 @@ namespace Pages.Yandex
         private By _alertMessageLocator = By.XPath("//div[@role = 'alert']");
 
 
-        public YandexLoginPage(IWebDriver driver) : base(driver) { }
+        public YandexLoginPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IHomePage LoginAs(User user) 
@@ -31,6 +34,7 @@ namespace Pages.Yandex
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginLocator);
             Driver.FindElement(_submitLoginLocator).Submit();
             Waiters.WaitUntilTitleContains(Driver, YandexHomePage.pageTitle);
+            logger.Info("Yandex user has authorized");
             return new YandexHomePage(Driver);
         }
 

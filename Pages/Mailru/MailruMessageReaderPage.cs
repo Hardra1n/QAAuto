@@ -18,7 +18,10 @@ namespace Pages.Mailru
         private By _isInBacketTextLocator = By.XPath("//*[@class = 'notify__message__text']");
 
 
-        public MailruMessageReaderPage(IWebDriver driver) : base(driver) { }
+        public MailruMessageReaderPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMailboxPage BackToMailbox()

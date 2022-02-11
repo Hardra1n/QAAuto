@@ -29,6 +29,7 @@ namespace Pages.Yandex
         public YandexHomePage(IWebDriver driver) : base(driver)
         {
             Waiters.WaitUntilTitleEquals(Driver, pageTitle);
+            logger = NLog.LogManager.GetCurrentClassLogger();
         }
 
         public IMailboxPage GoToMailboxPage()

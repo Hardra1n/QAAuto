@@ -10,7 +10,10 @@ namespace Pages.Mailru
         private By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'compose-button')]");
 
 
-        public MailruMailboxPage(IWebDriver driver) : base(driver) { }
+        public MailruMailboxPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)

@@ -10,7 +10,10 @@ namespace Pages.Yandex
         private By _messageComposerButtonLocator = By.XPath("//a[contains(@class, 'mail-ComposeButton')]");
 
 
-        public YandexMailboxPage(IWebDriver driver) : base(driver) { }
+        public YandexMailboxPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public IMessageReaderPage OpenNewMessageFromConcreteAuthor(string author)

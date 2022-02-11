@@ -19,7 +19,10 @@ namespace Pages.Mailru
         private By _alertMessageLocator = By.XPath("//div[@data-test-id='error-footer-text']");
 
 
-        public MailruLoginPage(IWebDriver driver) : base(driver) { }
+        public MailruLoginPage(IWebDriver driver) : base(driver)
+        {
+            logger = NLog.LogManager.GetCurrentClassLogger();
+        }
 
 
         public ILoginPage TypeUsername(string username)
@@ -40,6 +43,8 @@ namespace Pages.Mailru
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginButtonLocator);
             Driver.FindElement(_submitLoginButtonLocator).Submit();
             Waiters.WaitUntilTitleContains(Driver, _afterLoginDriverTitle);
+
+            logger.Info("Mailru user has authorized");
             return new MailruHomePage(Driver);
         }
 
