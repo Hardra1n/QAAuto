@@ -8,16 +8,29 @@ namespace ModelNService.Service
 {
     public static class ScreenshotMaker
     {
+        private const string directoryName = "screenshots/";
+
         public static void TakeScreenshot(IWebDriver driver)
         {
             Screenshot screen = driver.TakeScreenshot();
+            CreateDirectory();
             screen.SaveAsFile(GetFileName(), ScreenshotImageFormat.Png);
         }
-        private static string GetFileName()
+
+        private static void CreateDirectory()
         {
-            string time = DateTime.Now.ToString();
-            string testname = TestContext.CurrentContext.Test.FullName;
-            return time + ' ' + testname + ".png";
+            if (!Directory.Exists(directoryName))
+            {
+                Directory.CreateDirectory(directoryName);
+            }
         }
+
+        private static string GetFileName()
+            => directoryName
+                + DateTime.Now.Date.ToShortDateString() + ' '
+                + DateTime.Now.Hour + 'h'
+                + DateTime.Now.Minute + 'm' + ' '
+                + TestContext.CurrentContext.Test.Name
+                + ".png";
     }
 }

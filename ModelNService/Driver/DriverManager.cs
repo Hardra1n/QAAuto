@@ -22,7 +22,7 @@ namespace ModelNService.Driver
                         break;
                     case "chrome":
                     default:
-                        _driver = new ChromeDriver(GetChromeOptions()); // k.hovan@yandex.ru
+                        _driver = new ChromeDriver(GetChromeOptions());
                         break;
                 }
             }
