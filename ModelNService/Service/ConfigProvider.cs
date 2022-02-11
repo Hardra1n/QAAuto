@@ -8,21 +8,12 @@ namespace ModelNService.Service
 {
     public class ConfigProvider
     {
-        private const string _accountCredentialsPath = @"Resource\AccountCredentials.json";
-
-        private Dictionary<Type, string> _configPathDictionary = new()
-        {
-            { new AccountCredentials().GetType(), _accountCredentialsPath}
-        };
-
         public T Get<T>() where T: new()
         {
-            T obj = new();
             var settings = new ConfigurationBuilder()
-                .AddJsonFile(_configPathDictionary[typeof(T)])
+                .AddJsonFile(AccountCreditsProvider.GetJsonPath())
                 .Build();
-            obj = settings.Get<T>();
-            return obj;
+            return settings.Get<T>();
         }
     }
 }

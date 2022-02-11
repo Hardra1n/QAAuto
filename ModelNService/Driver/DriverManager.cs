@@ -9,8 +9,6 @@ namespace ModelNService.Driver
     {
         private static IWebDriver _driver;
 
-        private static TestContext TestContext { get; set; }
-
         private DriverManager() { }
 
         public static IWebDriver GetWebDriver()
@@ -24,7 +22,7 @@ namespace ModelNService.Driver
                         break;
                     case "chrome":
                     default:
-                        _driver = new ChromeDriver(GetChromeOptions());
+                        _driver = new ChromeDriver(GetChromeOptions()); // k.hovan@yandex.ru
                         break;
                 }
             }
