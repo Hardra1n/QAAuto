@@ -37,6 +37,8 @@ namespace Pages.Yandex
             OpenMenubar();
             Waiters.WaitUntilDisplayElement(Driver, _buttonToMailboxLocator);
             Driver.FindElement(_buttonToMailboxLocator).Click();
+
+            logger.Info("Yandex user navigated to mailbox page.");
             return new YandexMailboxPage(Driver);
         }
 
@@ -45,6 +47,8 @@ namespace Pages.Yandex
             OpenDisplayNameWindow();
             SelectAnotherDisplayName();
             PutDisplayName(nickname);
+
+            logger.Info($"Yandex user changed nickname to {nickname}.");
             return SaveDisplayName();
         }
 

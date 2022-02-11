@@ -36,6 +36,8 @@ namespace Pages.Yandex
             Waiters.WaitUntilDisplayElement(Driver, _deleteButtonLocator);
             Driver.FindElement(_deleteButtonLocator).Click();
             Waiters.WaitUntilNoSuchElement(Driver, _senderEmailLocator);
+
+            logger.Info("Yandex user deleted a message.");
             return this;
         }
 

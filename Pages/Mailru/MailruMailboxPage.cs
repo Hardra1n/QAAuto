@@ -22,6 +22,8 @@ namespace Pages.Mailru
             By locator = By.XPath(xPath);
             Waiters.WaitUntilDisplayElement(Driver, locator);
             Driver.FindElement(locator).Click();
+
+            logger.Info($"Mailru user opened new message from {author}.");
             return new MailruMessageReaderPage(Driver);
         }
 
@@ -30,11 +32,14 @@ namespace Pages.Mailru
         {
             Waiters.WaitUntilDisplayElement(Driver, _messageComposerButtonLocator);
             Driver.FindElement(_messageComposerButtonLocator).Click();
+
+            logger.Info("Mailru user navigated to message composer page.");
             return new MailruMessageComposerPage(Driver);
         }
 
         public IHomePage GoToHomePage()
         {
+            logger.Info("Mailru user navigated to home page.");
             return new MailruHomePage(Driver);
         }
 

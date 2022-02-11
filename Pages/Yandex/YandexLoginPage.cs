@@ -34,7 +34,8 @@ namespace Pages.Yandex
             Waiters.WaitUntilDisplayElement(Driver, _submitLoginLocator);
             Driver.FindElement(_submitLoginLocator).Submit();
             Waiters.WaitUntilTitleContains(Driver, YandexHomePage.pageTitle);
-            logger.Info("Yandex user has authorized");
+
+            logger.Info("Yandex user was authorized");
             return new YandexHomePage(Driver);
         }
 

@@ -44,7 +44,7 @@ namespace Pages.Mailru
             Driver.FindElement(_submitLoginButtonLocator).Submit();
             Waiters.WaitUntilTitleContains(Driver, _afterLoginDriverTitle);
 
-            logger.Info("Mailru user has authorized");
+            logger.Info("Mailru user was authorized");
             return new MailruHomePage(Driver);
         }
 

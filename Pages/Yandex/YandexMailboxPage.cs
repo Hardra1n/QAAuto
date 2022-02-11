@@ -21,6 +21,8 @@ namespace Pages.Yandex
             By locator = By.XPath(GetNewMessageFromConcreteAuthorLocator(author));
             Waiters.WaitUntilDisplayElement(Driver, locator);
             Driver.FindElement(locator).Click();
+
+            logger.Info($"Yandex user opened new message from {author}.");
             return new YandexMessageReaderPage(Driver);
         }
 
@@ -28,12 +30,16 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _messageComposerButtonLocator);
             Driver.FindElement(_messageComposerButtonLocator).Click();
+
+            logger.Info("Yandex user navigated to message composer page.");
             return new YandexMessageComposerPage(Driver);
         }
 
         public IHomePage GoToHomePage()
         {
             Driver.Url = YandexHomePage.URL;
+
+            logger.Info("Yandex user navigated to home page.");
             return new YandexHomePage(Driver);
         }
 

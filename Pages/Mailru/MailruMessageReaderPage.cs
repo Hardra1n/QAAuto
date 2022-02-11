@@ -36,6 +36,8 @@ namespace Pages.Mailru
             Waiters.WaitUntilDisplayElement(Driver, _deleteMessageButtonLocator);
             Driver.FindElement(_deleteMessageButtonLocator).Click();
             Waiters.WaitUntilDisplayElement(Driver, _isInBacketTextLocator);
+
+            logger.Info("Mailru user deleted a message.");
             return this;
         }
 

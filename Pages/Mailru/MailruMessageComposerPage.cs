@@ -26,6 +26,8 @@ namespace Pages.Mailru
         {
             Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSendingLocator);
             Driver.FindElement(_backToMailboxButtonAfterSendingLocator).Click();
+
+            logger.Info("Mailru user sent a message.");
             return new MailruMailboxPage(Driver);
         }
 

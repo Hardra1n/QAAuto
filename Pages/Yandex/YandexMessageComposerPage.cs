@@ -27,6 +27,8 @@ namespace Pages.Yandex
         {
             Waiters.WaitUntilDisplayElement(Driver, _backToMailboxButtonAfterSendingLocator);
             Driver.FindElement(_backToMailboxButtonAfterSendingLocator).Click();
+
+            logger.Info("Yandex user sent a message.");
             return new MailruMailboxPage(Driver);
         }
 

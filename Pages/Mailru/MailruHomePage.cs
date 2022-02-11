@@ -19,16 +19,20 @@ namespace Pages.Mailru
         {
             Waiters.WaitUntilDisplayElement(Driver, _goToMailboxButtonLocator);
             Driver.FindElement(_goToMailboxButtonLocator).Click();
+
+            logger.Info("Mailru user navigated to mailbox page.");
             return new MailruMailboxPage(Driver);
         }
 
         public IHomePage ChangeNickname(string nickname)
         {
+            logger.Error("Mailru user tried to change nickname.");
             throw new NotImplementedException();
         }
 
         public string GetNickname()
         {
+            logger.Error("Mailru user tried to get nickname.");
             throw new NotImplementedException();
         }
     }
