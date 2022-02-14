@@ -25,12 +25,24 @@ namespace ModelNService.Service
             }
         }
 
+        //private static string GetFileName()
+        //    => directoryName
+        //        + DateTime.Now.Date.ToShortDateString() + ' '
+        //        + DateTime.Now.Hour + 'h'
+        //        + DateTime.Now.Minute + 'm' + ' '
+        //        + TestContext.CurrentContext.Test.Name
+        //        + ".png";
+
         private static string GetFileName()
-            => directoryName
-                + DateTime.Now.Date.ToShortDateString() + ' '
-                + DateTime.Now.Hour + 'h'
-                + DateTime.Now.Minute + 'm' + ' '
+        {
+            return directoryName 
+                + DateTime.Now.Day + 'd' 
+                + DateTime.Now.Month + 'm' 
+                + DateTime.Now.Year + ' ' 
+                + DateTime.Now.Hour + 'h' 
+                + DateTime.Now.Minute + "m " 
                 + TestContext.CurrentContext.Test.Name
                 + ".png";
+        }
     }
 }
