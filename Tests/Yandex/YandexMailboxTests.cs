@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Yandex;
+using System;
 using System.Threading;
 
 namespace Tests.Yandex
@@ -35,33 +36,46 @@ namespace Tests.Yandex
             _driver.Url = YandexMailboxPage.URL;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            HandleTestFailure();
+        }
+
         [Test]
         public void CanOpenMessageComposerTest()
         {
-            YandexMessageComposerPage composerPage = (YandexMessageComposerPage)_page.OpenMessageComposer();
             try
             {
+                YandexMessageComposerPage composerPage = (YandexMessageComposerPage)_page.OpenMessageComposer();
                 composerPage.EnterRecipientEmailSendingMessage("temp@temp");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                Assert.Fail(ex.Message);
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
             }
         }
 
         [Test]
         public void CanChangeNickname()
         {
-            string changingNickname = "Lola";
-            IHomePage homepage = _page.GoToHomePage();
-            string primaryNickname = homepage.GetNickname();
-            
-            string actualNickname = homepage.ChangeNickname(changingNickname)
-                                            .GetNickname();
+            try
+            {
+                string changingNickname = "Lola";
+                IHomePage homepage = _page.GoToHomePage();
+                string primaryNickname = homepage.GetNickname();
 
-            Assert.AreEqual(changingNickname, actualNickname);
+                string actualNickname = homepage.ChangeNickname(changingNickname)
+                                                .GetNickname();
 
-            homepage.ChangeNickname(primaryNickname);
+                Assert.AreEqual(changingNickname, actualNickname);
+
+                homepage.ChangeNickname(primaryNickname);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
     }
 }

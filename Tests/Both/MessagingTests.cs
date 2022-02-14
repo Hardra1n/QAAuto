@@ -6,6 +6,7 @@ using Pages;
 using Pages.Interfaces;
 using Pages.Mailru;
 using Pages.Yandex;
+using System;
 using System.Threading;
 
 namespace Tests.Both
@@ -37,83 +38,110 @@ namespace Tests.Both
             DriverManager.CloseDriver();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            HandleTestFailure();
+        }
+
         [Test]
         public void MessageFromYandexToMailru()
         {
-            string messageSubject = "YandexToMailru";
-            string messageText = "This text should be checked";
+            try
+            {
+                string messageSubject = "YandexToMailru";
+                string messageText = "This text should be checked";
 
-            _driver.Url = YandexMailboxPage.URL;
-            IMailboxPage mailboxPage = new YandexMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer()
-                       .SendMessage(messageSubject, 
-                                    messageText,
-                                    accounts.Mailru.Email);
+                _driver.Url = YandexMailboxPage.URL;
+                IMailboxPage mailboxPage = new YandexMailboxPage(_driver);
+                mailboxPage.OpenMessageComposer()
+                           .SendMessage(messageSubject,
+                                        messageText,
+                                        accounts.Mailru.Email);
 
-            _driver.Url = MailruLoginPage.URL;
-            mailboxPage = new MailruMailboxPage(_driver);
-            IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Yandex.Username);
+                _driver.Url = MailruLoginPage.URL;
+                mailboxPage = new MailruMailboxPage(_driver);
+                IMessageReaderPage readerPage
+                    = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Yandex.Username);
 
-            Assert.AreEqual(messageText, readerPage.GetText());
-            Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(accounts.Yandex.Email, readerPage.GetAuthorEmail());
+                Assert.AreEqual(messageText, readerPage.GetText());
+                Assert.AreEqual(messageSubject, readerPage.GetSubject());
+                Assert.AreEqual(accounts.Yandex.Email, readerPage.GetAuthorEmail());
 
-            readerPage.DeleteMessage();
+                readerPage.DeleteMessage();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
         
         [Test]
         public void MessageFromMailruToYandex()
         {
-            string messageSubject = "MailruToYandex";
-            string messageText = "This text should be checked";
+            try
+            {
+                string messageSubject = "MailruToYandex";
+                string messageText = "This text should be checked";
 
-            _driver.Url = MailruMailboxPage.URL;
-            IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer()
-                       .SendMessage(messageSubject, 
-                                    messageText,
-                                    accounts.Yandex.Email);
-            _driver.Url = YandexMailboxPage.URL;
-            mailboxPage = new YandexMailboxPage(_driver);
-            IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
+                _driver.Url = MailruMailboxPage.URL;
+                IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
+                mailboxPage.OpenMessageComposer()
+                           .SendMessage(messageSubject,
+                                        messageText,
+                                        accounts.Yandex.Email);
+                _driver.Url = YandexMailboxPage.URL;
+                mailboxPage = new YandexMailboxPage(_driver);
+                IMessageReaderPage readerPage
+                    = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
 
-            Assert.AreEqual(messageText, readerPage.GetText());
-            Assert.AreEqual(messageSubject, readerPage.GetSubject());
-            Assert.AreEqual(accounts.Mailru.Email, readerPage.GetAuthorEmail());
+                Assert.AreEqual(messageText, readerPage.GetText());
+                Assert.AreEqual(messageSubject, readerPage.GetSubject());
+                Assert.AreEqual(accounts.Mailru.Email, readerPage.GetAuthorEmail());
 
-            readerPage.DeleteMessage();
+                readerPage.DeleteMessage();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
         [Test]
         public void ChangeYandexNicknameOnMailruMessage()
         {
-            string messageSubjct = "Changing nickname";
-            string messageText = "Contro";
+            try
+            {
+                string messageSubjct = "Changing nickname";
+                string messageText = "Contro";
 
-            _driver.Url = MailruMailboxPage.URL;
-            IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
-            mailboxPage.OpenMessageComposer()
-                       .SendMessage(messageSubjct, 
-                                    messageText,
-                                    accounts.Yandex.Email);
-            _driver.Url = YandexMailboxPage.URL;
-            mailboxPage = new YandexMailboxPage(_driver);
-            IMessageReaderPage readerPage 
-                = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
-            string actualRecivedNickname = readerPage.GetText();
-            
-            Assert.AreEqual(messageText, actualRecivedNickname);
+                _driver.Url = MailruMailboxPage.URL;
+                IMailboxPage mailboxPage = new MailruMailboxPage(_driver);
+                mailboxPage.OpenMessageComposer()
+                           .SendMessage(messageSubjct,
+                                        messageText,
+                                        accounts.Yandex.Email);
+                _driver.Url = YandexMailboxPage.URL;
+                mailboxPage = new YandexMailboxPage(_driver);
+                IMessageReaderPage readerPage
+                    = mailboxPage.OpenNewMessageFromConcreteAuthor(accounts.Mailru.Username);
+                string actualRecivedNickname = readerPage.GetText();
 
-            IHomePage homePage = readerPage.DeleteMessage().BackToMailbox().GoToHomePage();
-            string defaultNickame = homePage.GetNickname();
-            homePage.ChangeNickname(actualRecivedNickname);
-            string actualChangedNickname = homePage.GetNickname();
+                Assert.AreEqual(messageText, actualRecivedNickname);
 
-            Assert.AreEqual(actualRecivedNickname, actualChangedNickname);
+                IHomePage homePage = readerPage.DeleteMessage().BackToMailbox().GoToHomePage();
+                string defaultNickame = homePage.GetNickname();
+                homePage.ChangeNickname(actualRecivedNickname);
+                string actualChangedNickname = homePage.GetNickname();
 
-            homePage.ChangeNickname(defaultNickame);
+                Assert.AreEqual(actualRecivedNickname, actualChangedNickname);
+
+                homePage.ChangeNickname(defaultNickame);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
     }
 }

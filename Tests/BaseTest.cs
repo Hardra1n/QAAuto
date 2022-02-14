@@ -13,8 +13,7 @@ namespace Tests
 
         protected IWebDriver _driver;
 
-        [TearDown]
-        public void ScreenshotOnFailure()
+        protected void HandleTestFailure()
         {
             if (TestContext.CurrentContext.Result.Outcome == ResultState.Failure)
             {

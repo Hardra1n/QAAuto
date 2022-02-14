@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Mailru;
+using System;
 
 namespace Tests.Mailru
 {
@@ -25,6 +26,7 @@ namespace Tests.Mailru
         [TearDown]
         public void TearDown()
         {
+            HandleTestFailure();
             DriverManager.CloseDriver();
         }
 
@@ -32,36 +34,57 @@ namespace Tests.Mailru
         [TestCase("fmwdklasnfkwjas", "Такой аккаунт не зарегистрирован")]
         public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(username)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .GetAlertMessageText();
+            try
+            {
+                string actualAlertMessage = _page.TypeUsername(username)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .GetAlertMessageText();
 
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
         [TestCase("", "Поле «Пароль» должно быть заполнено")]
         [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(accounts.Mailru.Username)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .TypePassword(password)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .GetAlertMessageText();
+            try
+            {
+                string actualAlertMessage = _page.TypeUsername(accounts.Mailru.Username)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .TypePassword(password)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .GetAlertMessageText();
 
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
         [Test]
         [Category("Smoke")]
         public void LoginWithCorrectUsernameAndPassword()
         {
-            string titleHomepageSubstring = "Почта Mail.ru";
+            try
+            {
+                string titleHomepageSubstring = "Почта Mail.ru";
 
-            _page.LoginAs(accounts.Mailru);
-            bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
+                _page.LoginAs(accounts.Mailru);
+                bool isContains = Waiters.WaitUntilTitleContains(_driver, titleHomepageSubstring);
 
-            Assert.IsTrue(isContains);
+                Assert.IsTrue(isContains);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
     }
 }

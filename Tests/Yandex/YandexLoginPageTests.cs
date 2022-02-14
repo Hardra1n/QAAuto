@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages;
 using Pages.Yandex;
+using System;
 
 namespace Tests.Yandex
 {
@@ -24,6 +25,7 @@ namespace Tests.Yandex
         [TearDown]
         public void TearDown()
         {
+            HandleTestFailure();
             DriverManager.CloseDriver();
         }
 
@@ -32,36 +34,56 @@ namespace Tests.Yandex
         [TestCase("", "Логин не указан")]
         public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(username)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .GetAlertMessageText();
+            try
+            {
+                string actualAlertMessage = _page.TypeUsername(username)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .GetAlertMessageText();
 
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
         [TestCase("1234564321", "Неверный пароль")]
         [TestCase("", "Пароль не указан")]
         public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
         {
-            string actualAlertMessage = _page.TypeUsername(accounts.Yandex.Username)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .TypePassword(password)
-                                             .SubmitLoginWithoutSwitchToNewPage()
-                                             .GetAlertMessageText();
+            try
+            {
+                string actualAlertMessage = _page.TypeUsername(accounts.Yandex.Username)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .TypePassword(password)
+                                                 .SubmitLoginWithoutSwitchToNewPage()
+                                                 .GetAlertMessageText();
 
-            Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
         [Test]
         [Category("Smoke")]
         public void LoginWithCorrectUsernameAndPassword()
         {
-            string expectedDriverTitle = "Яндекс ID";
-            
-            _page.LoginAs(accounts.Yandex);
-            bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
+            try
+            {
+                string expectedDriverTitle = "Яндекс ID";
+                _page.LoginAs(accounts.Yandex);
+                bool isContains = Waiters.WaitUntilTitleContains(_driver, expectedDriverTitle);
 
-            Assert.IsTrue(isContains);
+                Assert.IsTrue(isContains);
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
+            }
         }
 
     }

@@ -3,6 +3,7 @@ using ModelNService.Service;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Pages.Mailru;
+using System;
 using System.Threading;
 
 namespace Tests.Mailru
@@ -35,17 +36,23 @@ namespace Tests.Mailru
             _driver.Url = MailruMailboxPage.URL;
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            HandleTestFailure();
+        }
+
         [Test]
         public void CanOpenMessageComposerTest()
         {
-            MailruMessageComposerPage composerPage = (MailruMessageComposerPage)_page.OpenMessageComposer();
             try
             {
+                MailruMessageComposerPage composerPage = (MailruMessageComposerPage)_page.OpenMessageComposer();
                 composerPage.EnterRecipientEmailSendingMessage("temp@temp");
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                Assert.Fail(ex.Message);
+                Assert.Fail(ex.Message + '\n' + ex.StackTrace);
             }
         }
     }
