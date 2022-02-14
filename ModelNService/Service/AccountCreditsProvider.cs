@@ -9,9 +9,9 @@ namespace ModelNService.Service
 {
     public class AccountCreditsProvider
     {
-        private const string QAEnvironmentPath = @"Resource\AccountCredentials.qa.json";
+        private const string QAEnvironmentPath = @"Resource/AccountCredentials.qa.json";
 
-        private const string DevEnvironmentPath = @"Resource\AccountCredentials.dev.json";
+        private const string DevEnvironmentPath = @"Resource/AccountCredentials.dev.json";
 
         public static string GetJsonPath()
         {

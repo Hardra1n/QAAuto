@@ -5,7 +5,7 @@
   </PropertyGroup>
 	
   <ItemGroup>
-	<Content Include="Resource\AccountCredentials.qa.json">
+	<Content Include="Resource/AccountCredentials.qa.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</Content>
   </ItemGroup>
