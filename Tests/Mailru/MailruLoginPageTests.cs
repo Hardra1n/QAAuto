@@ -30,9 +30,9 @@ namespace Tests.Mailru
             DriverManager.CloseDriver();
         }
 
-        [TestCase("", "Поле «Имя аккаунта» должно быть заполнено")]
-        [TestCase("fmwdklasnfkwjas", "Такой аккаунт не зарегистрирован")]
-        public void CannotLoginWithIncorrectUsername(string username, string expectedAlertMessage)
+        [TestCase("", "Поле «Имя аккаунта» должно быть заполнено", "The \"Account name\" field is required")]
+        [TestCase("fmwdklasnfkwjas", "Такой аккаунт не зарегистрирован", "That account is not registered")]
+        public void CannotLoginWithIncorrectUsername(string username, params string[] expectedAlertMessages)
         {
             try
             {
@@ -40,7 +40,8 @@ namespace Tests.Mailru
                                                  .SubmitLoginWithoutSwitchToNewPage()
                                                  .GetAlertMessageText();
 
-                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                bool isEquals = actualAlertMessage.AreEqual(expectedAlertMessages);
+                Assert.IsTrue(isEquals, actualAlertMessage + '/' + expectedAlertMessages);
             }
             catch (Exception ex)
             {
@@ -48,9 +49,9 @@ namespace Tests.Mailru
             }
         }
 
-        [TestCase("", "Поле «Пароль» должно быть заполнено")]
-        [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз")]
-        public void CannotLoginWithIncorrectPassword(string password, string expectedAlertMessage)
+        [TestCase("", "Поле «Пароль» должно быть заполнено", "The \"Password\" field is required")]
+        [TestCase("dmwfkslawa", "Неверный пароль, попробуйте ещё раз", "Incorrect password. Try again")]
+        public void CannotLoginWithIncorrectPassword(string password, params string[] expectedAlertMessages)
         {
             try
             {
@@ -59,8 +60,8 @@ namespace Tests.Mailru
                                                  .TypePassword(password)
                                                  .SubmitLoginWithoutSwitchToNewPage()
                                                  .GetAlertMessageText();
-
-                Assert.AreEqual(expectedAlertMessage, actualAlertMessage);
+                bool isEquals = actualAlertMessage.AreEqual(expectedAlertMessages);
+                Assert.IsTrue(isEquals, actualAlertMessage + '/' + expectedAlertMessages);
             }
             catch (Exception ex)
             {
